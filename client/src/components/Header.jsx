@@ -1,24 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch, AiOutlineCloseCircle } from "react-icons/ai";
 import { CiLocationOn } from "react-icons/ci";
 import CustomButton from "./CustomButton";
 import { popularSearch } from "../utils/data";
 // import { HeroImage } from "../assets";
 
-const SearchInput = ({ placeholder, icon, value, setValue, styles }) => {
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
-
+const SearchInput = ({ placeholder, icon, value,jname,name, setValue, styles }) => {
+  // const handleChange = (e) => {
+  //   setValue(e.target.value);
+  // };
+  
+  const [search,setSearch] =useState({
+    jobname:'',
+    joblocation:'',
+  })
+  const handleChange=(e)=>{
+    const {name,value}=e.target;
+    // console.log(name,value)
+    setSearch((data) => ({ ...data, [name]: value }))
+  }
   const clearInput = () => setValue("");
-
+  useEffect(()=>{
+    // console.log(search);
+  })
   return (
     <div className={`flex w-full md:w-1/3 items-center ${styles}`}>
       {icon}
 
       <input
-        value={value}
-        onChange={(e) => handleChange(e)}
+        name={`${name}`}
+        value={name=='jobname'?search.jobname:search.joblocation}
+        onChange={handleChange}
         type="text"
         className="w-full md:w-64 p-2 outline-none bg-transparent text-base"
         placeholder={placeholder}
@@ -52,7 +64,7 @@ const Header = ({
           <div className=" mb-8 flex justify-center ">
             <p className="  font-semibold text-5xl font-[Poppins] ">
               The Right{" "}
-              <span className="font-[silk-serif] text-[#14a800] italic text-7xl border-b-2 border-[#14a800]">
+              <span className="font-[silk-serif] text-[#1176DB] italic text-7xl border-b-2 border-[#1176DB]">
                 {" "}
                 Freelance Service
               </span>{" "}
@@ -64,12 +76,15 @@ const Header = ({
             <SearchInput
               placeholder='Job Title or Keywords'
               icon={<AiOutlineSearch className='text-gray-600 text-xl' />}
+              // onChange={()=>{}}
+              name="jobname"
               value={searchQuery}
               setValue={setSearchQuery}
             />
             <SearchInput
               placeholder='Add Country or City'
               icon={<CiLocationOn className='text-gray-600 text-xl' />}
+              name='joblocation'
               value={location}
               setValue={setLocation}
               styles={"hidden md:flex"}
@@ -81,7 +96,7 @@ const Header = ({
                 title="Search"
                 className=''
                 containerStyles={
-                  " text-white py-2 md:py3 px-3 md:px-10 focus:outline-none bg-[#14a800] hover:bg-[#10b100] rounded-full md:rounded-md text-sm md:text-base"
+                  " text-white py-2 md:py3 px-3 md:px-10 focus:outline-none bg-[#1176DB] hover:bg-[#1176DB]/70 rounded-full md:rounded-md text-sm md:text-base"
                 }
               />
             </div>
@@ -92,7 +107,7 @@ const Header = ({
               {popularSearch.map((search, index) => (
                 <span
                   key={index}
-                  className="bg-[#14a800] text-white py-2 px-4 rounded-full text-sm md:text-base"
+                  className="bg-[#1176DB] text-white py-2 px-4 rounded-full text-sm md:text-base"
                 >
                   {search}
                 </span>

@@ -14,6 +14,7 @@ export const createJob = async (req, res, next) => {
       salary,
       vacancies,
       experience,
+      screeningQuestions,
       desc,
       requirements,
     } = req.body;
@@ -45,6 +46,8 @@ export const createJob = async (req, res, next) => {
       salary,
       vacancies,
       experience,
+      screeningQuestions,
+      
       detail: { desc, requirements },
       company: id,
     };
@@ -143,8 +146,8 @@ export const updateJob = async (req, res, next) => {
 //get all jobs or use query parameter to filter job
 export const getJobPosts = async (req, res, next) => {
   try {
-    const { search, sort, location, jType, exp } = req.query;
-    const types = jType?.split(","); //full-time,part-time
+    const { search, sort, location, exp} = req.query;
+    // const types = jType?.split(","); full-time,part-time
     const experience = exp?.split("-"); //2-6
 
     let queryObject = {};
@@ -152,10 +155,10 @@ export const getJobPosts = async (req, res, next) => {
     if (location) {
       queryObject.location = { $regex: location, $options: "i" };
     }
-    console.log(jType,types)
-    if (jType) {
-      queryObject.jobType = { $in: types }
-    }
+    // console.log(jType,types)
+    // if (jType) {
+    //   queryObject.jobType = { $in: types }
+    // }
     // console.log(queryObject.jobType)
 
     //    [2. 6]
@@ -163,8 +166,8 @@ export const getJobPosts = async (req, res, next) => {
 
     if (exp) {
       queryObject.experience = {
-        $gte: Number(experience[0]) - 1,
-        $lte: Number(experience[1]) + 1,
+        $gte: Number(experience[0]),
+        $lte: Number(experience[1]),
       };
     }
 

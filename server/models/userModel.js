@@ -3,43 +3,65 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import JWT from "jsonwebtoken";
 
-const userSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: [true, "First Name is Required!"],
+const userSchema = new mongoose.Schema(
+  {
+    firstName: {
+      type: String,
+      required: [true, "First Name is Required!"],
+    },
+    lastName: {
+      type: String,
+      required: [true, "Last Name is Required!"],
+    },
+    email: {
+      type: String,
+      required: [true, " Email is Required!"],
+      unique: true,
+      validate: validator.isEmail,
+    },
+    password: {
+      type: String,
+      required: [true, "Password is Required!"],
+      minlength: [6, "Password length should be greater than 6 character"],
+      select: true,
+    },
+    accountType: { type: String, default: "seeker" },
+    contactNumber: { type: String,default:'undefined' },
+    profileUrl: { type: String },
+    cvUrl: { type: String },
+    currentJobRole: { type: String,default:'undefined' },
+    currentSalary: {
+      type: Number,
+      default:"undefined"
+    },
+    currentCompany: {
+      type: String,
+      default:'undefined'
+    },
+    currentLocation: { type: String,
+      default:'india'
+     },
+    openToRelocate: {
+      type: String,
+      enum: ["YES", "NO"],
+      default: "YES",
+    },
+    joinConsulting: {
+      type: String,
+      enum: ["Post Graduation", "Lateral"],
+      default: "Post Graduation",
+    },
+    about: { type: String },
+    experience: {
+      type: Number,
+      default:1,
+    },
+    skills: [String],
+    appliedJobs: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Application",
+    },
   },
-  lastName: {
-    type: String,
-    required: [true, "Last Name is Required!"],
-  },
-  email: {
-    type: String,
-    required: [true, " Email is Required!"],
-    unique: true,
-    validate: validator.isEmail,
-  },
-  password: {
-    type: String,
-    required: [true, "Password is Required!"],
-    minlength: [6, "Password length should be greater than 6 character"],
-    select: true,
-  },
-  accountType: { type: String, default: "seeker" },
-  contact: { type: String },
-  location: { type: String },
-  profileUrl: { type: String },
-  cvUrl: { type: String },
-  jobTitle: { type: String },
-  about: { type: String },
-  exprience:{
-    type:Number
-  },
-  skills:[String],
-  appliedJobs:{
-    type:mongoose.Schema.Types.ObjectId,
-    ref:"Application"
-  }
-},
   { timestamps: true }
 );
 

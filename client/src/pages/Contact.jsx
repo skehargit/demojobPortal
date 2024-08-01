@@ -6,8 +6,8 @@ const Contact = () => {
     <div className="min-h-screen flex flex-col items-center py-8 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-4xl font-extrabold text-[#14a800]">Contact Us</h1>
-          <p className="mt-2 text-lg text-gray-600">Get in touch with us for any queries or support.</p>
+          <h1 className="text-4xl font-extrabold text-[#1176DB]">Get in Touch with High Impact Talent</h1>
+          <p className="mt-2 text-lg text-gray-600">We'd love to hear from you! Whether you have questions about our services, need support, or want to provide feedback, our team is here to help.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8">
@@ -16,13 +16,13 @@ const Contact = () => {
               <h2 className="text-2xl font-bold text-gray-900">Our Address</h2>
               <div className="mt-4 text-gray-600">
                 <p className="flex items-center gap-2">
-                  <FaMapMarkerAlt className="text-[#14a800]" /> 1234 Main Street, Anytown, USA
+                  <FaMapMarkerAlt className="text-[#1176DB]" /> 1234 Main Street, Anytown, USA
                 </p>
                 <p className="flex items-center gap-2 mt-2">
-                  <FaEnvelope className="text-[#14a800]" /> info@company.com
+                  <FaEnvelope className="text-[#1176DB]" /> highimpacttalentenquiry@gmail.com
                 </p>
                 <p className="flex items-center gap-2 mt-2">
-                  <FaPhone className="text-[#14a800]" /> +1 (123) 456-7890
+                  <FaPhone className="text-[#1176DB]" /> +1 (123) 456-7890
                 </p>
               </div>
               <div className="mt-6">
@@ -31,7 +31,7 @@ const Contact = () => {
             </div>
 
             <div className="bg-white p-6 shadow rounded-lg">
-              <h2 className="text-2xl font-bold text-gray-900">Follow Us</h2>
+              <p className="text-xl font-bold text-gray-900">Connect with us on social media for the latest updates and industry insights.</p>
               <div className="flex justify-center mt-4 space-x-6 text-gray-600">
                 <a href="https://www.facebook.com" className="hover:text-[#14a800]">
                   <FaFacebook size={30} />
@@ -50,7 +50,7 @@ const Contact = () => {
           </div>
 
           <div className="bg-white p-6 shadow rounded-lg">
-            <h2 className="text-2xl font-bold text-gray-900">Send Us a Message</h2>
+            <h2 className="text-2xl font-bold text-[#1176DB]">Send Us a Message</h2>
             <form className="mt-4 space-y-4">
               <div>
                 <label htmlFor="name" className="sr-only">Name</label>
@@ -90,7 +90,7 @@ const Contact = () => {
               <div>
                 <button
                   type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#14a800] hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#14a800]"
+                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-[#1176DB] hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#14a800]"
                 >
                   Send Message
                 </button>

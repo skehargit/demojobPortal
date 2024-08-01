@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 const JobCard = ({ job }) => {
   // console.log("JobCard:", job);
+  // console.log(job)
   return (
     <Link to={`/job-detail/${job?._id}`}>
       <div
@@ -20,14 +21,34 @@ const JobCard = ({ job }) => {
 
           <div className=''>
             <p className='text-lg font-semibold truncate'>{job?.jobTitle}</p>
+            <div className="flex gap-3">
             <span className='flex gap-2 items-center'>
               <GoLocation className='text-slate-900 text-sm' />
               {job?.location}
             </span>
+            
+            </div>
+            <span className='flex gap-2 items-center'>
+              {/* <GoLocation className='text-slate-900 text-sm' /> */}
+              <span>Anual salary</span>{job?.salary}
+            </span>
+            <span className='flex gap-2 items-center'>
+              {/* <GoLocation className='text-slate-900 text-sm' /> */}
+              <span>Experience</span>{job?.experience} years
+            </span>
+            <span className='flex gap-2 items-center'>
+              {/* <GoLocation className='text-slate-900 text-sm' /> */}
+              <span>company</span>{job?.company?.name}
+            </span>
           </div>
+          {/* <div className=''>
+            <p className='text-lg font-semibold truncate'>{job?.salary}</p>
+            
+          </div> */}
         </div>
 
         <div className='py-3'>
+          Description :
           <p className='text-sm'>
             {job?.detail[0]?.desc?.slice(0, 150) + "..."}
           </p>

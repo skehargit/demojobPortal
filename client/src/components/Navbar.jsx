@@ -9,7 +9,7 @@ import CustomButton from "./CustomButton";
 import { users } from "../utils/data";
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../redux/userSlice";
-
+import logo from '../assets/logo.jpg'
 function MenuList({ user, onClick }) {
   const dispatch = useDispatch();
   const handleLogout = () => {
@@ -26,7 +26,7 @@ function MenuList({ user, onClick }) {
               <p className="text-sm font-semibold ">
                 {user?.firstName ?? user?.name}
               </p>
-              <span className="text-sm text-[#14a800] ">
+              <span className="text-sm text-[#1176DB] ">
                 {user?.jobTitle ?? user?.email}
               </span>
             </div>
@@ -62,7 +62,7 @@ function MenuList({ user, onClick }) {
                       user?.accountType ? "/user-profile/:id" : "company-profile"
                     }`}
                     className={`${
-                      active ? "bg-[#14a800] text-white" : "text-gray-900"
+                      active ? "bg-[#1176DB] text-white" : "text-gray-900"
                     } group flex w-full items-center rounded-md p-2 text-sm`}
                     onClick={onClick}
                   >
@@ -119,29 +119,33 @@ const Navbar = () => {
               to="/"
               className="text-[#14a800] font- text-3xl tracking-tighter "
             >
-              Expert<span className="text-[#437a3c]">Ease</span>
+              {/* Expert<span className="text-[#437a3c]">Ease</span> */}
+              <div className="w-[50px] h-[50px] rounded-full overflow-hidden"><img src={logo} alt="" /></div>
             </Link>
           </div>
 
           <ul className="hidden lg:flex gap-10 text-base ">
-            <li className="hover:text-[#14a800]">
-              <Link to="/">Find Job</Link>
+            <li className="hover:text-[#1176DB]">
+              <Link to="/find-jobs">Find Job</Link>
             </li>
-            <li className="hover:text-[#14a800]">
+            <li className="hover:text-[#1176DB]">
               <Link to="/companies">Companies</Link>
             </li>
-            <li className="hover:text-[#14a800]">
+            <li className="hover:text-[#1176DB]">
               <Link to={user?.accountType === "seeker" ? "" : "/upload-job"}>
               {user?.accountType === "seeker" ? "" : "Upload Job"}</Link>
               {}
             </li>
-            <li className="hover:text-[#14a800]">
+            <li className="hover:text-[#1176DB]">
               <Link to="/about-us">About</Link>
             </li>
-            <li className="hover:text-[#14a800]">
+            <li className="hover:text-[#1176DB]">
               <Link to="/contact-us">Contact Us</Link>
             </li>
-            <li className="hover:text-[#14a800]">
+            <li className="hover:text-[#1176DB]">
+              <Link to="/upload-resume">upload resume</Link>
+            </li>
+            <li className="hover:text-[#1176DB]">
               <Link to="/privacy-policy">Privacy & Policy</Link>
             </li>
           </ul>

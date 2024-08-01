@@ -92,16 +92,27 @@ const UploadJob = () => {
             />
 
             <div className="w-full flex gap-4">
-              <div className={`w-1/2 mt-2`}>
+              {/* <div className={`w-1/2 mt-2`}>
                 <label className="text-gray-600 text-sm mb-1">Job Type</label>
                 <JobTypes jobTitle={jobType} setJobTitle={setJobType} />
+              </div> */}
+              <div className="w-1/2">
+                <TextInput
+                  name="experience"
+                  label="Years of Experience"
+                  placeholder="experience"
+                  type="number"
+                  register={register("experience", {
+                    required: "Experience is required",
+                  })}
+                  error={errors.experience ? errors.experience?.message : ""}
+                />
               </div>
-
               <div className="w-1/2">
                 <TextInput
                   name="salary"
-                  label="Salary (USD)"
-                  placeholder="eg. 1500"
+                  label="Annual salary (INR)"
+                  placeholder="eg. 100000"
                   type="number"
                   register={register("salary", {
                     required: "Salary is required",
@@ -111,7 +122,7 @@ const UploadJob = () => {
               </div>
             </div>
 
-            <div className="w-full flex gap-4">
+            {/* <div className="w-full flex gap-4">
               <div className="w-1/2">
                 <TextInput
                   name="vacancies"
@@ -125,19 +136,8 @@ const UploadJob = () => {
                 />
               </div>
 
-              <div className="w-1/2">
-                <TextInput
-                  name="experience"
-                  label="Years of Experience"
-                  placeholder="experience"
-                  type="number"
-                  register={register("experience", {
-                    required: "Experience is required",
-                  })}
-                  error={errors.experience ? errors.experience?.message : ""}
-                />
-              </div>
-            </div>
+              
+            </div> */}
 
             <TextInput
               name="location"
@@ -171,14 +171,54 @@ const UploadJob = () => {
 
             <div className="flex flex-col">
               <label className="text-gray-600 text-sm mb-1">
-                Requirements
+                Screening questions
               </label>
-              <textarea
+              {/* <textarea
                 className="rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none"
                 rows={4}
                 cols={6}
                 {...register("requirements")}
-              ></textarea>
+              ></textarea> */}
+              <TextInput
+              name="location"
+              label="question 1"
+              placeholder="eg. New York"
+              type="text"
+              register={register("location", {
+                required: "Job Location is required",
+              })}
+              error={errors.location ? errors.location?.message : ""}
+            />
+            <TextInput
+              name="location"
+              label="question 2"
+              placeholder="eg. New York"
+              type="text"
+              register={register("location", {
+                required: "Job Location is required",
+              })}
+              error={errors.location ? errors.location?.message : ""}
+            />
+            <TextInput
+              name="location"
+              label="question 3"
+              placeholder="eg. New York"
+              type="text"
+              register={register("location", {
+                required: "Job Location is required",
+              })}
+              error={errors.location ? errors.location?.message : ""}
+            />
+            <TextInput
+              name="location"
+              label="question 4"
+              placeholder="eg. New York"
+              type="text"
+              register={register("location", {
+                required: "Job Location is required",
+              })}
+              error={errors.location ? errors.location?.message : ""}
+            />
             </div>
 
             {errMsg && (
@@ -211,6 +251,7 @@ const UploadJob = () => {
             return <JobCard job={data} key={index} />;
           })}
         </div>
+        
       </div>
     </div>
   );

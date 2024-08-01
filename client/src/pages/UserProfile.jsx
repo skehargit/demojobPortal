@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { HiLocationMarker } from "react-icons/hi";
@@ -9,6 +9,7 @@ import { CustomButton, TextInput } from "../components";
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
+  // console.log(user)
   const {
     register,
     handleSubmit,
@@ -17,16 +18,18 @@ const UserForm = ({ open, setOpen }) => {
     formState: { errors },
   } = useForm({
     mode: "onChange",
-    defaultValues: { ...user},
+    defaultValues: { ...user },
   });
   const dispatch = useDispatch();
   const [profileImage, setProfileImage] = useState("");
   const [uploadCv, setUploadCv] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  // console.log(uploadCv)
   const onSubmit = async (data) => {
+    // console.log(data)
     setIsSubmitting(true);
     try {
+      console.log(data);
       const newData = uri ? { ...data, profileUrl: uri } : data;
       const res = await apiRequest({
         url: "/users/update-user",
@@ -35,23 +38,22 @@ const UserForm = ({ open, setOpen }) => {
         method: "PUT",
       });
 
-      if(res){
+      if (res) {
         const newData = { token: res?.token, ...res?.user };
         dispatch(Login(newData));
         localStorage.setItem("userInfo", JSON.stringify(res));
         window.location.reload();
-
-
       }
       setIsSubmitting(false);
     } catch (error) {
       setIsSubmitting(false);
-
     }
   };
 
   const closeModal = () => setOpen(false);
-
+  useEffect(() => {
+    console.log(user);
+  });
   return (
     <>
       <Transition appear show={open ?? false} as={Fragment}>
@@ -84,8 +86,9 @@ const UserForm = ({ open, setOpen }) => {
                     as="h3"
                     className="text-lg font-semibold leading-6 text-gray-900"
                   >
-                    Edit Profile
+                    Add Additional info
                   </Dialog.Title>
+
                   <form
                     className="w-full mt-2 flex flex-col gap-5"
                     onSubmit={handleSubmit(onSubmit)}
@@ -93,30 +96,18 @@ const UserForm = ({ open, setOpen }) => {
                     <div className="w-full flex gap-2">
                       <div className="w-1/2">
                         <TextInput
-                          name="firstName"
-                          label="First Name"
-                          placeholder="James"
+                          name="currentCompany"
+                          label="Current Company"
+                          placeholder="currentCompany"
                           type="text"
-                          register={register("firstName", {
-                            required: "First Name is required",
-                          })}
-                          error={
-                            errors.firstName ? errors.firstName?.message : ""
-                          }
                         />
                       </div>
                       <div className="w-1/2">
                         <TextInput
-                          name="lastName"
-                          label="Last Name"
-                          placeholder="Wagonner"
+                          name="currentSalary"
+                          label="current Salary"
+                          placeholder="current Salary"
                           type="text"
-                          register={register("lastName", {
-                            required: "Last Name is required",
-                          })}
-                          error={
-                            errors.lastName ? errors.lastName?.message : ""
-                          }
                         />
                       </div>
                     </div>
@@ -128,10 +119,6 @@ const UserForm = ({ open, setOpen }) => {
                           label="Contact"
                           placeholder="Phone Number"
                           type="text"
-                          register={register("contact", {
-                            required: "Coontact is required!",
-                          })}
-                          error={errors.contact ? errors.contact?.message : ""}
                         />
                       </div>
 
@@ -141,25 +128,43 @@ const UserForm = ({ open, setOpen }) => {
                           label="Location"
                           placeholder="Location"
                           type="text"
-                          register={register("location", {
-                            required: "Location is required",
-                          })}
-                          error={
-                            errors.location ? errors.location?.message : ""
-                          }
                         />
                       </div>
                     </div>
+                    <div className="w-full flex gap-2">
+                      <div className="w-1/2">
+                        <TextInput
+                          name="experience"
+                          label="Experience"
+                          placeholder="Experience"
+                          type="text"
+                        />
+                      </div>
 
+                      <div className="w-1/2">
+                        <TextInput
+                          name="currentLocation"
+                          label="current Location"
+                          placeholder="current Location"
+                          type="text"
+                        />
+                      </div>
+                    </div>
+                    <select className="border p-2" name="openToRelocate" id="">
+                      <option value="">open To Relocate</option>
+                      <option value="">YES</option>
+                      <option value="">NO</option>
+                    </select>
+                    <select className="border p-2" name="joinConsulting" id="">
+                      <option value="">Join Consulting</option>
+                      <option value="">Post Graduation</option>
+                      <option value="">lateral</option>
+                    </select>
                     <TextInput
-                      name="jobTitle"
-                      label="Job Title"
-                      placeholder="Software Engineer"
+                      name="currentJobRole"
+                      label="Current Job Role"
+                      placeholder="Current Job Role"
                       type="text"
-                      register={register("jobTitle", {
-                        required: "Job Title is required",
-                      })}
-                      error={errors.jobTitle ? errors.jobTitle?.message : ""}
                     />
                     <div className="w-full flex gap-2 text-sm">
                       <div className="w-1/2">
@@ -229,7 +234,7 @@ const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const userInfo = user;
-
+  console.log(userInfo)
   return (
     <div className="container mx-auto flex items-center justify-center py-10">
       <div className="w-full md:w-2/3 2xl:w-2/4 bg-white shadow-lg p-10 rounded-lg">
@@ -250,13 +255,62 @@ const UserProfile = () => {
 
           <div className="w-full flex flex-wrap lg:flex-row justify-between mt-8 text-sm">
             <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              <HiLocationMarker /> {userInfo?.location ?? "No Location"}
+              <HiLocationMarker /> {userInfo?.currentLocation ?? "No Location"}
             </p>
             <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
               <AiOutlineMail /> {userInfo?.email ?? "No Email"}
             </p>
+            {/* <p className="flex gap-1 items-center justify-center  px-3 py-1 text-white rounded-full bg-green-500 ">
+              view resume
+            </p> */}
             <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              <FiPhoneCall /> {userInfo?.contact ?? "No Contact"}
+              <FiPhoneCall /> {userInfo?.contactNumber ?? "No Contact"}
+            </p>
+          </div>
+        </div>
+        <div>
+        <div className="flex">
+          <a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">Download Resume</div></a>
+          </div>
+          <div className="flex">
+            <p>experience :</p>
+            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
+              {userInfo?.experience ?? "experience"}
+            </p>
+          </div>
+          <div className="flex">
+            <p>Current Company :</p>
+            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
+              {userInfo?.currentCompany ?? "current company"}
+            </p>
+          </div>
+          <div className="flex">
+            <p>Current JobRole :</p>
+            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
+              {userInfo?.ccurrentJobRole ?? "currentJobRole"}
+            </p>
+          </div>
+          <div className="flex">
+            <p>
+            joinConsulting :</p>
+            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
+              {userInfo?.joinConsulting ?? "joinConsulting"}
+            </p>
+          </div>
+          <div className="flex">
+            <p>
+            openToRelocate :</p>
+            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
+              {userInfo?.openToRelocate ?? "openToRelocate"}
+            </p>
+          </div>
+          <div className="flex">
+            <p>
+            skills :</p>
+            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
+              {userInfo?.skills.length>0&&skills.map((item,idx)=>{
+                return <span key={idx}>item</span>
+              })}
             </p>
           </div>
         </div>
@@ -282,7 +336,7 @@ const UserProfile = () => {
                 className="w-full md:w-64 bg-[#14a800] text-white mt-4 py-2 rounded"
                 onClick={() => setOpen(true)}
               >
-                Edit Profile
+                update details
               </button>
             </div>
           </div>

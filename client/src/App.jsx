@@ -9,15 +9,18 @@ import Contact from "./pages/Contact";
 import ApplicationTracking from "./pages/ApplicationTracking";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ApplicationStatus from "./pages/ApplicationStatus";
+import UploadResume from "./pages/UploadResume";
+import Landing from "./pages/Landing";
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
   const location = useLocation();
-  return user?.token ? (
-    <Outlet />
-  ) : (
-    <Navigate to='/user-auth' state={{ from: location }} replace />
-  );
+  return <Outlet/>
+  // return user?.token ? (
+  //   <Outlet />
+  // ) : (
+  //   <Navigate to='/user-auth' state={{ from: location }} replace />
+  // );
 }
 function App() {
   const { user } = useSelector((state) => state.user);
@@ -30,10 +33,11 @@ function App() {
       
       <Routes>
         <Route element={<Layout />}>
-          <Route
+          {/* <Route
             path='/'
             element={<Navigate to='/find-jobs' replace={true} />}
-          />
+          /> */}
+          <Route path="/" element={<Landing/>}></Route>
           <Route path='/find-jobs' element={<FindJob />} />
           <Route path='/companies' element={<Companies />} />
           <Route
@@ -56,6 +60,8 @@ function App() {
         <Route path='/user-auth' element={<Auth/>} />
         <Route path='/contact-us' element={<Contact/>} />
         <Route path="/admin-dashboard" element={<Dashboard />} />
+        <Route path="/upload-resume" element={<UploadResume />} />
+
         <Route path="/application-tracking" element={<ApplicationTracking />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 

@@ -12,6 +12,7 @@ const jobSchema = new mongoose.Schema(
     detail: [{ desc: { type: String }, requirements: { type: String } }],
     application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
     requiredSkills:[String],
+    screeningQuestions:[String],
     maxApplicants:{
       type:Number,
     },

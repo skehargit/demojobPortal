@@ -45,6 +45,7 @@ const SignUp = ({ open, setOpen }) => {
       }
     }
     try {
+      console.log(formData)
       const res = await apiRequest({
         url: URL,
         method: "POST",

@@ -5,7 +5,7 @@ import { BsStars } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
 
 import Header from "../components/Header.jsx";
-import { experience, jobTypes, jobs } from "../utils/data";
+import { experience } from "../utils/data";
 import { CustomButton, JobCard, ListBox } from "../components";
 import { apiRequest } from "../utils";
 
@@ -29,7 +29,7 @@ const FindJobs = () => {
   const updateURL = ({
     query,
     cmpLoc,
-    jType,
+    // jType,
     exp,
     sort,
     pageNum,
@@ -39,7 +39,7 @@ const FindJobs = () => {
 
     if (query) params.append("query", query);
     if (cmpLoc) params.append("location", cmpLoc);
-    if (jType.length > 0) params.append("jType", jType.join(","));
+    // if (jType.length > 0) params.append("jType", jType.join(","));
     if (exp) params.append("exp", exp);
     if (sort) params.append("sort", sort);
     if (pageNum) params.append("page", pageNum);
@@ -49,10 +49,10 @@ const FindJobs = () => {
 
   const fetchJobs = async () => {
     setIsFetching(true);
+    
     const newURL = updateURL({
       query: searchQuery,
       cmpLoc: jobLocation,
-      jType: filterJobTypes,
       exp: filterExp,
       sort: sort,
       pageNum: page,
@@ -63,7 +63,7 @@ const FindJobs = () => {
         url: "/jobs" + newURL,
         method: "GET",
       });
-      console.log(newURL,res)
+      // console.log(newURL,res)
       setData(res?.data);
       setNumPage(res?.numOfPage);
       setRecordCount(res?.total);
@@ -83,17 +83,33 @@ const FindJobs = () => {
     }
   };
   
-  const filterExperience = (e) => {
-    console.log("Filtering by Experience:", e);
-    if (filterExp.includes(e)) {
-      setFilterExp(filterExp.filter((exp) => exp !== e));
-    } else {
-      setFilterExp([...filterExp, e]);
+  const filterExperience = (e,idx) => {
+    console.log("Filtering by Experience:", e,e.checked);
+    // e.checked?e.checked=false:e.checked=true
+    if(idx ==0){
+      document.querySelector('.check1').checked = false;
+      document.querySelector('.check2').checked = false;
+      document.querySelector('.check3').checked = false;
+    }else if(idx ==1){
+      document.querySelector('.check0').checked = false;
+      document.querySelector('.check2').checked = false;
+      document.querySelector('.check3').checked = false;
+    }else if(idx ==2){
+      document.querySelector('.check0').checked = false;
+      document.querySelector('.check1').checked = false;
+      document.querySelector('.check3').checked = false;
+    }else if(idx==3){
+      document.querySelector('.check0').checked = false;
+      document.querySelector('.check1').checked = false;
+      document.querySelector('.check2').checked = false;
     }
+    setFilterExp(e.value)
+    
   };
   
 
   useEffect(() => {
+    console.log(searchQuery,jobLocation)
     console.log(data.length)
     if (expVal.length > 0) {
       let newExpVal = [];
@@ -126,7 +142,7 @@ const FindJobs = () => {
         <div className="hidden md:flex flex-col py-2 w-1/6 shadow-sm rounded-lg xed">
           <p className="text-lg font-semibold text-[#14a800]">Filter Search</p>
 
-          <div className="py-2">
+          {/* <div className="py-2">
             <div className="flex justify-between mb-3">
               <p className="flex items-center gap-2 font-semibold">
                 <BiBriefcaseAlt2 />
@@ -150,7 +166,7 @@ const FindJobs = () => {
                 </div>
               ))}
             </div>
-          </div>
+          </div> */}
 
           <div className="py-2 mt-4">
             <div className="flex justify-between mb-3">
@@ -161,13 +177,14 @@ const FindJobs = () => {
             </div>
 
             <div className="flex flex-col gap-2">
-              {experience.map((exp) => (
+              {experience.map((exp,idx) => (
                 <div key={exp.title} className="flex items-center gap-3">
-                  <input
+                  <input 
+                    // checked={idx==0?true:false}
                     type="checkbox"
                     value={exp.value}
-                    className="w-4 h-4"
-                    onChange={(e) => filterExperience(e.target.value)}
+                    className={`check${idx} w-4 h-4`}
+                    onChange={(e) => filterExperience(e.target,idx)}
                   />
                   <span>{exp.title}</span>
                 </div>

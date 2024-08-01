@@ -3,20 +3,49 @@ import Users from "../models/userModel.js";
 import { application } from "express";
 import Application from "../models/ApplicationModel.js";
 
+// upload resume
+export const uploadResume = async(req,res)=>{
+  try {
+    const {url} = req.body;
+    // console.log(url)
+    const userResume = await Users.findOneAndUpdate({_id:req.body.user.userId},{cvUrl:url})
+    if(!userResume){
+      return res.status(404).json({
+        success:false,
+        message:'Problem while uploding resume'
+      })
+    }
+    res.status(200).json({
+      success:true,
+      message:'resume updated'
+    })
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      success:false,
+    })
+  }
+}
 // update user details
 export const updateUser = async (req, res, next) => {
   const {
     firstName,
     lastName,
     email,
-    contact,
-    location,
-    profileUrl,
-    jobTitle,
-    about,
-    cvUrl,
-    experience,
-    skills
+      accountType,
+      contactNumber,
+      profileUrl,
+      cvUrl,
+      currentJobRole,
+      currentSalary,
+      currentCompany,
+      currentLocation,
+      openToRelocate,
+      joinConsulting,
+      about,
+      experience,
+      skills,
+      appliedJobs
   } = req.body;
 
   try {
@@ -31,17 +60,20 @@ export const updateUser = async (req, res, next) => {
     }
 
     const updateUser = {
-      firstName,
-      lastName,
-      email,
-      contact,
-      location,
+      accountType,
+      contactNumber,
       profileUrl,
-      jobTitle,  
-      about,
       cvUrl,
+      currentJobRole,
+      currentSalary,
+      currentCompany,
+      currentLocation,
+      openToRelocate,
+      joinConsulting,
+      about,
       experience,
-      skills
+      skills,
+      appliedJobs
     };
 
     const user = await Users.findByIdAndUpdate(id, updateUser, { new: true });
@@ -94,8 +126,24 @@ export const getUser = async (req, res, next) => {
 
 // register user
 export const register = async (req, res, next) => {
-  const { firstName, lastName, email, password } = req.body;
-
+  // const { firstName, lastName, email, password } 
+  // {
+  //   accountType,contactNumber,profileUrl,cvUrl,currentJobRole,currentSalary,currentCompany,currentLocation,openToRelocate,joinConsulting,about,experience,skills,appliedJobs}
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    joinConsulting,
+      openToRelocate,
+      currentSalary,
+      currentJobRole,
+      contactNumber,
+      currentLocation,
+      currentCompany,
+      skills,
+      appliedJobs,
+  }= req.body;
   //validate fileds
 
   if (!firstName) {
@@ -124,21 +172,24 @@ export const register = async (req, res, next) => {
       lastName,
       email,
       password,
+      joinConsulting,
+      openToRelocate,
+      currentSalary,
+      currentJobRole,
+      contactNumber,
+      currentLocation,
+      currentCompany,
+      skills,
+      appliedJobs,
     });
 
     // user token
     const token = await user.createJWT();
-
+    user.password=null;
     res.status(201).send({
       success: true,
       message: "Account created successfully",
-      user: {
-        _id: user._id,
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        accountType: user.accountType,
-      },
+      user,
       token,
     });
   } catch (error) {
@@ -224,6 +275,8 @@ export const deleteUser = async (req, res, next) => {
     });
   }
 };
+
+
 
 
 

@@ -15,7 +15,7 @@ const Footer = () => {
           <div className="w-full flex flex-wrap gap-10 justify-between -mb-10 -px-4">
             {footerLinks.map(({ id, title, links }) => (
               <div className="w-auto px-4" key={id + title}>
-                <h2 className="font-bold text-[#14a800] text-mb-3 uppercase">
+                <h2 className="font-bold text-[#1176DB] text-mb-3 uppercase">
                   {title}
                 </h2>
 
@@ -55,14 +55,14 @@ const Footer = () => {
         <div className="bg-[#424242]">
           <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
             <p className="text-gray-300 text-sm text-center sm:text-left">
-              &copy; 2024 ExpertEase
+              &copy; 2024 HighImpactTalentenquiry
               <a
                 href="https://linkedin.com/in/harsh-d-rao"
-                className="text-[#14a800] ml-1"
+                className="text-[#1176DB] ml-1 font-semibold"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                @Harsh D. Rao
+                highimpacttalentenquiry@gmail.com
               </a>
             </p>
           </div>

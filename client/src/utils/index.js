@@ -57,7 +57,7 @@ export const updateURL = ({
     sort,
     navigate,
     location,
-    jtype,
+    // jtype,
     exp
 }) => {
 
@@ -82,9 +82,9 @@ export const updateURL = ({
         params.set("navigate", navigate);
     }
     
-    if(jtype){
-        params.set("jtype", jtype);
-    }
+    // if(jtype){
+    //     params.set("jtype", jtype);
+    // }
 
     if(exp){
         params.set("exp", exp);
