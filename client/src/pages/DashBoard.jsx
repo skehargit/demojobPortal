@@ -13,9 +13,13 @@ const Dashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const usersRes = await axios.get('http://localhost:8800/api/users');
-        const jobsRes = await axios.get('http://localhost:8800/api/jobs');
-        const appsRes = await axios.get('http://localhost:8800/api/applications');
+        // https://demojobportal.onrender.com
+        // const usersRes = await axios.get('http://localhost:8800/api/users');
+        // const jobsRes = await axios.get('http://localhost:8800/api/jobs');
+        // const appsRes = await axios.get('http://localhost:8800/api/applications');
+        const usersRes = await axios.get('https://demojobportal.onrender.com');
+        const jobsRes = await axios.get('https://demojobportal.onrender.com');
+        const appsRes = await axios.get('https://demojobportal.onrender.com');
         
         console.log('Users:', usersRes.data); // Ensure this is an array
         console.log('Jobs:', jobsRes.data);   // Ensure this is an array

@@ -51,7 +51,7 @@ const UploadResume = () => {
       }
       
       const updateResume = await axios.post(
-        "http://localhost:8800/api-v1/user/upload-resume",
+        "https://demojobportal.onrender.com/api-v1/user/upload-resume",
         data,
         {
           headers: {

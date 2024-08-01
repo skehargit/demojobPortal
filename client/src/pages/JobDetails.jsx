@@ -25,7 +25,7 @@ const JobDetail = () => {
     // axios
     try {
       const res = await apiRequest({
-        url: `http://localhost:8800/api-v1/application/create`,
+        url: `https://demojobportal.onrender.com/api-v1/application/create`,
         data:{job:jobid,company:companyid,applicant:applicantid},
         method: "POST",
         
