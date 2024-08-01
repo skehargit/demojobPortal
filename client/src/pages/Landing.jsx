@@ -2,8 +2,8 @@ import React from 'react'
 
 const Landing = () => {
   return (
-    <div className=' '>
-        <div className='h-[calc(100vh-100px)]'>
+    <div className=''>
+        <div className='hero h-[calc(100vh-100px)]'>
                 <div className='border h-full w-full flex items-center justify-center'>
                     <div className='flex flex-col items-center justify-center'>
                         <h1 className='text-[6vw] text-[#1176DB] leading-none font-semibold'>Transform Your Future <br></br>
