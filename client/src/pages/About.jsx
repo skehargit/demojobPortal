@@ -53,7 +53,6 @@ const About = () => {
           </h2>
           <ul className="mt-4 list-disc list-inside text-gray-600">
             <li>Koustubh Haridas, Co-Founder & CEO (ex-Bain & Company)</li>
-            <li>Sanjeet Saluja, Co-Founder & CTO (Bain & Company)</li>
             <li>Umang Somani , Co-Founder & CFO (Mahindra Group)</li>
           </ul>
         </div>
