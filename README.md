@@ -1,8 +1,8 @@
-frontend 
+<h1>Frontend</h1>
     cd client
-    npm install
-    npm run dev
-Backend
+    <br>npm install
+    <br>npm run dev
+<h1>Backend</h1>
     cd server
-    npm install
-    npm start
+    <br>npm install
+    <br>npm start
