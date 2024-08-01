@@ -260,12 +260,12 @@ const CompanyProfile = () => {
           <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
             <HiLocationMarker /> {info?.location ?? "No Location"}
           </p>
-          <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
+          {/* <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
             <AiOutlineMail /> {info?.email ?? "No Email"}
           </p>
           <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
             <FiPhoneCall /> {info?.contact ?? "No Contact"}
-          </p>
+          </p> */}
 
           <div className="flex flex-col items-center mt-10 md:mt-0">
             <span className="text-xl">{info?.jobPosts?.length}</span>

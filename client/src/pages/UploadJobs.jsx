@@ -181,7 +181,7 @@ const UploadJob = () => {
               ></textarea> */}
               <TextInput
               name="location"
-              label="question 1"
+              label="Question 1"
               placeholder="eg. New York"
               type="text"
               register={register("location", {
@@ -191,7 +191,7 @@ const UploadJob = () => {
             />
             <TextInput
               name="location"
-              label="question 2"
+              label="Question 2"
               placeholder="eg. New York"
               type="text"
               register={register("location", {
@@ -201,7 +201,7 @@ const UploadJob = () => {
             />
             <TextInput
               name="location"
-              label="question 3"
+              label="Question 3"
               placeholder="eg. New York"
               type="text"
               register={register("location", {
@@ -211,7 +211,7 @@ const UploadJob = () => {
             />
             <TextInput
               name="location"
-              label="question 4"
+              label="Question 4"
               placeholder="eg. New York"
               type="text"
               register={register("location", {

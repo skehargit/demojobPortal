@@ -69,15 +69,7 @@ const Companies = () => {
 
   return (
     <div className="w-full bg-white">
-      <Header
-        title="Find Your Dream Company"
-        handleClick={handleSearchSubmit}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        location={cmpLocation}
-        setLocation={setCmpLocation }
-
-      />
+      <h1>Find Out Next Opportunity</h1>
 
       <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 px-5 md:px-0 py-6 ">
         <div className="flex items-center justify-between mb-4">

@@ -21,7 +21,7 @@ const CompanyCard = ({ cmp }) => {
           >
             {name}
           </Link>
-          <span className="text-sm text-blue-600">{email}</span>
+          {/* <span className="text-sm text-blue-600">{email}</span> */}
         </div>
       </div>
 
