@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
-  // console.log(user)
+  console.log(user)
   const {
     register,
     handleSubmit,
@@ -235,7 +235,7 @@ const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const userInfo = user;
-  console.log(userInfo)
+  console.log(user.cvUrl)
   return (
     <div className="container mx-auto flex items-center justify-center py-10">
       <div className="w-full md:w-2/3 2xl:w-2/4 bg-white shadow-lg p-10 rounded-lg">
@@ -271,8 +271,9 @@ const UserProfile = () => {
         </div>
         <div>
         <div className="flex">
-          {userInfo?.cvUrl!=''?<a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">Download Resume</div></a>:<Link to={'/upload-resume'}><div  className="bg-[#1176DB] p-2 text-white">Upload Resume</div></Link>}
-          
+          {/* {userInfo?.cvUrl!=''?<a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">Download Resume</div></a>:}
+           */}
+           <Link to={'/upload-resume'}><div  className="bg-[#1176DB] p-2 text-white">Upload Resume</div></Link>
           </div>
           <div className="flex">
             <p>experience :</p>

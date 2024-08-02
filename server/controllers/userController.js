@@ -17,7 +17,8 @@ export const uploadResume = async(req,res)=>{
     }
     res.status(200).json({
       success:true,
-      message:'resume updated'
+      message:'resume updated',
+      user:userResume
     })
   } catch (error) {
     console.log(error)
