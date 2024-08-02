@@ -30,15 +30,15 @@ const JobCard = ({ job }) => {
             </div>
             <span className='flex gap-2 items-center'>
               {/* <GoLocation className='text-slate-900 text-sm' /> */}
-              <span>Anual salary : </span>{job?.salary}
+              <span>Anual salary</span>{job?.salary}
             </span>
             <span className='flex gap-2 items-center'>
               {/* <GoLocation className='text-slate-900 text-sm' /> */}
-              <span>Experience : </span>{job?.experience} years
+              <span>Experience</span>{job?.experience} years
             </span>
             <span className='flex gap-2 items-center'>
               {/* <GoLocation className='text-slate-900 text-sm' /> */}
-              <span>company : </span>{job?.company?.name}
+              <span>company</span>{job?.company?.name}
             </span>
           </div>
           {/* <div className=''>
@@ -58,12 +58,13 @@ const JobCard = ({ job }) => {
           <p className='bg-[#14a8001c] text-[#14a800] py-0.5 px-1.5 rounded font-semibold text-sm'>
             {job?.jobType}
           </p>
-          <span className='text-gray-500 text-sm'>
+          <span className='text-blue-500 text-sm'>
             {moment(job?.createdAt).fromNow()}
           </span>
         </div>
       </div>
     </Link>
+
   );
 };
 

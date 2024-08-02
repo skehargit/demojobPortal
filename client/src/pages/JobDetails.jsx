@@ -211,7 +211,7 @@ const JobDetail = () => {
                   }
                 )
                 // navigate("/screening-questions")
-              }} className="p-2 bg-blue-500 my-2"> screening questions</div>
+              }} className="p-2 bg-blue-500 my-2 text-white rounded-lg"> Apply now</div>
           <div className="w-full">
             {user?.id === job?.company?._id ? (
               <CustomButton

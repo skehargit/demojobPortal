@@ -72,7 +72,7 @@ const UploadJob = () => {
     <div className="container mx-auto flex flex-col md:flex-row gap-8 2xl:gap-14 transition-all ease-in-out mb-4 ">
       <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
         <div>
-          <p className="text-[#14a800] font-semibold text-2xl">Job Post</p>
+          <p className="text-blue-500 font-semibold text-2xl">Job Post</p>
 
           <form
             className="w-full mt-2 flex flex-col gap-8"
@@ -92,7 +92,7 @@ const UploadJob = () => {
             />
 
             <div className="w-full flex gap-4">
-              {/* <div className={`w-1/2 mt-2`}>
+              {/* <div className={w-1/2 mt-2}>
                 <label className="text-gray-600 text-sm mb-1">Job Type</label>
                 <JobTypes jobTitle={jobType} setJobTitle={setJobType} />
               </div> */}
@@ -229,7 +229,7 @@ const UploadJob = () => {
             <div className="mt-2">
               <CustomButton
                 type="submit"
-                containerStyles="inline-flex justify-center rounded-md border border-transparent bg-[#14a800] px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none "
+                containerStyles="inline-flex justify-center rounded-md border border-transparent bg-blue-500 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none "
                 title="Post Job"
               />
             </div>
@@ -257,4 +257,4 @@ const UploadJob = () => {
   );
 };
 
-export default UploadJob;
+export default UploadJob;

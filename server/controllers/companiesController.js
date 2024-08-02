@@ -66,18 +66,25 @@ export const signIn = async (req, res, next) => {
     }
 
     const company = await Companies.findOne({ email });
-
+    
     if (!company) {
-      
       next("Invalid email or Password=");
       return;
     }
-
-    //compare password
+    console.log(company)
+    // bcrypt.compare(password, company.password, (err, result) => {
+    //   if (err) throw err;
+    //   if (result) {
+    //     console.log('Password matches!');
+    //   } else {
+    //     console.log('Password does not match!');
+    //   }
+    // });
+    // compare password
     const isMatch = await company.comparePassword(password);
     // console.log(isMatch)
     if (!isMatch) {
-      next("Invalid email or Password-");
+      next(`Invalid email or Password-,${company.password}`);
       return;
     }
     company.password = undefined;

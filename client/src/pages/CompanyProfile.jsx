@@ -151,7 +151,7 @@ const CompanyForm = ({ open, setOpen }) => {
                       About Company
                     </label>
                     <textarea
-                      className="rounded border border-gray-400 focus:outline-none focus:border-[#14a800] focus:ring-1 focus:ring-[#14a800] text-base px-4 py-2 resize-none"
+                      className="rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none"
                       rows={4}
                       cols={6}
                       {...register("about", {
@@ -172,7 +172,7 @@ const CompanyForm = ({ open, setOpen }) => {
                   <div className="mt-4">
                     <CustomButton
                       type="submit"
-                      containerStyles="inline-flex justify-center rounded-md border border-transparent bg-[#14a800] px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none"
+                      containerStyles="inline-flex justify-center rounded-md border border-transparent bg-blue-500 px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none"
                       title={"Make Changes"}
                     />
                   </div>
@@ -242,14 +242,14 @@ const CompanyProfile = () => {
               <CustomButton
                 onClick={() => setOpenForm(true)}
                 title="Edit Profile"
-                containerStyles="py-1.5 px-3 md:px-5 focus:outline-none bg-[#14a800] hover:bg-[#14a800] text-white rounded text-sm md:text-base border border-[#14a800]"
+                containerStyles="py-1.5 px-3 md:px-5 focus:outline-none bg-blue-500 hover:bg-blue-500 text-white rounded text-sm md:text-base border "
               />
 
               <Link to="/upload-job">
                 <CustomButton
                   title="Upload Job"
                   iconRight={<FiUpload />}
-                  containerStyles="text-[#14a800] py-1.5 px-3 md:px-5 focus:outline-none rounded text-sm md:text-base border border-[#14a800]"
+                  containerStyles="text-blue-500 py-1.5 px-3 md:px-5 focus:outline-none rounded text-sm md:text-base border border-blue-500"
                 />
               </Link>
             </div>
@@ -269,13 +269,13 @@ const CompanyProfile = () => {
 
           <div className="flex flex-col items-center mt-10 md:mt-0">
             <span className="text-xl">{info?.jobPosts?.length}</span>
-            <p className="text-[#14a800]">Job Post</p>
+            <p className="text-blue-500">Job Post</p>
           </div>
         </div>
       </div>
 
       <div className="w-full mt-20 flex flex-col gap-2">
-        <p>Jobs Posted by <span className="text-[#14a800]">{info?.name}</span></p>
+        <p>Jobs Posted by <span className="text-blue-500">{info?.name}</span></p>
         <div className="flex flex-wrap gap-3">
           {info?.jobPosts?.length === 0 && (
             <div className="flex flex-col items-center justify-center">
@@ -295,4 +295,4 @@ const CompanyProfile = () => {
   );
 };
 
-export default CompanyProfile;
+export default CompanyProfile;
