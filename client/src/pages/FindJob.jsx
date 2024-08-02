@@ -15,7 +15,6 @@ const FindJobs = () => {
   const [numPage, setNumPage] = useState(1);
   const [recordCount, setRecordCount] = useState(0);
   const [data, setData] = useState([]);
-
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   const [filterJobTypes, setFilterJobTypes] = useState([]);
@@ -140,7 +139,7 @@ const FindJobs = () => {
 
       <div className="container mx-auto flex gap-6 2xl:gap-10 py-0 pb-4 ">
         <div className="hidden md:flex flex-col py-2 w-1/6 shadow-sm rounded-lg xed">
-          <p className="text-lg font-semibold text-[#14a800]">Filter Search</p>
+          <p className="text-lg font-semibold text-[#1176DB]">Filter Search</p>
 
           {/* <div className="py-2">
             <div className="flex justify-between mb-3">
@@ -168,7 +167,7 @@ const FindJobs = () => {
             </div>
           </div> */}
 
-          <div className="py-2 mt-4">
+          <div className="py-2">
             <div className="flex justify-between mb-3">
               <p className="flex items-center gap-2 font-semibold">
                 <BsStars />
@@ -195,9 +194,10 @@ const FindJobs = () => {
 
         <div className="w-full md:w-5/6 px-5 md:px-0">
           <div className="flex items-center justify-between mb-4">
-            <p className="text-sm md:text-base text-[#14a800] border-b-1">
+            
+            {isFetching?<p className="text-xl  text-[#1176DB] border-b-1">Finding jobs...</p>:<p className="text-xl   text-[#1176DB] border-b-1">
               Showing: <span className="font-semibold">{data.length}</span> Jobs Available 
-            </p>
+            </p>}
 
             <div className="flex flex-col md:flex-row gap-0 md:gap-2 md:items-center md:justify-center">
               <p className="text-sm md:text-base">Sort By:</p>

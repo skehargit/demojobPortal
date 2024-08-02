@@ -30,15 +30,15 @@ const JobCard = ({ job }) => {
             </div>
             <span className='flex gap-2 items-center'>
               {/* <GoLocation className='text-slate-900 text-sm' /> */}
-              <span>Anual salary</span>{job?.salary}
+              <span>Anual salary : </span>{job?.salary}
             </span>
             <span className='flex gap-2 items-center'>
               {/* <GoLocation className='text-slate-900 text-sm' /> */}
-              <span>Experience</span>{job?.experience} years
+              <span>Experience : </span>{job?.experience} years
             </span>
             <span className='flex gap-2 items-center'>
               {/* <GoLocation className='text-slate-900 text-sm' /> */}
-              <span>company</span>{job?.company?.name}
+              <span>company : </span>{job?.company?.name}
             </span>
           </div>
           {/* <div className=''>
