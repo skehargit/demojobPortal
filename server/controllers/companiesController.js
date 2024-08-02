@@ -72,21 +72,20 @@ export const signIn = async (req, res, next) => {
       return;
     }
     console.log(company)
-    // bcrypt.compare(password, company.password, (err, result) => {
-    //   if (err) throw err;
-    //   if (result) {
-    //     console.log('Password matches!');
-    //   } else {
-    //     console.log('Password does not match!');
-    //   }
-    // });
-    // compare password
-    const isMatch = await company.comparePassword(password);
-    // console.log(isMatch)
-    if (!isMatch) {
-      next(`Invalid email or Password-,${company.password}`);
-      return;
+    const match = await bcrypt.compare(password, company.password)
+    if(!match){
+      return res.status(404).json({
+        success:false,
+        message:"password not match"
+      })
     }
+    // compare password
+    // const isMatch = await company.comparePassword(password);
+    // // console.log(isMatch)
+    // if (!isMatch) {
+    //   next(`Invalid email or Password-,${company.password}`);
+    //   return;
+    // }
     company.password = undefined;
 
     const token = company.createJWT();
