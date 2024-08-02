@@ -191,7 +191,7 @@ const Navbar = () => {
             isOpen ? "absolute flex bg-[#f7fdfd] " : "hidden"
           } container mx-auto lg:hidden flex-col pl-8 gap-3 py-5`}
         >
-          <Link to="/" onClick={handleCloseNavbar}>
+          <Link to="/find-jobs" onClick={handleCloseNavbar}>
             Find Job
           </Link>
           <Link to="/companies" onClick={handleCloseNavbar}>
