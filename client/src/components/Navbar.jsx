@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { BiChevronDown } from "react-icons/bi";
 import { CgProfile } from "react-icons/cg";
@@ -11,12 +11,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../redux/userSlice";
 import logo from '../assets/logo.jpg'
 function MenuList({ user, onClick }) {
+  // const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const handleLogout = () => {
     dispatch(Logout());
     window.location.replace("/");
   };
-
+  // useEffect(()=>{
+  //   console.log(user.length)
+  // })
   return (
     <div className="bg-white">
       <Menu as="div" className="inline-block text-left">
@@ -105,7 +108,7 @@ function MenuList({ user, onClick }) {
 const Navbar = () => {
   const { user } = useSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(false);
-  console.log(user)
+  // console.log(user ,user.token)
   const handleCloseNavbar = () => {
     setIsOpen((prev) => !prev);
   };
@@ -131,20 +134,25 @@ const Navbar = () => {
             <li className="hover:text-[#1176DB]">
               <Link to="/companies">Companies</Link>
             </li>
-            <li className="hover:text-[#1176DB]">
+            {/* {!user?.token=='undefined'&&} */}
+            
+            {user?.token&&<li className="hover:text-[#1176DB]">
               <Link to={user?.accountType === "seeker" ? "" : "/upload-job"}>
-              {user?.accountType === "seeker" ? "" : "Upload Job"}</Link>
+              {user?.accountType != "seeker"&&"Upload Job"}</Link>
               {}
-            </li>
+            </li>}
+            
             <li className="hover:text-[#1176DB]">
               <Link to="/about-us">About</Link>
             </li>
             <li className="hover:text-[#1176DB]">
               <Link to="/contact-us">Contact Us</Link>
             </li>
+            {/* {user.token=='undefined'&&} */}
             <li className="hover:text-[#1176DB]">
-              <Link to="/upload-resume">upload resume</Link>
+              <Link to="/upload-resume">{user?.accountType === "seeker"&&"upload resume"}</Link>
             </li>
+            
             <li className="hover:text-[#1176DB]">
               <Link to="/privacy-policy">Privacy & Policy</Link>
             </li>
@@ -155,7 +163,7 @@ const Navbar = () => {
               <Link to="/user-auth">
                 <CustomButton
                   title="Sign In"
-                  containerStyles="text-[#14a800] py-1.5 px-5 focus:outline-none hover:bg-[#14a800] hover:text-white rounded-full text-base border border-[#14a800]"
+                  containerStyles="text-[#14a800] py-1.5 px-5 focus:outline-none hover:bg-[#1176DB] hover:text-white rounded-full text-base border border-[#1176DB]"
                 />
               </Link>
             ) : (

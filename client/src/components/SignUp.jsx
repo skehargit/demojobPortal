@@ -11,7 +11,7 @@ import { Login } from "../redux/userSlice";
 const SignUp = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-
+  const [loading,setloadting]=useState(false)
   const [isRegister, setIsRegister] = useState(true);
   const [accountType, setAccountType] = useState("seeker");
 
@@ -45,7 +45,8 @@ const SignUp = ({ open, setOpen }) => {
       }
     }
     try {
-      console.log(formData)
+      // console.log(formData)
+      setloadting(true)
       const res = await apiRequest({
         url: URL,
         method: "POST",
@@ -59,7 +60,9 @@ const SignUp = ({ open, setOpen }) => {
         const userData = { token: res?.token, ...res?.user };
         dispatch(Login(userData));
         localStorage.setItem("userInfo", JSON.stringify(userData));
+        setloadting(false)
         window.location.replace(from);
+        
       }
     } catch (error) {
       // Handle error
@@ -102,12 +105,12 @@ const SignUp = ({ open, setOpen }) => {
                     {isRegister ? "Create Account" : "Account Sign In"}
                   </Dialog.Title>
 
-                  <div className="w-full flex items-center justify-center py-4 ">
+                  <div className="w-full flex gap-2 items-center justify-center py-4 ">
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType === "seeker"
-                          ? "bg-[#14a800] text-white font-semibold"
-                          : "bg-white border border-[#14a800]"
+                          ? "bg-[#1176DB] text-white font-semibold"
+                          : "bg-white border border-[#1176DB]"
                       }`}
                       onClick={() => setAccountType("seeker")}
                     >
@@ -116,8 +119,8 @@ const SignUp = ({ open, setOpen }) => {
                     <button
                       className={`flex-1 px-4 py-2 rounded text-sm outline-none ${
                         accountType !== "seeker"
-                          ? "bg-[#14a800] text-white font-semibold"
-                          : "bg-white border border-[#14a800]"
+                          ? "bg-[#1176DB] text-white font-semibold"
+                          : "bg-white border border-[#1176DB]"
                       }`}
                       onClick={() => setAccountType("company")}
                     >
@@ -254,11 +257,14 @@ const SignUp = ({ open, setOpen }) => {
                     )}
 
                     <div className="mt-2">
-                      <CustomButton
+                      {/* <CustomButton
                         type="submit"
                         containerStyles={`inline-flex justify-center rounded-md bg-[#14a800] px-8 py-2 text-sm font-medium text-white outline-none hover:bg-[#10a900]`}
                         title={isRegister ? "Create Account" : "Login Account"}
-                      />
+                      /> */}
+                      <button type="submit" className="bg-blue-500 text-white py-2 px-5 rounded-lg">
+                        {isRegister?<div>{loading?"Creating Account....":"Create Account"}</div>:<div>{loading?"Login....":"Login Account"}</div>}
+                      </button>
                     </div>
                   </form>
 
@@ -269,7 +275,7 @@ const SignUp = ({ open, setOpen }) => {
                         : "Do not have an account"}
 
                       <span
-                        className="text-sm text-[#14a800] ml-2 hover:scale-125 hover:font-semibold cursor-pointer"
+                        className="text-sm text-[#1176DB] ml-2 hover:scale-125 hover:font-semibold cursor-pointer"
                         onClick={() => setIsRegister((prev) => !prev)}
                       >
                         {isRegister ? "Login" : "Create Account"}

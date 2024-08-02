@@ -4,12 +4,16 @@ const Landing = () => {
   return (
     <div className=''>
         <div className='hero h-[calc(100vh-100px)]'>
-                <div className='border h-full w-full flex items-center justify-center'>
+                <div className='border h-full w-full bg-black/40 flex flex-col items-center justify-center'>
                     <div className='flex flex-col items-center justify-center'>
-                        <h1 className='text-[6vw] text-[#1176DB] leading-none font-semibold'>Transform Your Future <br></br>
+                        <h1 className='text-[6vw] text-white leading-none font-semibold'>Transform Your Future <br></br>
                          with High Impact Talent</h1>
-                        <p className='text-2xl'>Bridging the Gap Between Top-Tier Strategic Professionals and Leading Organizations</p>
+                        <p className='text-2xl text-white'>Bridging the Gap Between Top-Tier Strategic Professionals and Leading Organizations</p>
                     </div>
+                    {/* <div className='flex gap-2'>
+                        <div className='bg-blue-500 p-2 text-white'>Find Yor Next Job</div>
+                        <div className='bg-blue-500 p-2 text-white'>Post a Job</div>
+                    </div> */}
                 </div>
         </div>
         <div className='h-screen'>
