@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Linkedin } from "../assets";
 import moment from "moment";
 import { AiOutlineSafetyCertificate } from "react-icons/ai";
-import { useNavigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { jobs } from "../utils/data";
 import { CustomButton, JobCard } from "../components";
 import { useSelector } from "react-redux";
 import { apiRequest } from "../utils";
 import axios from "axios";
+import ScreeningQuestions from "./ScreeningQuestions";
 
 const JobDetail = () => {
   const { id } = useParams();
@@ -19,25 +20,7 @@ const JobDetail = () => {
   const [applied,setApplied]=useState(false)
   const [status,setStatus]=useState('applied')
   const navigate = useNavigate()
-  const applyHandler = async (jobid,companyid,applicantid)=>{
-    // alert('clicked')
-    console.log(jobid,companyid,applicantid)
-    // axios
-    try {
-      const res = await apiRequest({
-        url: `https://demojobportal.onrender.com/api-v1/application/create`,
-        data:{job:jobid,company:companyid,applicant:applicantid},
-        method: "POST",
-        
-      });
-      if(res){
-        setApplied(true)
-        console.log('applied',res)
-      }
-    } catch (error) {
-      console.log('Error while apply for job')
-    }
-  }
+  
   const getJobDetails = async () => {
     setIsFetching(true);
     try {
@@ -81,6 +64,7 @@ const JobDetail = () => {
   };
 
   useEffect(() => {
+    console.log(job)
     id && getJobDetails();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [id]);
@@ -88,9 +72,9 @@ const JobDetail = () => {
   if (isFetching || !job) {
     return <div>Loading...</div>;
   }
-  useEffect(()=>{
-    console.log(job)
-  })
+  // useEffect(()=>{
+  //   console.log(job)
+  // })
   return (
     <div className="container mx-auto pb-4 " >
       <div className="w-full flex flex-col md:flex-row gap-10">
@@ -174,8 +158,7 @@ const JobDetail = () => {
           {/* </div> */}
 
           <div className="my-6">
-            {selected === "0" ? (
-              <>
+          <div>
                 <p className="text-xl font-semibold ">Job Description</p>
 
                 <span className="text-base">{job?.detail?.[0]?.desc}</span>
@@ -188,7 +171,18 @@ const JobDetail = () => {
                     </span>
                   </>
                 )}
-              </>
+
+                <p className="text-xl font-semibold ">Skill Required :</p>
+                <ul className="flex flex-wrap gap-2">
+                  {job?.requiredSkills.length>0&&job?.requiredSkills.map((item,index)=>{
+                    return <li key={index} className="bg-zinc-500 text-white w-fit py-1 px-3 rounded-lg">{item}</li>
+                  })}
+                </ul>
+
+                <div className="flex gap-1"><p>Experience :</p><span>{job?.experience}</span> <span>Year</span></div>
+              </div>
+            {/* {selected === "0" ? (
+              
             ) : (
               <>
                 <div className="mb-6 flex flex-col">
@@ -202,9 +196,22 @@ const JobDetail = () => {
                 <p className="text-xl font-semibold">About Company</p>
                 <span>{job?.about}</span>
               </>
-            )}
+            )} */}
           </div>
-
+              <div onClick={()=>{
+                navigate(
+                  'screening-questions',
+                  {
+                    state: {
+                        questions:job?.screeningQuestions,
+                        jobid:job._id,
+                        companyid:job?.company?._id,
+                        userid:user._id
+                    }
+                  }
+                )
+                // navigate("/screening-questions")
+              }} className="p-2 bg-blue-500 my-2"> screening questions</div>
           <div className="w-full">
             {user?.id === job?.company?._id ? (
               <CustomButton
@@ -213,16 +220,7 @@ const JobDetail = () => {
                 containerStyles="w-full flex items-center justify-center bg-red-500 py-3 px-5 outline-none rounded-full text-base"
               />
             ) : (
-              <button
-      onClick={()=>{
-          !applied&&applyHandler(job._id,job.company._id,user._id)
-          applied&&navigate('/application-tracking')
-        }} 
-      className={`py-2 px-4 flex bg-green-500 w-full text-white items-center justify-center text-black rounded-[10px]`}
-    > 
-      {applied?`view application status`:'apply now'}
-    </button>
-
+              <></>
             )}
           </div>
         </div>

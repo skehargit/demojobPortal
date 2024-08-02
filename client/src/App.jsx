@@ -11,6 +11,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import ApplicationStatus from "./pages/ApplicationStatus";
 import UploadResume from "./pages/UploadResume";
 import Landing from "./pages/Landing";
+import ScreeningQuestions from "./pages/ScreeningQuestions";
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
@@ -53,6 +54,7 @@ function App() {
           <Route path={"/company-profile/job-detail/:id"} element={<CompaniesProfile />} />
           <Route path={"/upload-job"} element={<UploadJobs />} />
           <Route path={"/job-detail/:id"} element={<JobDetails />} />
+          <Route path="/job-detail/:id/screening-questions" element={<ScreeningQuestions/>}></Route>
           <Route path={'/applicationstatus'} element={<ApplicationStatus/>}></Route>
           
         </Route>
@@ -61,7 +63,7 @@ function App() {
         <Route path='/contact-us' element={<Contact/>} />
         <Route path="/admin-dashboard" element={<Dashboard />} />
         <Route path="/upload-resume" element={<UploadResume />} />
-
+        
         <Route path="/application-tracking" element={<ApplicationTracking />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
