@@ -131,11 +131,15 @@ const Navbar = () => {
             <li className="hover:text-[#1176DB]">
               <Link to="/find-jobs">Find Job</Link>
             </li>
-            <li className="hover:text-[#1176DB]">
+            {user?.accountType == "seeker"&&<li className="hover:text-[#1176DB]">
               <Link to="/companies">Companies</Link>
-            </li>
-            {/* {!user?.token=='undefined'&&} */}
+            </li>}
             
+            {/* {user?.token&&<li className="hover:text-[#1176DB]">
+              <Link to={user?.accountType === "seeker" ? "" : "/upload-job"}>
+              {user?.accountType != "seeker"&&"Upload Job"}</Link>
+              {}
+            </li>} */}
             {user?.token&&<li className="hover:text-[#1176DB]">
               <Link to={user?.accountType === "seeker" ? "" : "/upload-job"}>
               {user?.accountType != "seeker"&&"Upload Job"}</Link>
