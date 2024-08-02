@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import Companies from "../models/companiesModel.js";
 import { response } from "express";
-
+import bcrypt from "bcryptjs";
 // company register 
 export const register = async (req, res, next) => {
   const { name, email, password } = req.body;
