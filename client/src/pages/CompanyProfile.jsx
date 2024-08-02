@@ -192,7 +192,7 @@ const CompanyProfile = () => {
   const [info, setInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [openForm, setOpenForm] = useState(false);
-
+  console.log(user.token)
   const fetchCompany = async () => {
     setIsLoading(true);
     let id = params.id ? params.id : user?._id;
@@ -230,7 +230,7 @@ const CompanyProfile = () => {
   // dets();
 
   return (
-    <div className="container mx-auto p-5">
+    <div className="container mx-auto p-5 h-screen">
       <div className="">
         <div className="w-full flex flex-col md:flex-row gap-3 justify-between">
           <h2 className="text-gray-600 text-xl font-semibold">

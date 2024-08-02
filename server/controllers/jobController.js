@@ -16,13 +16,11 @@ export const createJob = async (req, res, next) => {
       skills,
       screeningQuestions,
       desc,
-      requirements,
     } = req.body;
 
     // Validate required fields
     if (
       !jobTitle ||
-      !jobType ||
       !location ||
       !salary ||
       !desc

@@ -84,7 +84,7 @@ const FindJobs = () => {
   };
   
   const filterExperience = (e,idx) => {
-    console.log("Filtering by Experience:", e,e.checked);
+    // console.log("Filtering by Experience:", e,e.checked);
     // e.checked?e.checked=false:e.checked=true
     if(idx ==0){
       document.querySelector('.check1').checked = false;
