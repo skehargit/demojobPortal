@@ -88,9 +88,11 @@ const JobDetail = () => {
   if (isFetching || !job) {
     return <div>Loading...</div>;
   }
-
+  useEffect(()=>{
+    console.log(job)
+  })
   return (
-    <div className="container mx-auto pb-4" >
+    <div className="container mx-auto pb-4 " >
       <div className="w-full flex flex-col md:flex-row gap-10">
         {/* LEFT SIDE */}
         <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
@@ -125,31 +127,31 @@ const JobDetail = () => {
           </div>
 
           <div className="w-full flex flex-wrap md:flex-row gap-2 items-center justify-between my-10">
-            <div className="bg-[#bdf4c8] w-40 h-16 rounded-lg flex flex-col items-center justify-center">
-              <span className="text-sm">Salary</span>
+            <div className="bg-[#bdf4c8] w-40 h-16 rounded-lg flex gap-2 items-center justify-center ">
+              <span className="text-sm">Anual Salary : </span>
               <p className="text-lg font-semibold text-gray-700">
-                ₹ {job?.salary}
+                {job?.salary}
               </p>
             </div>
 
-            <div className="bg-[#bae5f4] w-40 h-16 rounded-lg flex flex-col items-center justify-center">
+            {/* <div className="bg-[#bae5f4] w-40 h-16 rounded-lg flex flex-col items-center justify-center">
               <span className="text-sm">Job Type</span>
               <p className="text-lg font-semibold text-gray-700">
                 {job?.jobType}
               </p>
-            </div>
+            </div> */}
 
 
-            <div className="bg-[#cecdff] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
+            {/* <div className="bg-[#cecdff] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
               <span className="text-sm">No. of Vacancies</span>
               <p className="text-lg font-semibold text-gray-700">
                 {job?.vacancies}
               </p>
-            </div>
+            </div> */}
           </div>
 
-          <div className="w-full flex gap-4 py-5">
-            <CustomButton
+          {/* <div className="w-full flex gap-4 py-5"> */}
+            {/* <CustomButton
               onClick={() => setSelected("0")}
               title="Job Description"
               containerStyles={`w-full flex items-center justify-center py-3 px-5 outline-none rounded-full text-sm ${
@@ -157,9 +159,10 @@ const JobDetail = () => {
                   ? "bg-black text-white"
                   : "bg-white text-black border border-gray-300"
               }`}
-            />
+            /> */}
+            {/* <div className="w-full flex items-center justify-center py-3 px-5 font-semibold">Job Description</div> */}
 
-            <CustomButton
+            {/* <CustomButton
               onClick={() => setSelected("1")}
               title="Company"
               containerStyles={`w-full flex items-center justify-center  py-3 px-5 outline-none rounded-full text-sm ${
@@ -167,8 +170,8 @@ const JobDetail = () => {
                   ? "bg-black text-white"
                   : "bg-white text-black border border-gray-300"
               }`}
-            />
-          </div>
+            /> */}
+          {/* </div> */}
 
           <div className="my-6">
             {selected === "0" ? (
