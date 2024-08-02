@@ -68,7 +68,8 @@ export const signIn = async (req, res, next) => {
     const company = await Companies.findOne({ email });
 
     if (!company) {
-      next("Invalid email or Password");
+      
+      next("Invalid email or Password=");
       return;
     }
 
@@ -76,7 +77,7 @@ export const signIn = async (req, res, next) => {
     const isMatch = await company.comparePassword(password);
     // console.log(isMatch)
     if (!isMatch) {
-      next("Invalid email or Password");
+      next("Invalid email or Password-");
       return;
     }
     company.password = undefined;

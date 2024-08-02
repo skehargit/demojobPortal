@@ -141,7 +141,7 @@ const Navbar = () => {
               {}
             </li>} */}
             {user?.token&&<li className="hover:text-[#1176DB]">
-              <Link to={user?.accountType === "seeker" ? "" : "/upload-job"}>
+              <Link to={user?.accountType != "seeker"&&"/upload-job"}>
               {user?.accountType != "seeker"&&"Upload Job"}</Link>
               {}
             </li>}
@@ -197,14 +197,15 @@ const Navbar = () => {
           <Link to="/companies" onClick={handleCloseNavbar}>
             Companies
           </Link>
-          <Link
+          {user?.token&&<Link
             onClick={handleCloseNavbar}
             to={
-              user?.accountType === "seeker" ? "applly-gistory" : "upload-job"
+              user?.accountType != "seeker"&& "/upload-job"
             }
           >
-            {user?.accountType === "seeker" ? "Applications" : "Upload Job"}
-          </Link>
+            {user?.accountType != "seeker"&&"Upload Job"}
+          </Link>}
+          
           
 
           <div className="w-full py-10">
