@@ -198,7 +198,9 @@ const JobDetail = () => {
               </>
             )} */}
           </div>
-              <div onClick={()=>{
+          {user?.token==null?<div onClick={()=>{
+            navigate('/user-auth')
+          }} className="p-2 bg-blue-500 my-2 text-white rounded-lg text-center">Login/Register To Apply</div>:<div onClick={()=>{
                 navigate(
                   'screening-questions',
                   {
@@ -211,7 +213,8 @@ const JobDetail = () => {
                   }
                 )
                 // navigate("/screening-questions")
-              }} className="p-2 bg-blue-500 my-2 text-white rounded-lg"> Apply now</div>
+              }} className="p-2 bg-blue-500 my-2 text-white rounded-lg text-center"> Apply now</div>}
+              
           <div className="w-full">
             {user?.id === job?.company?._id ? (
               <CustomButton

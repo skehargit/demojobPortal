@@ -210,7 +210,7 @@ const ResumeUpload = () => {
           },
         }
       );
-      console.log(updateResume);
+      console.log(fileInfo,updateResume);
   };
 
   const openUploadDialog = () => {

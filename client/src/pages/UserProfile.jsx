@@ -237,7 +237,7 @@ const UserProfile = () => {
   const userInfo = user;
   console.log(user.cvUrl)
   return (
-    <div className="container mx-auto flex items-center justify-center py-10">
+    <div className="container mx-auto flex items-center justify-center py-10 ">
       <div className="w-full md:w-2/3 2xl:w-2/4 bg-white shadow-lg p-10 rounded-lg">
         <div className="flex flex-col items-center justify-center mb-4">
           <h1 className="text-4xl font-semibold text-slate-600">
@@ -250,7 +250,7 @@ const UserProfile = () => {
             {userInfo?.firstName + " " + userInfo?.lastName}
           </h1>
 
-          <h5 className="text-[#14a800] text-base font-bold">
+          <h5 className="text-blue-500 text-base font-bold">
             {userInfo?.jobTitle || "Add Job Title"}
           </h5>
 
@@ -269,11 +269,11 @@ const UserProfile = () => {
             </p>
           </div>
         </div>
-        <div>
+        <div className="capitalize">
         <div className="flex">
-          {/* {userInfo?.cvUrl!=''?<a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">Download Resume</div></a>:}
-           */}
-           <Link to={'/upload-resume'}><div  className="bg-[#1176DB] p-2 text-white">Upload Resume</div></Link>
+          {user?.cvUrl!=''?<a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">view Resume</div></a>:<Link to={'/upload-resume'}><div  className="bg-[#1176DB] p-2 text-white">Upload Resume</div></Link>}
+          
+           
           </div>
           <div className="flex">
             <p>experience :</p>
@@ -323,7 +323,7 @@ const UserProfile = () => {
         <div className="w-full py-10">
           <div className="w-full flex flex-col-reverse md:flex-row gap-8 py-6">
             <div className="w-full md:w-2/3 flex flex-col gap-4 text-lg text-slate-600 mt-20 md:mt-0">
-              <p className="text-[#14a800]  font-semibold text-2xl">ABOUT</p>
+              <p className="text-blue-500  font-semibold text-2xl">ABOUT</p>
               <span className="text-base text-justify leading-7">
                 {userInfo?.about ?? "No About Found"}
               </span>
@@ -336,7 +336,7 @@ const UserProfile = () => {
                 className="w-full h-48 object-contain rounded-lg"
               /> */}
               <button
-                className="w-full md:w-64 bg-[#14a800] text-white mt-4 py-2 rounded"
+                className="w-full md:w-64 bg-blue-500 text-white mt-4 py-2 rounded"
                 onClick={() => setOpen(true)}
               >
                 update details
