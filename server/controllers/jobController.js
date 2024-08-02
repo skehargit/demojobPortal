@@ -12,8 +12,8 @@ export const createJob = async (req, res, next) => {
       jobType,
       location,
       salary,
-      vacancies,
       experience,
+      skills,
       screeningQuestions,
       desc,
       requirements,
@@ -25,7 +25,6 @@ export const createJob = async (req, res, next) => {
       !jobType ||
       !location ||
       !salary ||
-      !requirements ||
       !desc
     ) {
       return res.status(400).json({ message: "Please Provide All Required Fields" });
@@ -44,10 +43,9 @@ export const createJob = async (req, res, next) => {
       jobType,
       location,
       salary,
-      vacancies,
       experience,
       screeningQuestions,
-      
+      skills,
       detail: { desc, requirements },
       company: id,
     };
@@ -84,11 +82,12 @@ export const updateJob = async (req, res, next) => {
       jobType,
       location,
       salary,
-      vacancies,
       experience,
       desc,
+      skills,
       requirements,
       maxApplicants,
+      screeningQuestions,
       duration
     } = req.body;
     const { jobId } = req.params;
@@ -115,10 +114,11 @@ export const updateJob = async (req, res, next) => {
       jobType,
       location,
       salary,
-      vacancies,
       experience,
+      skills,
       detail: { desc, requirements },
       maxApplicants,
+      screeningQuestions,
       duration,
       _id: jobId,
     };
@@ -147,7 +147,6 @@ export const updateJob = async (req, res, next) => {
 export const getJobPosts = async (req, res, next) => {
   try {
     const { search, sort, location, exp} = req.query;
-    // const types = jType?.split(","); full-time,part-time
     const experience = exp?.split("-"); //2-6
 
     let queryObject = {};
