@@ -13,7 +13,7 @@ export const createJob = async (req, res, next) => {
       location,
       salary,
       experience,
-      skills,
+      requiredSkills,
       screeningQuestions,
       desc,
       requirements
@@ -44,7 +44,7 @@ export const createJob = async (req, res, next) => {
       salary,
       experience,
       screeningQuestions,
-      skills,
+      requiredSkills,
       detail: { desc, requirements },
       company: id,
     };
