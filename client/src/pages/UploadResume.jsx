@@ -119,3 +119,45 @@ const UploadResume = () => {
 };
 
 export default UploadResume;
+
+
+
+
+// import React, { useRef } from 'react';
+//   import { Widget } from '@uploadcare/react-widget';
+
+//   const ResumeUpload = () => {
+//     const widgetApi = useRef();
+
+//     const handleUpload = (fileInfo) => {
+//       console.log('File uploaded:', fileInfo);
+//       // Send the fileInfo.cdnUrl to your backend to save it in the database
+//     };
+
+//     const openUploadDialog = () => {
+//       widgetApi.current.openDialog(null, {
+//         accept: 'application/pdf', // Only accept PDF files
+//       });
+//     };
+
+//     return (
+//       <div className="upload-container bg-white shadow rounded">
+//         <h2 className="text-lg font-bold mb-4">Upload Your Resume</h2>
+//         <button
+//           onClick={openUploadDialog}
+//           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+//         >
+//           Upload PDF Resume
+//         </button>
+//         <Widget
+//           publicKey="886857a9a1571edf40e9"
+//           ref={widgetApi}
+//           onChange={handleUpload}
+//           style={{ display: 'none' }} // Hide the default widget
+//         />
+        
+//       </div>
+//     );
+//   };
+
+//   export default ResumeUpload;

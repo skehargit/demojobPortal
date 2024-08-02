@@ -6,6 +6,7 @@ import { HiLocationMarker } from "react-icons/hi";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { CustomButton, TextInput } from "../components";
+import { Link } from "react-router-dom";
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
@@ -270,7 +271,8 @@ const UserProfile = () => {
         </div>
         <div>
         <div className="flex">
-          <a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">Download Resume</div></a>
+          {userInfo?.cvUrl!=''?<a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">Download Resume</div></a>:<Link to={'/upload-resume'}><div  className="bg-[#1176DB] p-2 text-white">Upload Resume</div></Link>}
+          
           </div>
           <div className="flex">
             <p>experience :</p>

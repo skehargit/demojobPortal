@@ -57,22 +57,21 @@ const Header = ({
     <div className="bg-[#ffffff]">
       <div
         className={`container mx-auto px-5 ${
-          type ? "h-[500px]" : "h-[350px]"
+          type ? "h-[200px]" : "h-[200px]"
         } flex items-center relative`}
       >
         <div className=" w-full z-10">
-          <div className=" mb-8 flex justify-center ">
+          <div className=" mb-3 flex justify-center ">
             <p className="  font-semibold text-5xl font-[Poppins] ">
-              The Right{" "}
+              {/* The Right{" "} */}
               <span className="font-[silk-serif] text-[#1176DB] italic text-7xl border-b-2 border-[#1176DB]">
                 {" "}
-                Freelance Service
+                Find Out Next Opportunity
               </span>{" "}
-              , Right a way
             </p>
           </div>
 
-          <div className="w-full  flex items-center justify-around bg-white px-2 md:px-5 py-2.5 md:py-6 shadow-2xl rounded-full">
+          <div className="w-full  flex items-center justify-around bg-white px-2 md:px-5 py-2.5 md:py-3 shadow-2xl rounded-full">
             <SearchInput
               placeholder='Job Title or Keywords'
               icon={<AiOutlineSearch className='text-gray-600 text-xl' />}
@@ -102,7 +101,7 @@ const Header = ({
             </div>
           </div>
 
-          {type && (
+          {/* {type && (
             <div className="w-full lg:1/2 flex flex-wrap gap-3 md:gap-6 py-10 md:py-14">
               {popularSearch.map((search, index) => (
                 <span
@@ -113,7 +112,7 @@ const Header = ({
                 </span>
               ))}
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

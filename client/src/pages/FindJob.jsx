@@ -15,6 +15,32 @@ const FindJobs = () => {
   const [numPage, setNumPage] = useState(1);
   const [recordCount, setRecordCount] = useState(0);
   const [data, setData] = useState([]);
+  const [checkboxes, setCheckboxes] = useState({
+    checkbox1: false,
+    checkbox2: false,
+    checkbox3: false,
+    checkbox4: false,
+  });
+  const handleCheckboxChange = (e) => {
+    const { name } = e.target;
+
+    setCheckboxes((prevState) => {
+      const newCheckboxes = {
+        checkbox1: false,
+        checkbox2: false,
+        checkbox3: false,
+        checkbox4: false,
+        [name]: !prevState[name], // Toggle the clicked checkbox
+      };
+
+      // If all checkboxes are false, set the first one to true
+      if (!Object.values(newCheckboxes).includes(true)) {
+        newCheckboxes.checkbox1 = true;
+      }
+
+      return newCheckboxes;
+    });
+  };
   const [searchQuery, setSearchQuery] = useState("");
   const [jobLocation, setJobLocation] = useState("");
   const [filterJobTypes, setFilterJobTypes] = useState([]);
@@ -48,7 +74,7 @@ const FindJobs = () => {
 
   const fetchJobs = async () => {
     setIsFetching(true);
-    
+
     const newURL = updateURL({
       query: searchQuery,
       cmpLoc: jobLocation,
@@ -81,35 +107,34 @@ const FindJobs = () => {
       setFilterJobTypes([...filterJobTypes, val]);
     }
   };
-  
-  const filterExperience = (e,idx) => {
+
+  const filterExperience = (e, idx) => {
     // console.log("Filtering by Experience:", e,e.checked);
     // e.checked?e.checked=false:e.checked=true
-    if(idx ==0){
-      document.querySelector('.check1').checked = false;
-      document.querySelector('.check2').checked = false;
-      document.querySelector('.check3').checked = false;
-    }else if(idx ==1){
-      document.querySelector('.check0').checked = false;
-      document.querySelector('.check2').checked = false;
-      document.querySelector('.check3').checked = false;
-    }else if(idx ==2){
-      document.querySelector('.check0').checked = false;
-      document.querySelector('.check1').checked = false;
-      document.querySelector('.check3').checked = false;
-    }else if(idx==3){
-      document.querySelector('.check0').checked = false;
-      document.querySelector('.check1').checked = false;
-      document.querySelector('.check2').checked = false;
+    if (idx == 0) {
+      document.querySelector(".check1").checked = false;
+      document.querySelector(".check2").checked = false;
+      document.querySelector(".check3").checked = false;
+    } else if (idx == 1) {
+      document.querySelector(".check0").checked = false;
+      document.querySelector(".check2").checked = false;
+      document.querySelector(".check3").checked = false;
+    } else if (idx == 2) {
+      document.querySelector(".check0").checked = false;
+      document.querySelector(".check1").checked = false;
+      document.querySelector(".check3").checked = false;
+    } else if (idx == 3) {
+      document.querySelector(".check0").checked = false;
+      document.querySelector(".check1").checked = false;
+      document.querySelector(".check2").checked = false;
     }
-    setFilterExp(e.value)
-    
+    setFilterExp(e.value);
   };
-  
 
   useEffect(() => {
-    console.log(searchQuery,jobLocation)
-    console.log(data.length)
+    // document.querySelector(".check0").checked = true;
+    console.log(searchQuery, jobLocation);
+    console.log(data.length);
     if (expVal.length > 0) {
       let newExpVal = [];
       expVal.forEach((el) => {
@@ -140,7 +165,44 @@ const FindJobs = () => {
       <div className="container mx-auto flex gap-6 2xl:gap-10 py-0 pb-4 ">
         <div className="hidden md:flex flex-col py-2 w-1/6 shadow-sm rounded-lg xed">
           <p className="text-lg font-semibold text-[#1176DB]">Filter Search</p>
-
+          {/* <div>
+            <label>
+              <input
+                type="checkbox"
+                name="checkbox1"
+                checked={checkboxes.checkbox1}
+                onChange={handleCheckboxChange}
+              />
+              Checkbox 1
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="checkbox2"
+                checked={checkboxes.checkbox2}
+                onChange={handleCheckboxChange}
+              />
+              Checkbox 2
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="checkbox3"
+                checked={checkboxes.checkbox3}
+                onChange={handleCheckboxChange}
+              />
+              Checkbox 3
+            </label>
+            <label>
+              <input
+                type="checkbox"
+                name="checkbox4"
+                checked={checkboxes.checkbox4}
+                onChange={handleCheckboxChange}
+              />
+              Checkbox 4
+            </label>
+          </div> */}
           {/* <div className="py-2">
             <div className="flex justify-between mb-3">
               <p className="flex items-center gap-2 font-semibold">
@@ -167,7 +229,7 @@ const FindJobs = () => {
             </div>
           </div> */}
 
-          <div className="py-2">
+          <div className="py-2 mt-4">
             <div className="flex justify-between mb-3">
               <p className="flex items-center gap-2 font-semibold">
                 <BsStars />
@@ -176,28 +238,42 @@ const FindJobs = () => {
             </div>
 
             <div className="flex flex-col gap-2">
-              {experience.map((exp,idx) => (
+              {experience.map((exp, idx) => (
                 <div key={exp.title} className="flex items-center gap-3">
-                  <input 
+                  <input
                     // checked={idx==0?true:false}
                     type="checkbox"
                     value={exp.value}
                     className={`check${idx} w-4 h-4`}
-                    onChange={(e) => filterExperience(e.target,idx)}
+                    onChange={(e) => filterExperience(e.target, idx)}
                   />
-                  <span>{exp.title}</span>
+                  <span className="capitalize">{exp.title}</span>
                 </div>
               ))}
+              {/* {experience.map((exp, idx) => (
+                <div key={exp.title} className="flex items-center gap-3">
+                  <label>
+              <input
+                type="checkbox"
+                name={`checkbox${idx+1}`}
+                checked={`checkboxes.checkbox${idx}`}
+                onChange={handleCheckboxChange}
+              />
+              Checkbox 4
+            </label>
+                </div> */}
+              {/* ))} */}
+              
             </div>
           </div>
         </div>
 
         <div className="w-full md:w-5/6 px-5 md:px-0">
           <div className="flex items-center justify-between mb-4">
-            
-            {isFetching?<p className="text-xl  text-[#1176DB] border-b-1">Finding jobs...</p>:<p className="text-xl   text-[#1176DB] border-b-1">
-              Showing: <span className="font-semibold">{data.length}</span> Jobs Available 
-            </p>}
+            <p className="text-sm md:text-base text-[#1176DB] border-b-1">
+              Showing: <span className="font-semibold">{data.length}</span> Jobs
+              Available
+            </p>
 
             <div className="flex flex-col md:flex-row gap-0 md:gap-2 md:items-center md:justify-center">
               <p className="text-sm md:text-base">Sort By:</p>

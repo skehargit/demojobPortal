@@ -153,13 +153,13 @@ const Navbar = () => {
               <Link to="/contact-us">Contact Us</Link>
             </li>
             {/* {user.token=='undefined'&&} */}
-            <li className="hover:text-[#1176DB]">
+            {/* <li className="hover:text-[#1176DB] capitalize">
               <Link to="/upload-resume">{user?.accountType === "seeker"&&"upload resume"}</Link>
-            </li>
+            </li> */}
             
-            <li className="hover:text-[#1176DB]">
+            {/* <li className="hover:text-[#1176DB]">
               <Link to="/privacy-policy">Privacy & Policy</Link>
-            </li>
+            </li> */}
           </ul>
 
           <div className="hidden lg:block">

@@ -1,28 +1,31 @@
 import React from 'react';
 import { FaSearch, FaBriefcase, FaUsers } from 'react-icons/fa';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Landing = () => {
+    const { user } = useSelector((state) => state.user);
   return (
     <div className=''>
       <div className='hero h-[calc(100vh-100px)]'>
         <div className=' h-full w-full bg-black/40 flex flex-col items-center justify-center relative'>
           <div className='flex flex-col gap-2 relative items-center justify-center animate-fadeIn'>
-            <h1 className='text-[6vw] text-white leading-none font-semibold'>
-              Transform Your Future <br />
-              with High Impact Talent
+            <h1 className=' text-white flex flex-col items-center justify-center leading-none '>
+              <span className='text-[6vw] max-[500px]:text-[10vw] leading-none font-semibold'>Transform Your Future</span>
+              <span className=' text-[6vw] max-[500px]:text-[10vw] leading-none font-semibold'>with High Impact Talent</span>
             </h1>
-            <p className='text-2xl text-white pt-4 -bottom-12 left-0 absolute animate-slideUp'>
+            <p className='text-2xl text-white pt-4 flex text-center'>
               Bridging the Gap Between Top-Tier Strategic Professionals and Leading Organizations
             </p>
           </div>
-          <div className='flex gap-4 pt-8 absolute bottom-8'>
-            <button className='bg-blue-500 p-4 text-white rounded-full flex items-center gap-2 animate-bounce'>
+          {user?.token==''&&<div className='flex gap-4 pt-8 absolute bottom-8'>
+            <Link  to={'/user-auth'} className='bg-blue-500 p-4 text-white rounded-full flex items-center gap-2 animate-bounce'>
               <FaSearch /> Find Your Next Job
-            </button>
-            <button className='bg-blue-500 p-4 text-white rounded-full flex items-center gap-2 animate-bounce delay-200'>
+            </Link>
+            <Link to={'/user-auth'} className='bg-blue-500 p-4 text-white rounded-full flex items-center gap-2 animate-bounce delay-200'>
               <FaBriefcase /> Post a Job
-            </button>
-          </div>
+            </Link>
+          </div>}
         </div>
       </div>
       <div>

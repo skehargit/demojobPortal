@@ -17,7 +17,7 @@ const companySchema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
-    minlength: [6, "Password must be at least"],
+    // minlength: [6, "Password must be at least"],
     select: true,
   },
   contact: { type: String },
