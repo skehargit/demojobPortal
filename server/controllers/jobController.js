@@ -243,7 +243,6 @@ export const getJobById = async (req, res, next) => {
     const searchQuery = {
       $or: [
         { jobTitle: { $regex: job?.jobTitle, $options: "i" } },
-        { jobType: { $regex: job?.jobType, $options: "i" } },
       ],
     };
 
