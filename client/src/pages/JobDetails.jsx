@@ -82,11 +82,11 @@ const JobDetail = () => {
         <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
           <div className="w-full flex items-center justify-between">
             <div className="w-3/4 flex gap-2">
-              <img
+              {/* <img
                 src={job?.company?.profileUrl}
                 alt={job?.company?.name}
                 className="w-20 h-20 md:w-24 md:h-20 rounded"
-              />
+              /> */}
 
               <div className="flex flex-col">
                 <p className="text-xl font-semibold text-gray-600">
@@ -111,12 +111,12 @@ const JobDetail = () => {
           </div>
 
           <div className="w-full flex flex-wrap md:flex-row gap-2 items-center justify-between my-10">
-            <div className="bg-[#bdf4c8] w-40 h-16 rounded-lg flex gap-2 items-center justify-center ">
+            {/* <div className="bg-[#bdf4c8] w-40 h-16 rounded-lg flex gap-2 items-center justify-center ">
               <span className="text-sm">Anual Salary : </span>
               <p className="text-lg font-semibold text-gray-700">
                 {job?.salary}
               </p>
-            </div>
+            </div> */}
 
             {/* <div className="bg-[#bae5f4] w-40 h-16 rounded-lg flex flex-col items-center justify-center">
               <span className="text-sm">Job Type</span>
@@ -171,15 +171,15 @@ const JobDetail = () => {
                     </span>
                   </>
                 )}
-
-                <p className="text-xl font-semibold ">Skill Required :</p>
+                {job?.requiredSkills.length>0&&<div><p className="text-xl font-semibold ">Skill Required :</p>
                 <ul className="flex flex-wrap gap-2">
                   {job?.requiredSkills.length>0&&job?.requiredSkills.map((item,index)=>{
                     return <li key={index} className="bg-zinc-500 text-white w-fit py-1 px-3 rounded-lg">{item}</li>
                   })}
-                </ul>
+                </ul></div>}
+                
 
-                <div className="flex gap-1"><p>Experience :</p><span>{job?.experience}</span> <span>Year</span></div>
+                <div className="flex gap-1 "><p className="font-semibold">Experience :</p><span>{job?.experience}</span> <span>Year</span></div>
               </div>
             {/* {selected === "0" ? (
               

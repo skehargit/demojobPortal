@@ -8,11 +8,11 @@ const CompanyCard = ({ cmp }) => {
     <div className="w-full h-16 flex gap-4 items-center justify-between bg-white shadow-md rounded">
       <div className="w-3/4 md:w-2/4 flex gap-4 items-center">
         <Link to={`/company-profile/${_id}`}>
-          <img
+          {/* <img
             src={profileUrl}
             alt={name}
             className="w-8 md:w-12 h-8 md:h-12 rounded"
-          />
+          /> */}
         </Link>
         <div className="h-full flex flex-col">
           <Link
