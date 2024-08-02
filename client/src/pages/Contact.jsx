@@ -15,15 +15,15 @@ const Contact = () => {
             <div className="bg-white p-6 shadow rounded-lg">
               <h2 className="text-2xl font-bold text-gray-900">Our Address</h2>
               <div className="mt-4 text-gray-600">
-                <p className="flex items-center gap-2">
+                {/* <p className="flex items-center gap-2">
                   <FaMapMarkerAlt className="text-[#1176DB]" /> 1234 Main Street, Anytown, USA
-                </p>
+                </p> */}
                 <p className="flex items-center gap-2 mt-2">
                   <FaEnvelope className="text-[#1176DB]" /> highimpacttalentenquiry@gmail.com
                 </p>
-                <p className="flex items-center gap-2 mt-2">
+                {/* <p className="flex items-center gap-2 mt-2">
                   <FaPhone className="text-[#1176DB]" /> +1 (123) 456-7890
-                </p>
+                </p> */}
               </div>
               <div className="mt-6">
                 <img src="https://via.placeholde.com/400" alt="Company Building" className="w-full rounded-lg shadow-lg" />
@@ -32,7 +32,7 @@ const Contact = () => {
 
             <div className="bg-white p-6 shadow rounded-lg">
               <p className="text-xl font-bold text-gray-900">Connect with us on social media for the latest updates and industry insights.</p>
-              <div className="flex justify-center mt-4 space-x-6 text-gray-600">
+              {/* <div className="flex justify-center mt-4 space-x-6 text-gray-600">
                 <a href="https://www.facebook.com" className="hover:text-[#14a800]">
                   <FaFacebook size={30} />
                 </a>
@@ -45,7 +45,7 @@ const Contact = () => {
                 <a href="https://www.instagram.com" className="hover:text-[#14a800]">
                   <FaInstagram size={30} />
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
 

@@ -62,15 +62,15 @@ const About = () => {
             <FaMapMarkerAlt className="text-[#1176DB]" /> Contact Information
           </h2>
           <div className="mt-4 text-gray-600">
-            <p className="flex items-center gap-2">
+            {/* <p className="flex items-center gap-2">
               <FaMapMarkerAlt className="text-[#1176DB]" /> 1234 Main Street, Anytown, USA
-            </p>
+            </p> */}
             <p className="flex items-center gap-2 mt-2">
-              <FaEnvelope className="text-[#1176DB]" /> info@company.com
+              <FaEnvelope className="text-[#1176DB]" /> highimpacttalentenquiry@gmail.com
             </p>
-            <p className="flex items-center gap-2 mt-2">
+            {/* <p className="flex items-center gap-2 mt-2">
               <FaPhone className="text-[#1176DB]" /> +1 (123) 456-7890
-            </p>
+            </p> */}
           </div>
         </div>
       </div>
