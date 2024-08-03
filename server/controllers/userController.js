@@ -125,6 +125,35 @@ export const getUser = async (req, res, next) => {
   }
 };
 
+export const getUsers =async(req,res)=>{
+  try {
+    // const id = req.body.user.userId;
+    // console.log(id)
+    const users = await Users.find({});
+
+    if (!users) {
+      return res.status(200).send({
+        message: "Users Not Found",
+        success: false,
+      });
+    }
+
+    // user.password = undefined;
+
+    res.status(200).json({
+      success: true,
+      users: users,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "auth error",
+      success: false,
+      error: error.message,
+    });
+  }
+}
+
 // register user
 export const register = async (req, res, next) => {
   // const { firstName, lastName, email, password } 
