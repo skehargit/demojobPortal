@@ -8,7 +8,7 @@ const DataTable = ({ data = [] }) => {
 
   // Assuming data is an array of objects with consistent keys
   const columns = Object.keys(data[0]);
-
+  // console.log(data,columns)
   return (
     <table className="min-w-full bg-white border border-gray-200">
       <thead>
@@ -21,8 +21,8 @@ const DataTable = ({ data = [] }) => {
       <tbody>
         {data.map((row, index) => (
           <tr key={index}>
-            {columns.map((col) => (
-              <td key={col} className="py-2 px-4 border-b">{row[col]}</td>
+            {columns.map((col,idx) => (
+              <td key={idx} className="py-2 px-4 border-b">{row[col]}</td>
             ))}
           </tr>
         ))}
