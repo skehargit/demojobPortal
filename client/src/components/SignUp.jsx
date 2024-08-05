@@ -64,8 +64,7 @@ const SignUp = ({ open, setOpen }) => {
         window.location.replace(from);
       }
     } catch (error) {
-      // Handle error
-      console.error(error);
+      console.log(error);
     }
   };
 

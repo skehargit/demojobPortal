@@ -48,6 +48,7 @@ const UserForm = ({ open, setOpen }) => {
       setIsSubmitting(false);
     } catch (error) {
       console.log(error)
+      setIsSubmitting(false);
     }
   };
 
