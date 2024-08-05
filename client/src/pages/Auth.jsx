@@ -14,7 +14,7 @@ function Auth() {
     return window.location.replace(from)
   }
   return (
-    <div className='w-full '>
+    <div className='w-full'>
       {/* <img src={Office} alt='Office' className='object-contain ' /> */}
       <div className='w-full h-screen bg-white'></div>
       <SignUp open={open} setOpen={setOpen} />
