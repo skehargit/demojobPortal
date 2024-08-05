@@ -254,7 +254,7 @@ export const signIn = async (req, res, next) => {
     if (!isMatch) {
       return res.status(401).json({
         success:false,
-        msg:"wrong password",
+        message:"wrong password",
       })
     }
 
