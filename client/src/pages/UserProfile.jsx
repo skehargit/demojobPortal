@@ -47,6 +47,7 @@ const UserForm = ({ open, setOpen }) => {
       }
       setIsSubmitting(false);
     } catch (error) {
+      console.log(error)
       setIsSubmitting(false);
     }
   };
@@ -290,7 +291,7 @@ const UserProfile = () => {
           <div className="flex">
             <p>Current JobRole :</p>
             <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.ccurrentJobRole ?? "currentJobRole"}
+              {userInfo?.currentJobRole ?? "currentJobRole"}
             </p>
           </div>
           <div className="flex">
