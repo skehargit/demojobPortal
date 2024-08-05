@@ -77,7 +77,7 @@ export const updateApplicationStatus = async (req, res) => {
       });
     }
     if (!application) {
-      return res.status(404).json({ msg: "Application not found" });
+      return res.status(404).json({ message: "Application not found" });
     }
 
     application.status = status;
