@@ -61,7 +61,7 @@ const SignUp = ({ open, setOpen }) => {
         dispatch(Login(userData));
         localStorage.setItem("userInfo", JSON.stringify(userData));
         setloadting(false);
-        window.location.replace(from);
+        // window.location.replace(from);
       }
     } catch (error) {
       console.log(error);
