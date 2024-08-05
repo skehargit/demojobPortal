@@ -11,7 +11,7 @@ import { Login } from "../redux/userSlice";
 const SignUp = ({ open, setOpen }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const [loading,setloadting]=useState(false)
+  const [loading, setloadting] = useState(false);
   const [isRegister, setIsRegister] = useState(true);
   const [accountType, setAccountType] = useState("seeker");
 
@@ -46,7 +46,7 @@ const SignUp = ({ open, setOpen }) => {
     }
     try {
       // console.log(formData)
-      setloadting(true)
+      setloadting(true);
       const res = await apiRequest({
         url: URL,
         method: "POST",
@@ -60,9 +60,8 @@ const SignUp = ({ open, setOpen }) => {
         const userData = { token: res?.token, ...res?.user };
         dispatch(Login(userData));
         localStorage.setItem("userInfo", JSON.stringify(userData));
-        setloadting(false)
+        setloadting(false);
         window.location.replace(from);
-        
       }
     } catch (error) {
       // Handle error
@@ -204,9 +203,24 @@ const SignUp = ({ open, setOpen }) => {
                         )}
                       </div>
                     )}
-
-                    <div className="w-full flex gap-1 md:gap-2">
-                      <div className={`${isRegister ? "w-1/2" : "w-full"}`}>
+                    {isRegister && (
+                        <div className="w-full">
+                          <TextInput
+                          name="currentJobRole"
+                            label="Current Job Role"
+                            placeholder="Current Job Role"
+                            type="cJobRole"
+                            register={register("cJobRole", {
+                              required: "Current Job Role Required!",
+                            })}
+                            error={
+                              errors.cJobRole ? errors.cJobRole?.message : ""
+                            }
+                          />
+                        </div>
+                      )}
+                    <div className={`w-full flex ${isRegister&&"flex-col"}  gap-1 md:gap-2`}>
+                      <div className="w-full">
                         <TextInput
                           name="password"
                           label="Password"
@@ -214,6 +228,14 @@ const SignUp = ({ open, setOpen }) => {
                           type="password"
                           register={register("password", {
                             required: "Password is required!",
+                            minLength: {
+                              value: 8,
+                              message: 'Password must be at least 8 characters long'
+                            },
+                            pattern: {
+                              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                              message: `Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character`
+                            }
                           })}
                           error={
                             errors.password ? errors.password?.message : ""
@@ -222,7 +244,7 @@ const SignUp = ({ open, setOpen }) => {
                       </div>
 
                       {isRegister && (
-                        <div className="w-1/2">
+                        <div className="w-full">
                           <TextInput
                             label="Confirm Password"
                             placeholder="Password"
@@ -262,8 +284,19 @@ const SignUp = ({ open, setOpen }) => {
                         containerStyles={`inline-flex justify-center rounded-md bg-[#14a800] px-8 py-2 text-sm font-medium text-white outline-none hover:bg-[#10a900]`}
                         title={isRegister ? "Create Account" : "Login Account"}
                       /> */}
-                      <button type="submit" className="bg-blue-500 text-white py-2 px-5 rounded-lg">
-                        {isRegister?<div>{loading?"Creating Account....":"Create Account"}</div>:<div>{loading?"Login....":"Login Account"}</div>}
+                      <button
+                        type="submit"
+                        className="bg-blue-500 text-white py-2 px-5 rounded-lg w-full"
+                      >
+                        {isRegister ? (
+                          <div>
+                            {loading
+                              ? "Creating Account...."
+                              : "Create Account"}
+                          </div>
+                        ) : (
+                          <div>{loading ? "Login...." : "Login Account"}</div>
+                        )}
                       </button>
                     </div>
                   </form>

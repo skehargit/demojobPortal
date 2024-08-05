@@ -11,6 +11,7 @@ const jobSchema = new mongoose.Schema(
     experience: { type: Number, default: 0 },
     detail: [{ desc: { type: String }, requirements: { type: String,default:"" } }],
     requiredSkills:[String],
+    
     screeningQuestions:[String],
     maxApplicants:{
       type:Number,

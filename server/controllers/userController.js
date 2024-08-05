@@ -174,6 +174,7 @@ export const register = async (req, res, next) => {
       skills,
       appliedJobs,
   }= req.body;
+  console.log(currentJobRole)
   //validate fileds
 
   if (!firstName) {
