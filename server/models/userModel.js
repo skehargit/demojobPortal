@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema(
     contactNumber: { type: String,default:'undefined' },
     profileUrl: { type: String },
     cvUrl: { type: String },
-    currentJobRole: { type: String,default:'undefined' },
+    currentJobRole: { type: String,required:true},
     currentSalary: {
       type: Number,
       default:"undefined"

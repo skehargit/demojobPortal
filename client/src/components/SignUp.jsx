@@ -209,12 +209,12 @@ const SignUp = ({ open, setOpen }) => {
                           name="currentJobRole"
                             label="Current Job Role"
                             placeholder="Current Job Role"
-                            type="cJobRole"
-                            register={register("cJobRole", {
+                            type="text"
+                            register={register("currentJobRole", {
                               required: "Current Job Role Required!",
                             })}
                             error={
-                              errors.cJobRole ? errors.cJobRole?.message : ""
+                              errors.currentJobRole ? errors.currentJobRole?.message : ""
                             }
                           />
                         </div>
