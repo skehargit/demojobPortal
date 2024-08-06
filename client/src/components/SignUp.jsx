@@ -7,8 +7,10 @@ import TextInput from "./TextInput";
 import { apiRequest } from "../utils";
 import CustomButton from "./CustomButton";
 import { Login } from "../redux/userSlice";
+import JobTypes from "./JobTypes";
 
 const SignUp = ({ open, setOpen }) => {
+  const [currentJobRole, setCurrentJobRole] = useState("McKinsey");
   const dispatch = useDispatch();
   const location = useLocation();
   const [loading, setloadting] = useState(false);
@@ -30,6 +32,7 @@ const SignUp = ({ open, setOpen }) => {
   const closeModal = () => setOpen(false);
 
   const onSubmit = async (formData) => {
+    const newData = { ...formData, currentJobRole: currentJobRole };
     let URL = null;
     if (isRegister) {
       if (accountType === "seeker") {
@@ -50,7 +53,7 @@ const SignUp = ({ open, setOpen }) => {
       const res = await apiRequest({
         url: URL,
         method: "POST",
-        data: formData,
+        data: newData,
       });
       console.log(res);
       if (res?.status === "failed") {
@@ -203,21 +206,12 @@ const SignUp = ({ open, setOpen }) => {
                       </div>
                     )}
                     {(isRegister&&accountType=='seeker')&& (
-                        <div className="w-full">
-                          <TextInput
-                          name="currentJobRole"
-                            label="Current Job Role"
-                            placeholder="Current Job Role"
-                            type="text"
-                            register={register("currentJobRole", {
-                              required: "Current Job Role Required!",
-                            })}
-                            error={
-                              errors.currentJobRole ? errors.currentJobRole?.message : ""
-                            }
-                          />
-                        </div>
+                        <div className={`w-full mt-2`}>
+                        <label className="text-gray-600 text-sm mb-1">Current Job</label>
+                        <JobTypes currentJobRole={currentJobRole} setCurrentJobRole={setCurrentJobRole} />
+                      </div>
                       )}
+                      
                     <div className={`w-full flex ${isRegister&&"flex-col"}  gap-1 md:gap-2`}>
                       <div className="w-full">
                         <TextInput
