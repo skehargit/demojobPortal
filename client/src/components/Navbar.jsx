@@ -17,9 +17,9 @@ function MenuList({ user, onClick }) {
     dispatch(Logout());
     window.location.replace("/");
   };
-  // useEffect(()=>{
-  //   console.log(user.length)
-  // })
+  useEffect(()=>{
+    console.log(user)
+  })
   return (
     <div className="bg-white">
       <Menu as="div" className="inline-block text-left">
@@ -62,7 +62,7 @@ function MenuList({ user, onClick }) {
                 {({ active }) => (
                   <Link
                     to={`${
-                      user?.accountType ? "/user-profile/:id" : "company-profile"
+                      user?.accountType ? `/user-profile/${user?._id}` : "company-profile"
                     }`}
                     className={`${
                       active ? "bg-[#1176DB] text-white" : "text-gray-900"

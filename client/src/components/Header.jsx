@@ -9,7 +9,8 @@ const SearchInput = ({ placeholder, icon, value,jname,name, setValue, styles }) 
   // const handleChange = (e) => {
   //   setValue(e.target.value);
   // };
-  
+  // console.log(value,name)
+  // setValue.setSearchQuery(value)
   const [search,setSearch] =useState({
     jobname:'',
     joblocation:'',
@@ -17,12 +18,17 @@ const SearchInput = ({ placeholder, icon, value,jname,name, setValue, styles }) 
   const handleChange=(e)=>{
     const {name,value}=e.target;
     // console.log(name,value)
+    
     setSearch((data) => ({ ...data, [name]: value }))
+    console.log(search)
+    // setSearchQuery(value)
   }
   const clearInput = () => setValue("");
   useEffect(()=>{
     // console.log(search);
-  })
+    // setValue(search.jobname)
+    // console.log('yes',  value)
+  },[setSearch])
   return (
     <div className={`flex w-full md:w-1/3 items-center ${styles}`}>
       {icon}
