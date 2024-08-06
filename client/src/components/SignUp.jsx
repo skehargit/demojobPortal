@@ -72,9 +72,10 @@ const SignUp = ({ open, setOpen }) => {
   };
 
   return (
-    <div className="">
+    <div className="bg-red-500 h-screen w-screen">
+      
       <Transition appear show={open || false}>
-        <Dialog as="div" className="relative z-10" onClose={()=>{}} >
+        <Dialog as="div" className="relative z-[1001]" onClose={()=>{}} >
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
