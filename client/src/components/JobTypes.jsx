@@ -2,22 +2,23 @@ import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { BsCheck2, BsChevronExpand } from "react-icons/bs";
 
-const types = ["McKinsey",
-  "Boston Consulting Group (BCG)",
-  "Bain & Company",
-  "Oliver Wyman",
-  "Deloitte",
-  "PricewaterhouseCoopers", 
-  "Strategy&",
-  "Ernst & Young", 
-  "EY-Parthenon",
-  "KPMG",
-  "LEK",
-  "Roland Berger",
-  "Kearney",
+const types = [
   "Accenture strategy",
   "Alvarez and marsal",
+  "Bain & Company",
+  "Boston Consulting Group (BCG)",
+  "Deloitte",
+  "Ernst & Young", 
   "Everest", 
+  "EY-Parthenon",
+  "Kearney",
+  "KPMG",
+  "LEK",
+  "McKinsey",
+  "Oliver Wyman",
+  "PricewaterhouseCoopers", 
+  "Roland Berger",
+  "Strategy&",
   "TSMG",
   ,"others(please specify)"];
 
