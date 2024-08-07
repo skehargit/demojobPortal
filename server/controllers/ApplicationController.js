@@ -16,7 +16,10 @@ export const createApplication = async (req, res) => {
     });
     const isAlreadyApplied = await Application.findOne({applicant,job})
     if(isAlreadyApplied){
-      return res.status(400).send('You have already applied for this job.')
+      return res.status(400).json({
+        success:false,
+        message:'You have already applied for this job.'
+      })
     }
     const user = await Users.findByIdAndUpdate(
       { _id: applicant },

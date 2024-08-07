@@ -44,6 +44,7 @@ const ScreeningQuestions = () => {
       }
     } catch (error) {
       console.log('Error while apply for job')
+      
     }
   }
   ///resume
