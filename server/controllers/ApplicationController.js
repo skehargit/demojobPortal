@@ -14,6 +14,10 @@ export const createApplication = async (req, res) => {
       applicant,
       status: status || "applied",
     });
+    const isAlreadyApplied = await Application.findOne({applicant,job})
+    if(isAlreadyApplied){
+      return res.status(400).send('You have already applied for this job.')
+    }
     const user = await Users.findByIdAndUpdate(
       { _id: applicant },
       { $push: { appliedJobs: newApplication._id } }

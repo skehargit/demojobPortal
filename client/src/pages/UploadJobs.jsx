@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CustomButton, JobCard, JobTypes, TextInput } from "../components";
-import { jobTypes, jobs } from "../utils/data";
+// import { jobTypes, jobs } from "../utils/data";
 import { apiRequest } from "../utils";
 import { useSelector } from "react-redux";
 
@@ -53,24 +53,24 @@ const UploadJob = () => {
   };
 
 
-  const getRecentPost = async ()=>{
-    try {
-      const id = user?._id;
-      const res = await apiRequest({
-        url: "/comapnies/get-company" + id,
-        method: "GET"
-      })
-      setRecentPost(res?.data?.jobPosts)
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  // const getRecentPost = async ()=>{
+  //   try {
+  //     const id = user?._id;
+  //     const res = await apiRequest({
+  //       url: "/comapnies/get-company" + id,
+  //       method: "GET"
+  //     })
+  //     setRecentPost(res?.data?.jobPosts)
+  //   } catch (error) {
+  //     console.log(error)
+  //   }
+  // }
   useEffect(() => {
-    getRecentPost()
+    // getRecentPost()
   }, [])  
   return (
-    <div className="container mx-auto flex flex-col md:flex-row gap-8 2xl:gap-14 transition-all ease-in-out mb-4 ">
-      <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
+    <div className="container mx-auto flex flex-col gap-8 w-full items-center justify-center transition-all ease-in-out mb-4 ">
+      <div className="w-full h-fit max-w-[1500px] bg-white px-5 py-10 md:px-10">
         <div>
           <p className="text-blue-500 font-semibold text-2xl">Job Post</p>
 
@@ -236,7 +236,7 @@ const UploadJob = () => {
           </form>
         </div>
       </div>
-      <div className="w-full md:w-1/3 2xl:2/4 p-5 mt-20 md:mt-0">
+      {/* <div className="w-full md:w-1/3 2xl:2/4 p-5 mt-20 md:mt-0">
         <p className="text-gray-500 font-semibold">Recent Job Post</p>
 
         <div className="w-full flex flex-wrap gap-6">
@@ -252,7 +252,7 @@ const UploadJob = () => {
           })}
         </div>
         
-      </div>
+      </div> */}
     </div>
   );
 };
