@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useForm } from "react-hook-form";
 import { useLocation } from "react-router-dom";
@@ -10,7 +10,8 @@ import { Login } from "../redux/userSlice";
 import JobTypes from "./JobTypes";
 
 const SignUp = ({ open, setOpen }) => {
-  const [currentJobRole, setCurrentJobRole] = useState("McKinsey");
+  const [currentJobRole, setCurrentJobRole] = useState("Accenture strategy");
+  const [otherJob,setOtherJob]=useState('')
   const dispatch = useDispatch();
   const location = useLocation();
   const [loading, setloadting] = useState(false);
@@ -70,6 +71,10 @@ const SignUp = ({ open, setOpen }) => {
       console.log(error);
     }
   };
+  useEffect(()=>{
+    console.log(currentJobRole)
+    console.log(otherJob)
+  },[currentJobRole,otherJob])
 
   return (
     <div className="bg-red-500 h-screen w-screen">
@@ -210,9 +215,15 @@ const SignUp = ({ open, setOpen }) => {
                         <div className={`w-full mt-2`}>
                         <label className="text-gray-600 text-sm mb-1">Current Job</label>
                         <JobTypes currentJobRole={currentJobRole} setCurrentJobRole={setCurrentJobRole} />
+                        {currentJobRole=="others"&&<div className="flex flex-col h-full items-center">
+                          <input onChange={(e)=>{setOtherJob(e.target.value)}} type="text" value={otherJob} placeholder="Please Specify..." className="w-full mt-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2" />
+                          <div onClick={()=>{
+                            setCurrentJobRole(otherJob)
+                          }} className="flex items-center w-full rounded mt-2 text-white p-2 bg-blue-500 h-full">Add</div>
+                          </div>}
                       </div>
                       )}
-                      
+                    
                     <div className={`w-full flex ${isRegister&&"flex-col"}  gap-1 md:gap-2`}>
                       <div className="w-full">
                         <TextInput

@@ -20,7 +20,7 @@ const types = [
   "Roland Berger",
   "Strategy&",
   "TSMG",
-  ,"others(please specify)"];
+  ,"others"];
 
 export default function JobTypes({ currentJobRole, setCurrentJobRole }) {
   return (
