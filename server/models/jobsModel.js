@@ -7,11 +7,11 @@ const jobSchema = new mongoose.Schema(
     jobTitle: { type: String, required: [true, "Job Title is required"] },
     jobType: { type: String},
     location: { type: String, required: [true, "Location is required"] },
-    salary: { type: Number, required: [true, "Salary is required"] },
+    salary: { type: Number},
     experience: { type: Number, default: 0 },
     detail: [{ desc: { type: String }, requirements: { type: String,default:"" } }],
     requiredSkills:[String],
-    
+    companyType:{type:String},
     screeningQuestions:[String],
     maxApplicants:{
       type:Number,

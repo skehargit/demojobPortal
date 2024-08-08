@@ -11,7 +11,8 @@ import JobTypes from "./JobTypes";
 
 const SignUp = ({ open, setOpen }) => {
   const [currentJobRole, setCurrentJobRole] = useState("Accenture strategy");
-  const [otherJob,setOtherJob]=useState('')
+  const [otherJob, setOtherJob] = useState("");
+  const [selectedOption, setSelectedOption] = useState("");
   const dispatch = useDispatch();
   const location = useLocation();
   const [loading, setloadting] = useState(false);
@@ -33,6 +34,7 @@ const SignUp = ({ open, setOpen }) => {
   const closeModal = () => setOpen(false);
 
   const onSubmit = async (formData) => {
+    console.log(currentJobRole)
     const newData = { ...formData, currentJobRole: currentJobRole };
     let URL = null;
     if (isRegister) {
@@ -71,16 +73,11 @@ const SignUp = ({ open, setOpen }) => {
       console.log(error);
     }
   };
-  useEffect(()=>{
-    console.log(currentJobRole)
-    console.log(otherJob)
-  },[currentJobRole,otherJob])
 
   return (
     <div className="bg-red-500 h-screen w-screen">
-      
       <Transition appear show={open || false}>
-        <Dialog as="div" className="relative z-[1001]" onClose={()=>{}} >
+        <Dialog as="div" className="relative z-[1001]" onClose={() => {}}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -192,7 +189,7 @@ const SignUp = ({ open, setOpen }) => {
                             }
                           />
                         </div>
-
+                        
                         {accountType === "seeker" && isRegister && (
                           <div className="w-1/2">
                             <TextInput
@@ -211,20 +208,81 @@ const SignUp = ({ open, setOpen }) => {
                         )}
                       </div>
                     )}
-                    {(isRegister&&accountType=='seeker')&& (
-                        <div className={`w-full mt-2`}>
-                        <label className="text-gray-600 text-sm mb-1">Current Job</label>
-                        <JobTypes currentJobRole={currentJobRole} setCurrentJobRole={setCurrentJobRole} />
-                        {currentJobRole=="others"&&<div className="flex flex-col h-full items-center">
-                          <input onChange={(e)=>{setOtherJob(e.target.value)}} type="text" value={otherJob} placeholder="Please Specify..." className="w-full mt-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2" />
-                          <div onClick={()=>{
-                            setCurrentJobRole(otherJob)
-                          }} className="flex items-center w-full rounded mt-2 text-white p-2 bg-blue-500 h-full">Add</div>
-                          </div>}
+                    {accountType != "seeker" && isRegister && (
+                          <div className="w-full">
+                            <h2 className="text-sm">
+                              Select an Option
+                            </h2>
+                            <div className="flex gap-4">
+                              <div className="flex items-center ">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    value="hiringAgency"
+                                    checked={selectedOption === "hiringAgency"}
+                                    onChange={(e) => {
+                                      setSelectedOption(e.target.value);
+                                  }}
+                                    className="mr-2 leading-tight"
+                                  />
+                                  Hiring Agency
+                                </label>
+                              </div>
+                              <div className="">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 flex items-center">
+                                  <input
+                                    type="checkbox"
+                                    value="company"
+                                    checked={selectedOption === "company"}
+                                    onChange={(e) => {
+                                      setSelectedOption(e.target.value);
+                                  }}
+                                    className="mr-2 leading-tight"
+                                  />
+                                  Company
+                                </label>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                    {isRegister && accountType == "seeker" && (
+                      <div className={`w-full mt-2`}>
+                        <label className="text-gray-600 text-sm mb-1">
+                          Current Job
+                        </label>
+                        <JobTypes
+                          currentJobRole={currentJobRole}
+                          setCurrentJobRole={setCurrentJobRole}
+                        />
+                        {currentJobRole == "others" && (
+                          <div className="flex flex-col h-full items-center">
+                            <input
+                              onChange={(e) => {
+                                setOtherJob(e.target.value);
+                              }}
+                              type="text"
+                              value={otherJob}
+                              placeholder="Please Specify..."
+                              className="w-full mt-2 rounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2"
+                            />
+                            <div
+                              onClick={() => {
+                                setCurrentJobRole(otherJob);
+                              }}
+                              className="flex items-center justify-center w-full rounded mt-2 text-white p-2 bg-blue-500 h-full"
+                            >
+                              Add
+                            </div>
+                          </div>
+                        )}
                       </div>
-                      )}
-                    
-                    <div className={`w-full flex ${isRegister&&"flex-col"}  gap-1 md:gap-2`}>
+                    )}
+
+                    <div
+                      className={`w-full flex ${
+                        isRegister && "flex-col"
+                      }  gap-1 md:gap-2`}
+                    >
                       <div className="w-full">
                         <TextInput
                           name="password"
@@ -235,12 +293,14 @@ const SignUp = ({ open, setOpen }) => {
                             required: "Password is required!",
                             minLength: {
                               value: 8,
-                              message: 'Password must be at least 8 characters long'
+                              message:
+                                "Password must be at least 8 characters long",
                             },
                             pattern: {
-                              value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                              message: `Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character`
-                            }
+                              value:
+                                /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                              message: `Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character`,
+                            },
                           })}
                           error={
                             errors.password ? errors.password?.message : ""

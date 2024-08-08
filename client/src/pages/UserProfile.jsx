@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 
 const UserForm = ({ open, setOpen }) => {
   const { user } = useSelector((state) => state.user);
-  console.log(user)
+  console.log(user);
   const {
     register,
     handleSubmit,
@@ -47,7 +47,7 @@ const UserForm = ({ open, setOpen }) => {
       }
       setIsSubmitting(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       setIsSubmitting(false);
     }
   };
@@ -236,114 +236,101 @@ const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const userInfo = user;
-  console.log(user.cvUrl)
+  console.log(user.cvUrl);
   return (
     <div className="container mx-auto flex items-center justify-center py-10 ">
-      <div className="w-full md:w-2/3 2xl:w-2/4 bg-white shadow-lg p-10 rounded-lg">
-        <div className="flex flex-col items-center justify-center mb-4">
-          <h1 className="text-4xl font-semibold text-slate-600">
-            <div className=" w-40">
-              <img
-                src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
-                alt=""
-              />
+      <div className="w-full md:w-2/3 2xl:w-2/4 bg-white flex flex-col gap-3 shadow-lg p-10 rounded-lg">
+        <div className="flex gap-3">
+          <div className="w-36 h-36 rounded-full border border-blue-500 flex items-center justify-center">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
+              alt=""
+            />
+          </div>
+          <div className="">
+            <h2 className="text-4xl capitalize">
+              {" "}
+              {userInfo?.firstName + " " + userInfo?.lastName}
+            </h2>
+            <div className="flex flex-col text-sm">
+              <p className="flex gap-1 items-center py-1 text-slate-600 rounded-full">
+                <AiOutlineMail /> {userInfo?.email ?? "No Email"}
+              </p>
+              <p className="flex gap-1 items-center py-1 text-slate-600 rounded-full">
+                <FiPhoneCall /> {userInfo?.contactNumber ?? "No Contact"}
+              </p>
+              <p className="flex gap-1 items-center py-1 text-slate-600 rounded-full">
+                <HiLocationMarker />{" "}
+                {userInfo?.currentLocation ?? "No Location"}
+              </p>
             </div>
-            {userInfo?.firstName + " " + userInfo?.lastName}
-          </h1>
-
-          <h5 className="text-blue-500 text-base font-bold">
-            {userInfo?.jobTitle || "Add Job Title"}
-          </h5>
-
-          <div className="w-full flex flex-wrap lg:flex-row justify-between mt-8 text-sm">
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              <HiLocationMarker /> {userInfo?.currentLocation ?? "No Location"}
-            </p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              <AiOutlineMail /> {userInfo?.email ?? "No Email"}
-            </p>
-            {/* <p className="flex gap-1 items-center justify-center  px-3 py-1 text-white rounded-full bg-green-500 ">
-              view resume
-            </p> */}
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              <FiPhoneCall /> {userInfo?.contactNumber ?? "No Contact"}
-            </p>
           </div>
         </div>
-        <div className="capitalize">
-        <div className="flex">
-          {user?.cvUrl!=''?<a href={userInfo?.cvUrl}><div  className="bg-[#1176DB] p-2 text-white">view Resume</div></a>:<Link to={'/upload-resume'}><div  className="bg-[#1176DB] p-2 text-white">Upload Resume</div></Link>}
-          
-           
-          </div>
-          <div className="flex">
-            <p>experience :</p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.experience ?? "experience"}
-            </p>
-          </div>
-          <div className="flex">
-            <p>Current Company :</p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.currentCompany ?? "current company"}
-            </p>
-          </div>
-          <div className="flex">
-            <p>Current JobRole :</p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.currentJobRole ?? "currentJobRole"}
-            </p>
-          </div>
-          <div className="flex">
-            <p>
-            joinConsulting :</p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.joinConsulting ?? "joinConsulting"}
-            </p>
-          </div>
-          <div className="flex">
-            <p>
-            openToRelocate :</p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.openToRelocate ?? "openToRelocate"}
-            </p>
-          </div>
-          <div className="flex">
-            <p>
-            skills :</p>
-            <p className="flex gap-1 items-center justify-center  px-3 py-1 text-slate-600 rounded-full">
-              {userInfo?.skills.length>0&&skills.map((item,idx)=>{
-                return <span key={idx}>item</span>
-              })}
-            </p>
+        <div className="capitalize border rounded p-2">
+          <div>resume</div>
+          <div className="border rounded h-10 overflow-hidden">
+            {user?.cvUrl != "" ? (
+              <a href={userInfo?.cvUrl}>
+                <div className="bg-blue-500 p-2 text-white">view Resume</div>
+              </a>
+            ) : (
+              <Link to={"/upload-resume"}>
+                <div className="bg-blue-500 p-2 text-white">Upload Resume</div>
+              </Link>
+            )}
           </div>
         </div>
-
-        <hr />
-
-        <div className="w-full py-10">
-          <div className="w-full flex flex-col-reverse md:flex-row gap-8 py-6">
-            <div className="w-full md:w-2/3 flex flex-col gap-4 text-lg text-slate-600 mt-20 md:mt-0">
-              <p className="text-blue-500  font-semibold text-2xl">ABOUT</p>
-              <span className="text-base text-justify leading-7">
-                {userInfo?.about ?? "No About Found"}
-              </span>
+        <div className="capitalize border rounded p-2">
+          <div>Details</div>
+          <div className="pl-2">
+            <div className="flex text-sm gap-2">
+              <p className="">experience :</p>
+              <p className="text-slate-600">
+                {userInfo?.experience ?? "experience"}
+              </p>
             </div>
-
-            <div className="w-full md:w-1/3 h-44">
-              {/* <img
-                src={userInfo?.profileUrl}
-                alt={userInfo?.firstName}
-                className="w-full h-48 object-contain rounded-lg"
-              /> */}
-              <button
-                className="w-full md:w-64 bg-blue-500 text-white mt-4 py-2 rounded"
-                onClick={() => setOpen(true)}
-              >
-                update details
-              </button>
+            <div className="flex text-sm gap-2">
+              <p>Current Company :</p>
+              <p className="text-slate-600">
+                {userInfo?.currentCompany ?? "current company"}
+              </p>
+            </div>
+            <div className="flex text-sm gap-2">
+              <p>Current Job :</p>
+              <p className="text-slate-600">
+                {userInfo?.currentJobRole ?? "currentJobRole"}
+              </p>
+            </div>
+            <div className="flex text-sm gap-2">
+              <p>join Consulting :</p>
+              <p className="text-slate-600">
+                {userInfo?.joinConsulting ?? "joinConsulting"}
+              </p>
+            </div>
+            <div className="flex text-sm gap-2">
+              <p>open To Relocate :</p>
+              <p className="text-slate-600">
+                {userInfo?.openToRelocate ?? "openToRelocate"}
+              </p>
             </div>
           </div>
+        </div>
+        <div className="border rounded p-2">
+          <div>Profile summary</div>
+          <p className="text-slate-600 pl-3 text-sm">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat
+            facere eveniet nam ut officia iste magni repudiandae cupiditate
+            harum assumenda.
+          </p>
+          {/* {userInfo?.about ?? "No About Found"} */}
+        </div>
+        <div className="border rounded p-2 ">
+          <button
+            className="w-full md:w-64 bg-blue-500 text-white py-2 capitalize rounded"
+            onClick={() => setOpen(true)}
+          >
+            update details
+          </button>
         </div>
       </div>
 
