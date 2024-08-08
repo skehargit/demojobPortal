@@ -23,7 +23,6 @@ export const createJob = async (req, res, next) => {
     if (
       !jobTitle ||
       !location ||
-      !salary ||
       !desc
     ) {
       return res.status(400).json({ message: "Please Provide All Required Fields" });
