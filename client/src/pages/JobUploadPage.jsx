@@ -66,6 +66,8 @@ const JobUploadPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    formData.experience=Number(formData.experience)
+    formData.salary=Number(formData.salary)
     console.log(formData);
     // Handle form submission logic here
     setIsLoading(true);
@@ -124,7 +126,7 @@ const JobUploadPage = () => {
         >
           <option value="">Select experience</option>
           {Array.from({ length: 15 }, (_, i) => (
-            <option key={i + 1} value={`${i + 1}+`}>{`${i + 1}+`}</option>
+            <option key={i + 1} value={i+1}>{`${i + 1}+`}</option>
           ))}
         </select>
       </div>

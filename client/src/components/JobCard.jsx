@@ -24,7 +24,7 @@ const JobCard = ({ job }) => {
             <div className="flex flex-col gap-1">
               <span className='flex gap-2 items-center'>
                 <GoLocation className='text-slate-900 text-sm' />
-                {job?.location}
+                {job?.jobLocation}
               </span>
               {/* <span className='flex gap-2 items-center'>
                 <span>Anual salary:</span>{job?.salary}
@@ -42,13 +42,13 @@ const JobCard = ({ job }) => {
         <div className='py-3'>
           <p>Description:</p>
           <p className='text-sm'>
-            {job?.detail[0]?.desc?.slice(0, 150) + "..."}
+            {job?.jobDescription?.slice(0, 150) + "..."}
           </p>
         </div>
 
         <div className='flex items-center justify-between'>
           <p className='bg-[#14a8001c] text-[#14a800] py-0.5 px-1.5 rounded font-semibold text-sm'>
-            {job?.jobType}
+            {/* {job?.jobType} */}
           </p>
           <span className='text-blue-500 text-sm'>
             {moment(job?.createdAt).fromNow()}
