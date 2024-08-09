@@ -9,7 +9,7 @@ export const createJob = async (req, res, next) => {
   try {
     const {
       jobTitle,
-      location,
+      jobLocation,
       salary,
       isSalaryConfidential,
       experience,
@@ -18,21 +18,22 @@ export const createJob = async (req, res, next) => {
       qualifications,
       screeningQuestions,
     } = req.body;
-    console.log(jobTitle,
-      location,
+    console.log(
+      jobTitle,
+      jobLocation,
       salary,
       isSalaryConfidential,
       experience,
       description,
       requirements,
       qualifications,
-      screeningQuestions)
+      screeningQuestions
+    );
     // Validate required fields
-    if (
-      !jobTitle ||
-      !location
-    ) {
-      return res.status(400).json({ message: "Please Provide All Required Fields" });
+    if (!jobTitle || !location) {
+      return res
+        .status(400)
+        .json({ message: "Please Provide All Required Fields" });
     }
 
     const id = req.body.user.userId;
@@ -45,8 +46,7 @@ export const createJob = async (req, res, next) => {
     // Create job post object
     const jobPost = {
       jobTitle,
-      jobType,
-      location,
+      jobLocation,
       salary: isSalaryConfidential ? null : salary,
       isSalaryConfidential,
       experience,
@@ -95,7 +95,7 @@ export const updateJob = async (req, res, next) => {
       requirements,
       maxApplicants,
       screeningQuestions,
-      duration
+      duration,
     } = req.body;
     const { jobId } = req.params;
 
@@ -105,7 +105,8 @@ export const updateJob = async (req, res, next) => {
       !location ||
       !salary ||
       !desc ||
-      !requirements ||!maxApplicants ||
+      !requirements ||
+      !maxApplicants ||
       !duration
     ) {
       next("Please Provide All Required Fields");
@@ -130,13 +131,15 @@ export const updateJob = async (req, res, next) => {
       _id: jobId,
     };
 
-    const jobupdate = await Jobs.findByIdAndUpdate(jobId, jobPost, { new: true })
+    const jobupdate = await Jobs.findByIdAndUpdate(jobId, jobPost, {
+      new: true,
+    });
 
-    if(!jobupdate){
+    if (!jobupdate) {
       return res.status(404).json({
-        success:false,
-        message:"Job not found"
-      })
+        success: false,
+        message: "Job not found",
+      });
     }
 
     res.status(200).json({
@@ -153,7 +156,7 @@ export const updateJob = async (req, res, next) => {
 //get all jobs or use query parameter to filter job
 export const getJobPosts = async (req, res, next) => {
   try {
-    const { search, sort, location, exp} = req.query;
+    const { search, sort, location, exp } = req.query;
     const experience = exp?.split("-"); //2-6
 
     let queryObject = {};
@@ -238,8 +241,11 @@ export const getJobById = async (req, res, next) => {
     const { id } = req.params;
 
     // const job = await Jobs.findById({ _id: id }).select("+password")
-    const job = await Jobs.findById({ _id: id }).populate({ path: "company", select: "-password" });
-    console.log(job)
+    const job = await Jobs.findById({ _id: id }).populate({
+      path: "company",
+      select: "-password",
+    });
+    console.log(job);
     if (!job) {
       return res.status(200).send({
         message: "Job Post Not Found",
@@ -249,9 +255,7 @@ export const getJobById = async (req, res, next) => {
 
     //GET SIMILAR JOB POST
     const searchQuery = {
-      $or: [
-        { jobTitle: { $regex: job?.jobTitle, $options: "i" } },
-      ],
+      $or: [{ jobTitle: { $regex: job?.jobTitle, $options: "i" } }],
     };
 
     let queryResult = Jobs.find(searchQuery)
@@ -280,8 +284,11 @@ export const deleteJobPost = async (req, res, next) => {
   try {
     const { id } = req.params;
     const companyId = req.body.user.userId;
-    await Application.deleteMany({job:id})
-    await Companies.findByIdAndUpdate({_id:companyId},{ $pull: { jobPosts:id } })
+    await Application.deleteMany({ job: id });
+    await Companies.findByIdAndUpdate(
+      { _id: companyId },
+      { $pull: { jobPosts: id } }
+    );
     await Jobs.findByIdAndDelete(id);
 
     res.status(200).send({

@@ -5,8 +5,8 @@ const jobSchema = new mongoose.Schema(
     company: { type: Schema.Types.ObjectId, ref: "Companies",required: true },
     application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
     jobTitle: { type: String, required: [true, "Job Title is required"] },
-    location: { type: String, required: [true, "Location is required"] },
-    salary: { type: String},
+    jobLocation: { type: String, required: [true, "Location is required"] },
+    salary: { type: Number},
     isSalaryConfidential: {
       type: Boolean,
       default: false,
@@ -29,7 +29,6 @@ screeningQuestions: [
   {
       question: {
           type: String,
-          required: true,
       },
       isMandatory: {
           type: Boolean,
@@ -39,10 +38,6 @@ screeningQuestions: [
 ],
     experience: { type: Number, default: 0 },
     companyType:{type:String},
-    screeningQuestions:[String],
-    maxApplicants:{
-      type:Number,
-    },
     duration:{
       type:String,
       defult:"permanent"
