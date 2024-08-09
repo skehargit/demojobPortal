@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import TextInput from "./TextInput";
 import { apiRequest } from "../utils";
@@ -18,7 +18,7 @@ const SignUp = ({ open, setOpen }) => {
   const [loading, setloadting] = useState(false);
   const [isRegister, setIsRegister] = useState(true);
   const [accountType, setAccountType] = useState("seeker");
-
+  const navigate = useNavigate()
   const [errMsg, setErrMsg] = useState("");
   const {
     register,
@@ -29,7 +29,7 @@ const SignUp = ({ open, setOpen }) => {
   } = useForm({
     mode: "onChange",
   });
-  let from = location.state?.from?.pathname || "/";
+  // let from = location.state?.from?.pathname || "/";
 
   const closeModal = () => setOpen(false);
 
@@ -66,8 +66,12 @@ const SignUp = ({ open, setOpen }) => {
         const userData = { token: res?.token, ...res?.user };
         dispatch(Login(userData));
         localStorage.setItem("userInfo", JSON.stringify(userData));
+        if(isRegister){
+          navigate('/user-additional-details')
+        }else if(accountType=='seeker'){
+          navigate('/find-jobs')
+        }
         setloadting(false);
-        // window.location.replace(from);
       }
     } catch (error) {
       console.log(error);

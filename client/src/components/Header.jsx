@@ -72,7 +72,7 @@ const Header = ({
               {/* The Right{" "} */}
               <span className="font-[silk-serif] text-[#1176DB] italic text-7xl border-b-2 border-[#1176DB]">
                 {" "}
-                Find Out Next Opportunity
+                Find your Next Opportunity
               </span>{" "}
             </p>
           </div>

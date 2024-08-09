@@ -6,235 +6,236 @@ import { HiLocationMarker } from "react-icons/hi";
 import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { CustomButton, TextInput } from "../components";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-const UserForm = ({ open, setOpen }) => {
-  const { user } = useSelector((state) => state.user);
-  console.log(user);
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    watch,
-    formState: { errors },
-  } = useForm({
-    mode: "onChange",
-    defaultValues: { ...user },
-  });
-  const dispatch = useDispatch();
-  const [profileImage, setProfileImage] = useState("");
-  const [uploadCv, setUploadCv] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  // console.log(uploadCv)
-  const onSubmit = async (data) => {
-    // console.log(data)
-    setIsSubmitting(true);
-    try {
-      console.log(data);
-      const newData = uri ? { ...data, profileUrl: uri } : data;
-      const res = await apiRequest({
-        url: "/users/update-user",
-        token: user?.token,
-        data: data,
-        method: "PUT",
-      });
+// const UserForm = ({ open, setOpen }) => {
+//   const { user } = useSelector((state) => state.user);
+//   console.log(user);
+//   const {
+//     register,
+//     handleSubmit,
+//     getValues,
+//     watch,
+//     formState: { errors },
+//   } = useForm({
+//     mode: "onChange",
+//     defaultValues: { ...user },
+//   });
+//   const dispatch = useDispatch();
+//   const [profileImage, setProfileImage] = useState("");
+//   const [uploadCv, setUploadCv] = useState("");
+//   const [isSubmitting, setIsSubmitting] = useState(false);
+//   // console.log(uploadCv)
+//   const onSubmit = async (data) => {
+//     // console.log(data)
+//     setIsSubmitting(true);
+//     try {
+//       console.log(data);
+//       const newData = uri ? { ...data, profileUrl: uri } : data;
+//       const res = await apiRequest({
+//         url: "/users/update-user",
+//         token: user?.token,
+//         data: data,
+//         method: "PUT",
+//       });
 
-      if (res) {
-        const newData = { token: res?.token, ...res?.user };
-        dispatch(Login(newData));
-        localStorage.setItem("userInfo", JSON.stringify(res));
-        window.location.reload();
-      }
-      setIsSubmitting(false);
-    } catch (error) {
-      console.log(error);
-      setIsSubmitting(false);
-    }
-  };
+//       if (res) {
+//         const newData = { token: res?.token, ...res?.user };
+//         dispatch(Login(newData));
+//         localStorage.setItem("userInfo", JSON.stringify(res));
+//         window.location.reload();
+//       }
+//       setIsSubmitting(false);
+//     } catch (error) {
+//       console.log(error);
+//       setIsSubmitting(false);
+//     }
+//   };
 
-  const closeModal = () => setOpen(false);
-  useEffect(() => {
-    console.log(user);
-  });
-  return (
-    <>
-      <Transition appear show={open ?? false} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={closeModal}>
-          <Transition.Child
-            as={Fragment}
-            enter="ease-out duration-300"
-            enterFrom="opacity-0"
-            enterTo="opacity-100"
-            leave="ease-in duration-200"
-            leaveFrom="opacity-100"
-            leaveTo="opacity-0"
-          >
-            <div className="fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
+//   const closeModal = () => setOpen(false);
+//   useEffect(() => {
+//     console.log(user);
+//   });
+//   return (
+//     <>
+//       <Transition appear show={open ?? false} as={Fragment}>
+//         <Dialog as="div" className="relative z-10" onClose={closeModal}>
+//           <Transition.Child
+//             as={Fragment}
+//             enter="ease-out duration-300"
+//             enterFrom="opacity-0"
+//             enterTo="opacity-100"
+//             leave="ease-in duration-200"
+//             leaveFrom="opacity-100"
+//             leaveTo="opacity-0"
+//           >
+//             <div className="fixed inset-0 bg-black bg-opacity-25" />
+//           </Transition.Child>
 
-          <div className="fixed inset-0 overflow-y-auto">
-            <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
-                enter="ease-out duration-300"
-                enterFrom="opacity-0 scale-95"
-                enterTo="opacity-100 scale-100"
-                leave="ease-in duration-200"
-                leaveFrom="opacity-100 scale-100"
-                leaveTo="opacity-0 scale-95"
-              >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
-                    as="h3"
-                    className="text-lg font-semibold leading-6 text-gray-900"
-                  >
-                    Add Additional info
-                  </Dialog.Title>
+//           <div className="fixed inset-0 overflow-y-auto">
+//             <div className="flex min-h-full items-center justify-center p-4 text-center">
+//               <Transition.Child
+//                 as={Fragment}
+//                 enter="ease-out duration-300"
+//                 enterFrom="opacity-0 scale-95"
+//                 enterTo="opacity-100 scale-100"
+//                 leave="ease-in duration-200"
+//                 leaveFrom="opacity-100 scale-100"
+//                 leaveTo="opacity-0 scale-95"
+//               >
+//                 <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-white p-6 text-left align-middle shadow-xl transition-all">
+//                   <Dialog.Title
+//                     as="h3"
+//                     className="text-lg font-semibold leading-6 text-gray-900"
+//                   >
+//                     Add Additional info
+//                   </Dialog.Title>
 
-                  <form
-                    className="w-full mt-2 flex flex-col gap-5"
-                    onSubmit={handleSubmit(onSubmit)}
-                  >
-                    <div className="w-full flex gap-2">
-                      <div className="w-1/2">
-                        <TextInput
-                          name="currentCompany"
-                          label="Current Company"
-                          placeholder="currentCompany"
-                          type="text"
-                        />
-                      </div>
-                      <div className="w-1/2">
-                        <TextInput
-                          name="currentSalary"
-                          label="current Salary"
-                          placeholder="current Salary"
-                          type="text"
-                        />
-                      </div>
-                    </div>
+//                   <form
+//                     className="w-full mt-2 flex flex-col gap-5"
+//                     onSubmit={handleSubmit(onSubmit)}
+//                   >
+//                     <div className="w-full flex gap-2">
+//                       <div className="w-1/2">
+//                         <TextInput
+//                           name="currentCompany"
+//                           label="Current Company"
+//                           placeholder="currentCompany"
+//                           type="text"
+//                         />
+//                       </div>
+//                       <div className="w-1/2">
+//                         <TextInput
+//                           name="currentSalary"
+//                           label="current Salary"
+//                           placeholder="current Salary"
+//                           type="text"
+//                         />
+//                       </div>
+//                     </div>
 
-                    <div className="w-full flex gap-2">
-                      <div className="w-1/2">
-                        <TextInput
-                          name="contact"
-                          label="Contact"
-                          placeholder="Phone Number"
-                          type="text"
-                        />
-                      </div>
+//                     <div className="w-full flex gap-2">
+//                       <div className="w-1/2">
+//                         <TextInput
+//                           name="contact"
+//                           label="Contact"
+//                           placeholder="Phone Number"
+//                           type="text"
+//                         />
+//                       </div>
 
-                      <div className="w-1/2">
-                        <TextInput
-                          name="location"
-                          label="Location"
-                          placeholder="Location"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <div className="w-full flex gap-2">
-                      <div className="w-1/2">
-                        <TextInput
-                          name="experience"
-                          label="Experience"
-                          placeholder="Experience"
-                          type="text"
-                        />
-                      </div>
+//                       <div className="w-1/2">
+//                         <TextInput
+//                           name="location"
+//                           label="Location"
+//                           placeholder="Location"
+//                           type="text"
+//                         />
+//                       </div>
+//                     </div>
+//                     <div className="w-full flex gap-2">
+//                       <div className="w-1/2">
+//                         <TextInput
+//                           name="experience"
+//                           label="Experience"
+//                           placeholder="Experience"
+//                           type="text"
+//                         />
+//                       </div>
 
-                      <div className="w-1/2">
-                        <TextInput
-                          name="currentLocation"
-                          label="current Location"
-                          placeholder="current Location"
-                          type="text"
-                        />
-                      </div>
-                    </div>
-                    <select className="border p-2" name="openToRelocate" id="">
-                      <option value="">open To Relocate</option>
-                      <option value="">YES</option>
-                      <option value="">NO</option>
-                    </select>
-                    <select className="border p-2" name="joinConsulting" id="">
-                      <option value="">Join Consulting</option>
-                      <option value="">Post Graduation</option>
-                      <option value="">lateral</option>
-                    </select>
-                    <TextInput
-                      name="currentJobRole"
-                      label="Current Job Role"
-                      placeholder="Current Job Role"
-                      type="text"
-                    />
-                    <div className="w-full flex gap-2 text-sm">
-                      <div className="w-1/2">
-                        <label className="text-gray-600 text-sm mb-1">
-                          Profile Picture
-                        </label>
-                        <input
-                          type="file"
-                          onChange={(e) => setProfileImage(e.target.files[0])}
-                        />
-                      </div>
+//                       <div className="w-1/2">
+//                         <TextInput
+//                           name="currentLocation"
+//                           label="current Location"
+//                           placeholder="current Location"
+//                           type="text"
+//                         />
+//                       </div>
+//                     </div>
+//                     <select className="border p-2" name="openToRelocate" id="">
+//                       <option value="">open To Relocate</option>
+//                       <option value="">YES</option>
+//                       <option value="">NO</option>
+//                     </select>
+//                     <select className="border p-2" name="joinConsulting" id="">
+//                       <option value="">Join Consulting</option>
+//                       <option value="">Post Graduation</option>
+//                       <option value="">lateral</option>
+//                     </select>
+//                     <TextInput
+//                       name="currentJobRole"
+//                       label="Current Job Role"
+//                       placeholder="Current Job Role"
+//                       type="text"
+//                     />
+//                     <div className="w-full flex gap-2 text-sm">
+//                       <div className="w-1/2">
+//                         <label className="text-gray-600 text-sm mb-1">
+//                           Profile Picture
+//                         </label>
+//                         <input
+//                           type="file"
+//                           onChange={(e) => setProfileImage(e.target.files[0])}
+//                         />
+//                       </div>
 
-                      <div className="w-1/2">
-                        <label className="text-gray-600 text-sm mb-1">
-                          Resume
-                        </label>
-                        <input
-                          type="file"
-                          onChange={(e) => setUploadCv(e.target.files[0])}
-                        />
-                      </div>
-                    </div>
+//                       <div className="w-1/2">
+//                         <label className="text-gray-600 text-sm mb-1">
+//                           Resume
+//                         </label>
+//                         <input
+//                           type="file"
+//                           onChange={(e) => setUploadCv(e.target.files[0])}
+//                         />
+//                       </div>
+//                     </div>
 
-                    <div className="flex flex-col">
-                      <label className="text-gray-600 text-sm mb-1">
-                        About
-                      </label>
-                      <textarea
-                        className="ounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none"
-                        rows={4}
-                        cols={6}
-                        {...register("about", {
-                          required:
-                            "Write a little bit about yourself and your projects",
-                        })}
-                        aria-invalid={errors.about ? "true" : "false"}
-                      ></textarea>
-                      {errors.about && (
-                        <span
-                          role="alert"
-                          className="text-xs text-red-500 mt-0.5"
-                        >
-                          {errors.about?.message}
-                        </span>
-                      )}
-                    </div>
+//                     <div className="flex flex-col">
+//                       <label className="text-gray-600 text-sm mb-1">
+//                         About
+//                       </label>
+//                       <textarea
+//                         className="ounded border border-gray-400 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-base px-4 py-2 resize-none"
+//                         rows={4}
+//                         cols={6}
+//                         {...register("about", {
+//                           required:
+//                             "Write a little bit about yourself and your projects",
+//                         })}
+//                         aria-invalid={errors.about ? "true" : "false"}
+//                       ></textarea>
+//                       {errors.about && (
+//                         <span
+//                           role="alert"
+//                           className="text-xs text-red-500 mt-0.5"
+//                         >
+//                           {errors.about?.message}
+//                         </span>
+//                       )}
+//                     </div>
 
-                    <div className="mt-4">
-                      <CustomButton
-                        type="submit"
-                        containerStyles="inline-flex justify-center rounded-md border border-transparent bg-[#14a800] px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none "
-                        title={"Submit"}
-                      />
-                    </div>
-                  </form>
-                </Dialog.Panel>
-              </Transition.Child>
-            </div>
-          </div>
-        </Dialog>
-      </Transition>
-    </>
-  );
-};
+//                     <div className="mt-4">
+//                       <CustomButton
+//                         type="submit"
+//                         containerStyles="inline-flex justify-center rounded-md border border-transparent bg-[#14a800] px-8 py-2 text-sm font-medium text-white hover:bg-[#1d4fd846] hover:text-[#1d4fd8] focus:outline-none "
+//                         title={"Submit"}
+//                       />
+//                     </div>
+//                   </form>
+//                 </Dialog.Panel>
+//               </Transition.Child>
+//             </div>
+//           </div>
+//         </Dialog>
+//       </Transition>
+//     </>
+//   );
+// };
 
 const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
-  const [open, setOpen] = useState(false);
+  // const [open, setOpen] = useState(false);
+  const navigate = useNavigate()
   const userInfo = user;
   console.log(user.cvUrl);
   return (
@@ -327,14 +328,16 @@ const UserProfile = () => {
         <div className="border rounded p-2 ">
           <button
             className="w-full md:w-64 bg-blue-500 text-white py-2 capitalize rounded"
-            onClick={() => setOpen(true)}
+            onClick={() =>{
+              navigate('/user-additional-details')
+            }}
           >
             update details
           </button>
         </div>
       </div>
 
-      <UserForm open={open} setOpen={setOpen} />
+      {/* <UserForm open={open} setOpen={setOpen} /> */}
     </div>
   );
 };

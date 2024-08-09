@@ -2,15 +2,42 @@ import mongoose, { Schema } from "mongoose";
 
 const jobSchema = new mongoose.Schema(
   {
-    company: { type: Schema.Types.ObjectId, ref: "Companies" },
+    company: { type: Schema.Types.ObjectId, ref: "Companies",required: true },
     application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
     jobTitle: { type: String, required: [true, "Job Title is required"] },
-    jobType: { type: String},
     location: { type: String, required: [true, "Location is required"] },
     salary: { type: Number},
+    isSalaryConfidential: {
+      type: Boolean,
+      default: false,
+  },
+  description: {
+    type: String,
+    required: true,
+},
+requirements: [
+  {
+      type: String,
+  },
+],
+qualifications: [
+  {
+      type: String,
+  },
+],
+screeningQuestions: [
+  {
+      question: {
+          type: String,
+          required: true,
+      },
+      isMandatory: {
+          type: Boolean,
+          default: false,
+      },
+  },
+],
     experience: { type: Number, default: 0 },
-    detail: [{ desc: { type: String }, requirements: { type: String,default:"" } }],
-    requiredSkills:[String],
     companyType:{type:String},
     screeningQuestions:[String],
     maxApplicants:{

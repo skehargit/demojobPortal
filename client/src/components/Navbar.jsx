@@ -128,9 +128,9 @@ const Navbar = () => {
           </div>
 
           <ul className="hidden lg:flex gap-10 text-base ">
-            <li className="hover:text-[#1176DB]">
+            {(!user.jobPosts)&&<li className="hover:text-[#1176DB]">
               <Link to="/find-jobs">Find Job</Link>
-            </li>
+            </li>}
             {user?.accountType == "seeker"&&<li className="hover:text-[#1176DB]">
               <Link to="/companies">Companies</Link>
             </li>}
