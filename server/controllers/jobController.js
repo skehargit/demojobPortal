@@ -47,10 +47,10 @@ export const createJob = async (req, res, next) => {
     const jobPost = {
       jobTitle,
       jobLocation,
-      salary: isSalaryConfidential ? null : salary,
-      isSalaryConfidential,
+      salary: salaryConfidential ? null : salary,
+      salaryConfidential,
       experience,
-      description,
+      jobDescription,
       requirements,
       qualifications,
       screeningQuestions,
