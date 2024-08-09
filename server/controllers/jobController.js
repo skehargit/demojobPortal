@@ -30,7 +30,7 @@ export const createJob = async (req, res, next) => {
       screeningQuestions
     );
     // Validate required fields
-    if (!jobTitle || !location) {
+    if (!jobTitle) {
       return res
         .status(400)
         .json({ message: "Please Provide All Required Fields" });
