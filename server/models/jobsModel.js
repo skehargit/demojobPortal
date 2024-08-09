@@ -6,7 +6,7 @@ const jobSchema = new mongoose.Schema(
     application: [{ type: Schema.Types.ObjectId, ref: "Application" }],
     jobTitle: { type: String, required: [true, "Job Title is required"] },
     location: { type: String, required: [true, "Location is required"] },
-    salary: { type: Number},
+    salary: { type: String},
     isSalaryConfidential: {
       type: Boolean,
       default: false,
