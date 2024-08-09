@@ -4,7 +4,7 @@ import { response } from "express";
 import bcrypt from "bcryptjs";
 // company register 
 export const register = async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password,copmanyType } = req.body;
 
   //validate fields
   if (!name) {
@@ -33,6 +33,7 @@ export const register = async (req, res, next) => {
       name,
       email,
       password,
+      copmanyType
     });
 
     // user token
@@ -45,6 +46,7 @@ export const register = async (req, res, next) => {
         _id: company._id,
         name: company.name,
         email: company.email,
+        companyType:company.copmanyType
       },
       token,
     });
