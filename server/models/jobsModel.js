@@ -36,7 +36,7 @@ const jobSchema = new mongoose.Schema(
         },
       },
     ],
-    experience: { type: Number, default: 0 },
+    experience: { type:String },
     companyType: { type: String },
     duration: {
       type: String,
