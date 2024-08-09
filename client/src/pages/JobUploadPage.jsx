@@ -84,10 +84,10 @@ const JobUploadPage = () => {
         // setErrMsg({ ...res });
       } else {
         // setErrMsg("success");
-        console.log("success");
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+        console.log("success",res);
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 2000);
       }
         setIsLoading(false);
     } catch (error) {

@@ -35,7 +35,7 @@ const SignUp = ({ open, setOpen }) => {
 
   const onSubmit = async (formData) => {
     console.log(currentJobRole)
-    const newData = { ...formData, currentJobRole: currentJobRole };
+    const newData = { ...formData, currentJobRole: currentJobRole,copmanyType:selectedOption };
     let URL = null;
     if (isRegister) {
       if (accountType === "seeker") {
@@ -51,7 +51,7 @@ const SignUp = ({ open, setOpen }) => {
       }
     }
     try {
-      // console.log(formData)
+      console.log(formData,newData)
       setloadting(true);
       const res = await apiRequest({
         url: URL,
