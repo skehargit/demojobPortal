@@ -83,9 +83,9 @@ const JobUploadPage = () => {
       } else {
         // setErrMsg("success");
         console.log("success");
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 2000);
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       }
         setIsLoading(false);
     } catch (error) {
@@ -270,7 +270,7 @@ const JobUploadPage = () => {
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
-        Submit
+        {isLoading?'Submiting....':'Submit'}
       </button>
     </form>
   );

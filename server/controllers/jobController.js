@@ -18,19 +18,8 @@ export const createJob = async (req, res, next) => {
       qualifications,
       screeningQuestions,
     } = req.body;
-    console.log(
-      jobTitle,
-      jobLocation,
-      salary,
-      salaryConfidential,
-      experience,
-      jobDescription,
-      requirements,
-      qualifications,
-      screeningQuestions
-    );
     // Validate required fields
-    if (!jobTitle) {
+    if (!jobTitle||!jobLocation||!jobDescription) {
       return res
         .status(400)
         .json({ message: "Please Provide All Required Fields" });
