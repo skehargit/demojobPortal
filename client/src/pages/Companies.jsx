@@ -69,7 +69,7 @@ const Companies = () => {
 
   return (
     <div className="w-full bg-white h-screen">
-      <div className="w-full flex items-center justify-center"><h1 className="text-4xl text-[Poppins] text-[#1176DB]">Find Out Next Opportunity</h1></div>
+      <div className="w-full flex items-center justify-center"><h1 className="text-4xl text-[Poppins] text-[#1176DB] capitalize">Find your Next Opportunity</h1></div>
 
       <div className="container mx-auto flex flex-col gap-5 2xl:gap-10 px-5 md:px-0 py-6 ">
         <div className="flex items-center justify-between mb-4">

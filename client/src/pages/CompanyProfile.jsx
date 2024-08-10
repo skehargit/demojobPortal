@@ -269,7 +269,7 @@ const CompanyProfile = () => {
 
           <div className="flex flex-col items-center mt-10 md:mt-0">
             <span className="text-xl">{info?.jobPosts?.length}</span>
-            <p className="text-blue-500">Job Post</p>
+            <p className="text-blue-500 capitalize">Jobs Posted</p>
           </div>
         </div>
       </div>

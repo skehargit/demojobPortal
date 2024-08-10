@@ -7,7 +7,7 @@ import CustomButton from "./CustomButton";
 
 const Footer = () => {
   return (
-    <footer className="text-white mp-20">
+    <footer className="text-white mp-20 overflow-x-hidden">
       <div className="overflow-x-hidden -mb-0.5"></div>
 
       <div className="bg-zinc-800">
@@ -54,18 +54,18 @@ const Footer = () => {
         </div> */}
 
         <div className="bg-[#424242]">
-          <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-            <p className="text-gray-300 text-sm text-center sm:text-left">
-              &copy; 2024 HighImpactTalentenquiry
+          <div className=" py-4 px-5 flex  ">
+            <div className="text-gray-300 text-sm flex flex-col ">
+              <span>&copy; 2024 HighImpactTalentenquiry</span>
               <a
-                href="https://linkedin.com/in/harsh-d-rao"
+                href=""
                 className="text-[#1176DB] ml-1 font-semibold"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 highimpacttalentenquiry@gmail.com
               </a>
-            </p>
+            </div>
           </div>
         </div>
       </div>
