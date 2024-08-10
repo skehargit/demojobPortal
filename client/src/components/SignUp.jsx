@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import TextInput from "./TextInput";
 import { apiRequest } from "../utils";
 import CustomButton from "./CustomButton";
-import { Login } from "../redux/userSlice";
 import JobTypes from "./JobTypes";
+import { Login } from "../redux/userSlice";
 
 const SignUp = ({ open, setOpen }) => {
   const [currentJobRole, setCurrentJobRole] = useState("Accenture strategy");

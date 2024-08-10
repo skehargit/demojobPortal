@@ -1,6 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { apiRequest } from "../utils";
 
 const UserInfoForm = () => {
+  const { user } = useSelector((state) => state.user);
+  // useSelector
   const [formData, setFormData] = useState({
     job: "",
     company: "",
@@ -15,6 +19,17 @@ const UserInfoForm = () => {
     profilePic: null,
     resume: null,
   });
+  // contactNumber,
+  //   profileUrl,
+  //   cvUrl,
+  //   currentJobRole,
+  //   currentSalary,
+  //   currentCompany,
+  //   currentLocation,
+  //   openToRelocate,
+  //   joinConsulting,
+  //   about,
+  //   experience
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,12 +48,23 @@ const UserInfoForm = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
+    // /update-user
+    // const res=await apiRequest()
+    const res = await apiRequest({
+      url: "user/update-user",
+      method: "PUT",
+      data: formData,
+      token:user?.token
+    });
+    console.log(res)
     // Handle form submission logic here
     console.log(formData);
   };
-
+  useEffect(()=>{
+    console.log(user)
+  },[])
   return (
     <div className="flex judtify-center border">
       <form
@@ -246,7 +272,6 @@ const UserInfoForm = () => {
                 onChange={handleFileChange}
                 accept="image/*"
                 className="w-full py-2"
-                required
               />
             </div>
             <div className="mb-4">
@@ -259,7 +284,6 @@ const UserInfoForm = () => {
                 onChange={handleFileChange}
                 accept=".pdf,.doc,.docx"
                 className="w-full py-2"
-                required
               />
             </div>
           </div>

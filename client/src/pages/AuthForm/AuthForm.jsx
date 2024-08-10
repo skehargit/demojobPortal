@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiRequest } from "../../utils";
-
+import { useDispatch } from "react-redux";
+import { Login } from "../../redux/userSlice";
 const AuthForm = () => {
   const [isUser, setIsUser] = useState(true);
-
+  const dispatch = useDispatch();
   // State for User Registration Form
   const [userForm, setUserForm] = useState({
     firstName: "",
@@ -95,20 +96,24 @@ const AuthForm = () => {
       console.log("User Form Data:", userForm);
       navigate("/user-additional-details");
       // Submit userForm data to your API or handle it
-    try {
+      try {
         const res = await apiRequest({
-            url: "user/register",
-            method: "POST",
-            data: userForm,
-          });
-          console.log(res);
-    } catch (error) {
-        console.log(error)
-    }
+          url: "user/register",
+          method: "POST",
+          data: userForm,
+        });
+        console.log(res);
+        const userData = { token: res?.token, ...res?.user };
+        dispatch(Login(userData));
+        localStorage.setItem("userInfo", JSON.stringify(userData));
+        navigate("/user-additional-details");
+      } catch (error) {
+        console.log(error);
+      }
     } else {
       console.log("Recruiter Form Data:", recruiterForm);
       // Submit recruiterForm data to your API or handle it
-    //   companies/register
+      //   companies/register
     }
   };
 

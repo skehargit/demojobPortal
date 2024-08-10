@@ -4,55 +4,53 @@ import { application } from "express";
 import Application from "../models/ApplicationModel.js";
 
 // upload resume
-export const uploadResume = async(req,res)=>{
+export const uploadResume = async (req, res) => {
   try {
-    const {url} = req.body;
+    const { url } = req.body;
     // console.log(url)
-    const userResume = await Users.findOneAndUpdate({_id:req.body.user.userId},{cvUrl:url})
-    if(!userResume){
+    const userResume = await Users.findOneAndUpdate(
+      { _id: req.body.user.userId },
+      { cvUrl: url }
+    );
+    if (!userResume) {
       return res.status(404).json({
-        success:false,
-        message:'Problem while uploding resume'
-      })
+        success: false,
+        message: "Problem while uploding resume",
+      });
     }
     res.status(200).json({
-      success:true,
-      message:'resume updated',
-      user:userResume
-    })
+      success: true,
+      message: "resume updated",
+      user: userResume,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(404).json({
-      success:false,
-    })
+      success: false,
+    });
   }
-}
+};
 // update user details
 export const updateUser = async (req, res, next) => {
   const {
-    firstName,
-    lastName,
-    email,
-      accountType,
-      contactNumber,
-      profileUrl,
-      cvUrl,
-      currentJobRole,
-      currentSalary,
-      currentCompany,
-      currentLocation,
-      openToRelocate,
-      joinConsulting,
-      about,
-      experience,
-      skills,
-      appliedJobs
+    job,
+    company,
+    experience,
+    about,
+    contactNumber,
+    profilePic,
+    resume,
+    salary,
+    location,
+    relocate,
+    joinConsulting,
+    dateOfBirth,
   } = req.body;
 
   try {
-    if (!firstName || !lastName || !email || !contact || !jobTitle || !about ||!cvUrl||!experience || !skills) {
-      next("Please provide all required fields");
-    }
+    // if (!about || !experience) {
+    //   next("Please provide all required fields");
+    // }
 
     const id = req.body.user.userId;
 
@@ -61,20 +59,18 @@ export const updateUser = async (req, res, next) => {
     }
 
     const updateUser = {
-      accountType,
       contactNumber,
-      profileUrl,
-      cvUrl,
-      currentJobRole,
-      currentSalary,
-      currentCompany,
-      currentLocation,
-      openToRelocate,
+      profileUrl: profilePic,
+      cvUrl: resume,
+      currentJobRole: job,
+      currentSalary: salary,
+      currentCompany: company,
+      currentLocation: location,
+      openToRelocate: relocate,
       joinConsulting,
+      dateOfBirth,
       about,
       experience,
-      skills,
-      appliedJobs
     };
 
     const user = await Users.findByIdAndUpdate(id, updateUser, { new: true });
@@ -99,7 +95,7 @@ export const updateUser = async (req, res, next) => {
 export const getUser = async (req, res, next) => {
   try {
     const id = req.body.user.userId;
-    console.log(id)
+    console.log(id);
     const user = await Users.findById({ _id: id });
 
     if (!user) {
@@ -125,7 +121,7 @@ export const getUser = async (req, res, next) => {
   }
 };
 
-export const getUsers =async(req,res)=>{
+export const getUsers = async (req, res) => {
   try {
     // const id = req.body.user.userId;
     // console.log(id)
@@ -152,19 +148,14 @@ export const getUsers =async(req,res)=>{
       error: error.message,
     });
   }
-}
+};
 
 // register user
 export const register = async (req, res, next) => {
-  // const { firstName, lastName, email, password } 
+  // const { firstName, lastName, email, password }
   // {
   //   accountType,contactNumber,profileUrl,cvUrl,currentJobRole,currentSalary,currentCompany,currentLocation,openToRelocate,joinConsulting,about,experience,skills,appliedJobs}
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-  }= req.body;
+  const { firstName, lastName, email, password } = req.body;
   //validate fileds
 
   if (!firstName) {
@@ -192,12 +183,12 @@ export const register = async (req, res, next) => {
       firstName,
       lastName,
       email,
-      password
+      password,
     });
 
     // user token
     const token = await user.createJWT();
-    user.password=null;
+    user.password = null;
     res.status(201).send({
       success: true,
       message: "Account created successfully",
@@ -210,7 +201,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-// login user 
+// login user
 export const signIn = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -234,9 +225,9 @@ export const signIn = async (req, res, next) => {
 
     if (!isMatch) {
       return res.status(401).json({
-        success:false,
-        message:"wrong password",
-      })
+        success: false,
+        message: "wrong password",
+      });
     }
 
     user.password = undefined;
@@ -259,7 +250,7 @@ export const signIn = async (req, res, next) => {
 export const deleteUser = async (req, res, next) => {
   try {
     const id = req.body.user.userId;
-    console.log(id)
+    console.log(id);
     const user = await Users.findById({ _id: id });
 
     if (!user) {
@@ -270,13 +261,13 @@ export const deleteUser = async (req, res, next) => {
     }
     // user application
 
-    const userApplication = await Application.deleteMany({applicant:id})
+    const userApplication = await Application.deleteMany({ applicant: id });
 
-    const deleteUser = await Users.findByIdAndDelete({_id:id});
+    const deleteUser = await Users.findByIdAndDelete({ _id: id });
 
     res.status(200).json({
       success: true,
-      deletedUser:deleteUser,
+      deletedUser: deleteUser,
     });
   } catch (error) {
     console.log(error);
@@ -287,9 +278,3 @@ export const deleteUser = async (req, res, next) => {
     });
   }
 };
-
-
-
-
-
-
