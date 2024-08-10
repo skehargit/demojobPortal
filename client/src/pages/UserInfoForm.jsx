@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { apiRequest } from "../utils";
-
+import { Widget } from "@uploadcare/react-widget";
 const UserInfoForm = () => {
   const { user } = useSelector((state) => state.user);
   // useSelector
+  const widgetApi = useRef();
+  const [fileUrl, setFileUrl] = useState("");
   const [formData, setFormData] = useState({
     job: "",
     company: "",
     experience: "",
     about: "",
     salary: "",
-    contactNumber:'',
+    contactNumber: "",
     location: "",
     relocate: "no", // Set 'no' as default value
     joinConsulting: "",
-    dateOfBirth: '',
+    dateOfBirth: "",
     profilePic: null,
     resume: null,
   });
@@ -48,25 +50,53 @@ const UserInfoForm = () => {
     });
   };
 
-  const handleSubmit = async(e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // /update-user
     // const res=await apiRequest()
     // formData.salary = Number(formData.salary)
-    formData.experience = Number(formData.experience)
+    formData.experience = Number(formData.experience);
+    if(fileUrl!='')formData.resume=fileUrl
     const res = await apiRequest({
       url: "user/update-user",
       method: "PUT",
       data: formData,
-      token:user?.token
+      token: user?.token,
     });
-    console.log(res)
+    console.log(res);
     // Handle form submission logic here
     console.log(formData);
   };
-  useEffect(()=>{
-    console.log(user)
-  },[])
+  
+
+  const handleUpload = async (fileInfo) => {
+    console.log("File uploaded:", fileInfo);
+    // Send the fileInfo.cdnUrl to your backend to save it in the database
+    setFileUrl(fileInfo.cdnUrl);
+    const data = {
+      url: fileInfo.cdnUrl,
+    };
+    const updateResume = await axios.post(
+      "https://demojobportal.onrender.com/api-v1/user/upload-resume",
+      data,
+      {
+        headers: {
+          Authorization: `Bearer ${user?.token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    console.log(fileInfo, updateResume);
+  };
+
+  const openUploadDialog = () => {
+    widgetApi.current.openDialog(null, {
+      accept: "application/pdf", // Only accept PDF files
+    });
+  };
+  useEffect(() => {
+    console.log(user);
+  }, []);
   return (
     <div className="flex judtify-center border">
       <form
@@ -162,7 +192,7 @@ const UserInfoForm = () => {
               >
                 <option value="">Select experience</option>
                 {Array.from({ length: 15 }, (_, i) => (
-                  <option key={i + 1} value={i+1}>{`${i + 1}+`}</option>
+                  <option key={i + 1} value={i + 1}>{`${i + 1}+`}</option>
                 ))}
               </select>
             </div>
@@ -195,19 +225,20 @@ const UserInfoForm = () => {
             </div>
           </div>
           <div>
-            
-          <div className="mb-4">
-    <label className="block text-gray-700 text-sm  mb-2">Date of Birth</label>
-    <input
-        type="date"
-        name="dateOfBirth"
-        value={formData.dateOfBirth}
-        onChange={handleChange}
-        placeholder="date of birth"
-        className="text-xs capitalize border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-        required
-    />
-</div>
+            <div className="mb-4">
+              <label className="block text-gray-700 text-sm  mb-2">
+                Date of Birth
+              </label>
+              <input
+                type="date"
+                name="dateOfBirth"
+                value={formData.dateOfBirth}
+                onChange={handleChange}
+                placeholder="date of birth"
+                className="text-xs capitalize border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                required
+              />
+            </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm  mb-2">
                 Contact Number
@@ -277,6 +308,33 @@ const UserInfoForm = () => {
               />
             </div>
             <div className="mb-4">
+              <h2 className="text-sm mb-4">Upload Your Resume</h2>
+              <button
+                onClick={openUploadDialog}
+                className="bg-blue-500  text-white py-2 px-4 rounded"
+              >
+                Upload PDF Resume
+              </button>
+              <Widget
+                publicKey="886857a9a1571edf40e9"
+                ref={widgetApi}
+                onChange={handleUpload}
+                style={{ display: "none" }} // Hide the default widget
+              />
+              {fileUrl && (
+                <div className="mt-4">
+                  <a
+                    href={fileUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-blue-500 hover:text-blue-700"
+                  >
+                    See Your Resume
+                  </a>
+                </div>
+              )}
+            </div>
+            {/* <div className="mb-4">
               <label className="block text-gray-700 text-sm  mb-2">
                 Upload Resume
               </label>
@@ -287,7 +345,7 @@ const UserInfoForm = () => {
                 accept=".pdf,.doc,.docx"
                 className="w-full py-2"
               />
-            </div>
+            </div> */}
           </div>
         </div>
         <button

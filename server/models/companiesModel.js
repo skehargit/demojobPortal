@@ -24,6 +24,7 @@ const companySchema = new Schema({
     required:true,
     default:"copmany"
   },
+  accountType:{type:String,default:"recruiter"},
   contact: { type: String },
   location: { type: String },
   about: { type: String },
