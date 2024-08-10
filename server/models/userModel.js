@@ -24,7 +24,7 @@ const userSchema = new mongoose.Schema(
       required: [true, "Password is Required!"]
     },
     accountType: { type: String, default: "seeker" },
-    contactNumber: { type: Number },
+    contactNumber: { type: String },
     profileUrl: { type: String },
     cvUrl: { type: String },
     currentJobRole: { type: String,default:"" },
@@ -51,6 +51,9 @@ const userSchema = new mongoose.Schema(
     experience: {
       type: Number,
       default: 1,
+    },
+    dateOfBirth:{
+      type:String,
     },
     appliedJobs: {
       type: mongoose.Schema.Types.ObjectId,

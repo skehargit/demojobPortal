@@ -11,7 +11,7 @@ const UserInfoForm = () => {
     experience: "",
     about: "",
     salary: "",
-    contactNumber: "",
+    contactNumber:'',
     location: "",
     relocate: "no", // Set 'no' as default value
     joinConsulting: "",
@@ -52,6 +52,8 @@ const UserInfoForm = () => {
     e.preventDefault();
     // /update-user
     // const res=await apiRequest()
+    // formData.salary = Number(formData.salary)
+    formData.experience = Number(formData.experience)
     const res = await apiRequest({
       url: "user/update-user",
       method: "PUT",
@@ -160,7 +162,7 @@ const UserInfoForm = () => {
               >
                 <option value="">Select experience</option>
                 {Array.from({ length: 15 }, (_, i) => (
-                  <option key={i + 1} value={`${i + 1}+`}>{`${i + 1}+`}</option>
+                  <option key={i + 1} value={i+1}>{`${i + 1}+`}</option>
                 ))}
               </select>
             </div>
