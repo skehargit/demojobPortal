@@ -21,26 +21,22 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: [true, "Password is Required!"],
-      // minlength: [2, "Password length should be greater than 2 character"],
-      select: true,
+      required: [true, "Password is Required!"]
     },
     accountType: { type: String, default: "seeker" },
-    contactNumber: { type: String,default:'undefined' },
+    contactNumber: { type: Number },
     profileUrl: { type: String },
     cvUrl: { type: String },
-    currentJobRole: { type: String,required:true},
+    currentJobRole: { type: String,default:"" },
     currentSalary: {
-      type: Number,
-      default:"undefined"
+      type: String,
+      default: "",
     },
     currentCompany: {
       type: String,
-      default:'undefined'
+      default: "",
     },
-    currentLocation: { type: String,
-      default:'india'
-     },
+    currentLocation: { type: String, default: "india" },
     openToRelocate: {
       type: String,
       enum: ["YES", "NO"],
@@ -54,9 +50,8 @@ const userSchema = new mongoose.Schema(
     about: { type: String },
     experience: {
       type: Number,
-      default:1,
+      default: 1,
     },
-    skills: [String],
     appliedJobs: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Application",

@@ -164,17 +164,7 @@ export const register = async (req, res, next) => {
     lastName,
     email,
     password,
-    joinConsulting,
-      openToRelocate,
-      currentSalary,
-      currentJobRole,
-      contactNumber,
-      currentLocation,
-      currentCompany,
-      skills,
-      appliedJobs,
   }= req.body;
-  console.log(currentJobRole)
   //validate fileds
 
   if (!firstName) {
@@ -202,16 +192,7 @@ export const register = async (req, res, next) => {
       firstName,
       lastName,
       email,
-      password,
-      joinConsulting,
-      openToRelocate,
-      currentSalary,
-      currentJobRole,
-      contactNumber,
-      currentLocation,
-      currentCompany,
-      skills,
-      appliedJobs,
+      password
     });
 
     // user token

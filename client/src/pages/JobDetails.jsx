@@ -161,22 +161,22 @@ const JobDetail = () => {
           <div>
                 <p className="text-xl font-semibold ">Job Description</p>
 
-                <span className="text-base">{job?.detail?.[0]?.desc}</span>
+                <span className="text-base">{job?.jobDescription}</span>
 
-                {job?.detail?.[0]?.requirements && (
+                {/* {job?.detail?.[0]?.requirements && (
                   <>
                     <p className="text-xl font-semibold mt-8">Requirements</p>
                     <span className="text-base">
                       {job?.detail?.[0]?.requirements || "No Requirements"}
                     </span>
                   </>
-                )}
-                {job?.requiredSkills.length>0&&<div><p className="text-xl font-semibold ">Skill Required :</p>
+                )} */}
+                {/* {job?.requiredSkills.length>0&&<div><p className="text-xl font-semibold ">Skill Required :</p>
                 <ul className="flex flex-wrap gap-2">
                   {job?.requiredSkills.length>0&&job?.requiredSkills.map((item,index)=>{
                     return <li key={index} className="bg-zinc-500 text-white w-fit py-1 px-3 rounded-lg">{item}</li>
                   })}
-                </ul></div>}
+                </ul></div>} */}
                 
 
                 <div className="flex gap-1 "><p className="font-semibold">Experience :</p><span>{job?.experience}</span> <span>Year</span></div>
