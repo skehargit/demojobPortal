@@ -4,7 +4,7 @@ import { response } from "express";
 import bcrypt from "bcryptjs";
 // company register
 export const register = async (req, res, next) => {
-  const { name, companyName, email, isHiringAgency, isCompany, password } =
+  const {  companyName, email, copmanyType, password } =
     req.body;
   //validate fields
   if (!companyName) {
@@ -19,7 +19,7 @@ export const register = async (req, res, next) => {
     next("Password is required and must be greater than 6 characters");
     return;
   }
-
+  const name = companyName;
   try {
     const accountExist = await Companies.findOne({ email });
 

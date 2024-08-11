@@ -14,13 +14,11 @@ const AuthForm = () => {
     password: "",
     confirmPassword: "",
   });
-
+  const [selectedOption, setSelectedOption] = useState("");
   // State for Recruiter Registration Form
   const [recruiterForm, setRecruiterForm] = useState({
     email: "",
     companyName: "",
-    isHiringAgency: false,
-    isCompany: false,
     password: "",
     confirmPassword: "",
   });
@@ -111,18 +109,27 @@ const AuthForm = () => {
         console.log(error);
       }
     } else {
+      const newData = { ...recruiterForm, copmanyType: selectedOption };
       console.log("Recruiter Form Data:", recruiterForm);
-      // companies/register
-      const res = await apiRequest({
-        url: "companies/register",
-        method: "POST",
-        data: recruiterForm,
-      });
-      console.log(res);
-      const userData = { token: res?.token, ...res?.user };
-      dispatch(Login(userData));
-      localStorage.setItem("userInfo", JSON.stringify(userData));
-      navigate("/upload-a-job");
+      
+      try {
+        const res = await apiRequest({
+          url: "companies/register",
+          method: "POST",
+          data: newData,
+        });
+        console.log(res);
+        if (res) {
+          const userData = { token: res?.token, ...res?.user };
+          dispatch(Login(userData));
+          localStorage.setItem("userInfo", JSON.stringify(userData));
+          navigate("/upload-a-job");
+        } else {
+          console.log(res.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
@@ -248,31 +255,37 @@ const AuthForm = () => {
                 required
               />
             </div>
-            <div className="mb-4">
-              <label className="block text-gray-700 mb-2">Company Type</label>
-              <div className="flex space-x-4">
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    name="isHiringAgency"
-                    checked={recruiterForm.isHiringAgency}
-                    onChange={handleRecruiterChange}
-                    className="mr-2"
-                    required
-                  />
-                  Hiring Agency
-                </label>
-                <label className="flex items-center">
-                  <input
-                    type="checkbox"
-                    name="isCompany"
-                    checked={recruiterForm.isCompany}
-                    onChange={handleRecruiterChange}
-                    className="mr-2"
-                    required
-                  />
-                  Company
-                </label>
+            <div className="w-full">
+              <h2 className="text-sm">Select an Option</h2>
+              <div className="flex gap-4">
+                <div className="flex items-center ">
+                  <label className="block text-gray-700 text-sm mb-2 flex items-center">
+                    <input
+                      type="checkbox"
+                      value="hiringAgency"
+                      checked={selectedOption === "hiringAgency"}
+                      onChange={(e) => {
+                        setSelectedOption(e.target.value);
+                      }}
+                      className="mr-2 leading-tight"
+                    />
+                    Hiring Agency
+                  </label>
+                </div>
+                <div className="">
+                  <label className="block text-gray-700 text-sm mb-2 flex items-center">
+                    <input
+                      type="checkbox"
+                      value="company"
+                      checked={selectedOption === "company"}
+                      onChange={(e) => {
+                        setSelectedOption(e.target.value);
+                      }}
+                      className="mr-2 leading-tight"
+                    />
+                    Company
+                  </label>
+                </div>
               </div>
             </div>
             <div className="mb-4">
@@ -296,8 +309,8 @@ const AuthForm = () => {
               <input
                 type="password"
                 name="confirmPassword"
-                value={userForm.confirmPassword} // or recruiterForm.confirmPassword
-                onChange={handleUserChange} // or handleRecruiterChange
+                value={recruiterForm.confirmPassword}
+                onChange={handleRecruiterChange}
                 className="w-full p-2 border rounded"
               />
               {confirmPasswordError && (
