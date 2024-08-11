@@ -27,7 +27,6 @@ export const register = async (req, res, next) => {
       next("Email Already Registered. Please Login");
       return;
     }
-    const copmanyType = isHiringAgency || isCompany;
     // create a new account
     const company = await Companies.create({
       name,
