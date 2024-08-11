@@ -112,8 +112,17 @@ const AuthForm = () => {
       }
     } else {
       console.log("Recruiter Form Data:", recruiterForm);
-      // Submit recruiterForm data to your API or handle it
-      //   companies/register
+      // companies/register
+      const res = await apiRequest({
+        url: "companies/register",
+        method: "POST",
+        data: recruiterForm,
+      });
+      console.log(res);
+      const userData = { token: res?.token, ...res?.user };
+      dispatch(Login(userData));
+      localStorage.setItem("userInfo", JSON.stringify(userData));
+      navigate("/upload-a-job");
     }
   };
 

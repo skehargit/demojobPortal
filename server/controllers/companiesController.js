@@ -2,12 +2,12 @@ import mongoose from "mongoose";
 import Companies from "../models/companiesModel.js";
 import { response } from "express";
 import bcrypt from "bcryptjs";
-// company register 
+// company register
 export const register = async (req, res, next) => {
-  const { name, email, password,copmanyType } = req.body;
-
+  const { name, companyName, email, isHiringAgency, isCompany, password } =
+    req.body;
   //validate fields
-  if (!name) {
+  if (!companyName) {
     next("Company Name is required!");
     return;
   }
@@ -27,13 +27,13 @@ export const register = async (req, res, next) => {
       next("Email Already Registered. Please Login");
       return;
     }
-
+    const copmanyType = isHiringAgency || isCompany;
     // create a new account
     const company = await Companies.create({
       name,
       email,
       password,
-      copmanyType
+      copmanyType,
     });
 
     // user token
@@ -46,7 +46,8 @@ export const register = async (req, res, next) => {
         _id: company._id,
         name: company.name,
         email: company.email,
-        companyType:company.copmanyType
+        companyType: company.copmanyType,
+        accountType: company.accountType,
       },
       token,
     });
@@ -56,7 +57,7 @@ export const register = async (req, res, next) => {
   }
 };
 
-// company login 
+// company login
 export const signIn = async (req, res, next) => {
   const { email, password } = req.body;
 
@@ -85,9 +86,9 @@ export const signIn = async (req, res, next) => {
     // console.log(isMatch)
     if (!isMatch) {
       return res.status(404).json({
-        success:false,
-        message:"password not match"
-      })
+        success: false,
+        message: "password not match",
+      });
     }
     company.password = undefined;
 
@@ -105,12 +106,11 @@ export const signIn = async (req, res, next) => {
   }
 };
 
-// update company details 
+// update company details
 export const updateCompanyProfile = async (req, res, next) => {
   const { name, contact, location, profileUrl, about } = req.body;
 
   try {
-
     const id = req.body.user.userId;
 
     if (!mongoose.Types.ObjectId.isValid(id))
