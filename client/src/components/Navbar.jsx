@@ -164,7 +164,7 @@ const Navbar = () => {
 
           <div className="hidden lg:block">
             {!user?.token ? (
-              <Link to="/user-auth">
+              <Link to="/authform">
                 <CustomButton
                   title="Sign In"
                   containerStyles="text-[#14a800] py-1.5 px-5 focus:outline-none hover:bg-[#1176DB] hover:text-white rounded-full text-base border border-[#1176DB]"
@@ -210,12 +210,12 @@ const Navbar = () => {
 
           <div className="w-full py-10">
             {!user?.token ? (
-              <a href="/user-auth">
+              <Link to="/authform">
                 <CustomButton
                   title="Sign In"
                   containerStyles={`text-[#14a800] py-1.5 px-5 focus:outline-none hover:bg-[#14a800] hover:text-white rounded-full text-base border border-[#14a800]`}
                 />
-              </a>
+              </Link>
             ) : (
               <div>
                 <MenuList user={user} onClick={handleCloseNavbar} />

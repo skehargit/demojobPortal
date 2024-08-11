@@ -60,17 +60,17 @@ const Header = ({
   setLocation,
 }) => {
   return (
-    <div className="bg-[#ffffff]">
+    <div className="bg-[#ffffff] mb-5">
       <div
-        className={`container mx-auto px-5 ${
+        className={`container mx-auto  px-2 ${
           type ? "h-[200px]" : "h-[200px]"
         } flex items-center relative`}
       >
-        <div className=" w-full z-10">
+        <div className=" w-full z-10 ">
           <div className=" mb-3 flex justify-center ">
-            <p className="  font-semibold text-5xl font-[Poppins] ">
+            <p className="  font-semibold  font-[Poppins] ">
               {/* The Right{" "} */}
-              <span className="font-[silk-serif] text-[#1176DB] italic text-7xl border-b-2 border-[#1176DB]">
+              <span className="font-[silk-serif] text-[#1176DB] italic text-[6vw] border-b-2 border-[#1176DB]">
                 {" "}
                 Find your Next Opportunity
               </span>{" "}

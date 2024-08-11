@@ -2,9 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import { apiRequest } from "../utils";
 import { Widget } from "@uploadcare/react-widget";
+import "react-phone-number-input/style.css";
+import PhoneInput from "react-phone-number-input";
+import { Loading } from "../components";
+import { useNavigate } from "react-router-dom";
 const UserInfoForm = () => {
   const { user } = useSelector((state) => state.user);
   // useSelector
+  const [loading,setLoading]=useState(false)
+  const [value, setValue] = useState();
   const widgetApi = useRef();
   const [fileUrl, setFileUrl] = useState("");
   const [formData, setFormData] = useState({
@@ -41,7 +47,7 @@ const UserInfoForm = () => {
       ...(name === "job" && value !== "Other" && { company: value }),
     });
   };
-
+  const navigate = useNavigate()
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     setFormData({
@@ -56,18 +62,30 @@ const UserInfoForm = () => {
     // const res=await apiRequest()
     // formData.salary = Number(formData.salary)
     formData.experience = Number(formData.experience);
-    if(fileUrl!='')formData.resume=fileUrl
-    const res = await apiRequest({
-      url: "user/update-user",
-      method: "PUT",
-      data: formData,
-      token: user?.token,
-    });
-    console.log(res);
-    // Handle form submission logic here
-    console.log(formData);
+    formData.contactNumber=value;
+    console.log(formData)
+    setLoading(true)
+    if (fileUrl != "") formData.resume = fileUrl;
+    try {
+      const res = await apiRequest({
+        url: "user/update-user",
+        method: "PUT",
+        data: formData,
+        token: user?.token,
+      });
+      console.log(res);
+      if(res.success){
+        alert('successfully user updated')
+        navigate('/find-jobs')
+      }else{
+        alert('error while updating user details')
+      }
+    } catch (error) {
+      console.log(error)
+    }finally{
+      setLoading(false)
+    }
   };
-  
 
   const handleUpload = async (fileInfo) => {
     console.log("File uploaded:", fileInfo);
@@ -243,15 +261,23 @@ const UserInfoForm = () => {
               <label className="block text-gray-700 text-sm  mb-2">
                 Contact Number
               </label>
-              <input
-                type="text"
+              <div className="border p-1 rounded">
+                <PhoneInput
+                placeholder="Enter phone number"
+                value={value}
+                onChange={setValue}
+              />
+              </div>
+              {/* <input
+                type="tel"
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 name="contactNumber"
                 value={formData.contactNumber}
                 onChange={handleChange}
                 placeholder="contact number"
                 className="capitalize text-xs border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 required
-              />
+              /> */}
             </div>
 
             <div className="mb-4">
@@ -352,7 +378,7 @@ const UserInfoForm = () => {
           type="submit"
           className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline w-full"
         >
-          Submit
+          {loading?"Loading...":"Submit"}
         </button>
       </form>
     </div>

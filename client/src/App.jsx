@@ -15,6 +15,7 @@ import ScreeningQuestions from "./pages/ScreeningQuestions";
 import UserInfoForm from "./pages/UserInfoForm";
 import JobUploadPage from "./pages/JobUploadPage";
 import AuthForm from "./pages/AuthForm/AuthForm";
+import Loginform from "./pages/AuthForm/Loginform";
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
@@ -62,6 +63,7 @@ function App() {
           
         </Route>
         <Route path="/authform" element={<AuthForm/>}></Route>
+        <Route path="/authlogin" element={<Loginform/>}></Route>
         <Route path="/user-additional-details" element={<UserInfoForm/>}></Route>
         <Route path="/upload-a-job" element={<JobUploadPage/>}></Route>
         <Route path='/about-us' element={<About />} />
