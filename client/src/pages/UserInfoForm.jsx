@@ -167,7 +167,7 @@ const UserInfoForm = () => {
             )}
             <div className="mb-4">
               <label className="block text-gray-700 text-sm  mb-2">
-                Current Salary
+                Current Salary (In INR Lakhs)
               </label>
               <input
                 type="text"
@@ -256,7 +256,7 @@ const UserInfoForm = () => {
 
             <div className="mb-4">
               <label className="block text-gray-700 text-sm mb-2">
-                Join Consulting
+                When did you first join Consulting ?
               </label>
               <select
                 name="joinConsulting"
@@ -272,7 +272,7 @@ const UserInfoForm = () => {
             </div>
             <div className="mb-4">
               <label className="block text-gray-700 text-sm  mb-2">
-                Open to Relocate
+                Open to Relocation ?
               </label>
               <div className="flex items-center">
                 <input

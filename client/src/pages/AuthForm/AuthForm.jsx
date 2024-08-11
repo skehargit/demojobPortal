@@ -112,24 +112,24 @@ const AuthForm = () => {
       const newData = { ...recruiterForm, copmanyType: selectedOption };
       console.log("Recruiter Form Data:", newData);
       
-      // try {
-      //   const res = await apiRequest({
-      //     url: "companies/register",
-      //     method: "POST",
-      //     data: newData,
-      //   });
-      //   console.log(res);
-      //   if (res) {
-      //     const userData = { token: res?.token, ...res?.user };
-      //     dispatch(Login(userData));
-      //     localStorage.setItem("userInfo", JSON.stringify(userData));
-      //     navigate("/upload-a-job");
-      //   } else {
-      //     console.log(res.message);
-      //   }
-      // } catch (error) {
-      //   console.log(error);
-      // }
+      try {
+        const res = await apiRequest({
+          url: "companies/register",
+          method: "POST",
+          data: newData,
+        });
+        console.log(res);
+        if (res.success) {
+          const userData = { token: res?.token, ...res?.user };
+          dispatch(Login(userData));
+          localStorage.setItem("userInfo", JSON.stringify(userData));
+          navigate("/upload-a-job");
+        } else {
+          console.log(res.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     }
   };
 
