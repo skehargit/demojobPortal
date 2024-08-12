@@ -116,14 +116,14 @@ const Navbar = () => {
   return (
     <>
       <div className="relative rounded-b-3xl z-50 ">
-        <nav className=" container mx-auto flex items-center justify-between p-5">
+        <nav className=" container mx-auto flex items-center justify-between  px-5">
           <div className="">
             <Link
               to="/"
               className="text-[#14a800] font- text-3xl tracking-tighter "
             >
               {/* Expert<span className="text-[#437a3c]">Ease</span> */}
-              <div className="w-[50px] h-[50px] rounded-full overflow-hidden"><img src={logo} alt="" /></div>
+              <div className="w-[40px] h-[40px] rounded-full overflow-hidden"><img src={logo} alt="" /></div>
             </Link>
           </div>
 

@@ -11,28 +11,58 @@ const Footer = () => {
       <div className="overflow-x-hidden -mb-0.5"></div>
 
       <div className="bg-zinc-800">
-        <div className="container px-5 py-20 mx-auto">
-          <div className="w-full flex flex-wrap gap-10 justify-between -mb-10 -px-4">
-            {footerLinks.map(({ id, title, links }) => (
-              <div className="w-auto px-4" key={id + title}>
-                <h2 className="font-bold text-[#1176DB] text-mb-3 uppercase">
-                  {title}
-                </h2>
-
-                <div className="mb-10 flex flex-col gap-2">
-                  {links.map((link, index) => (
-                    <a
-                      key={link + index}
-                      href="/"
-                      className="text-gray-300 text-sm hover:text-white"
-                    >
-                      {link}
-                    </a>
-                  ))}
-                </div>
-                <Link to="/privacy-policy">Privacy & Policy</Link>
+        <div className="container px-5 py-20 mx-auto ">
+          <div className="w-full flex flex-col items-center justify-center -mb-10 -px-4 ">
+            <h2 className="font-bold text-[#1176DB] text-mb-3 flex gap-2 uppercase">
+              {/* {title} */}
+              <span className="font-bold">High</span>{" "}
+              <span className="font-bold">Impact </span>{" "}
+              <span className="font-bold">Talent</span>
+            </h2>
+            <div className="w-auto px-4 py-3">
+              <div className="mb-10 flex flex-wrap items-center gap-3">
+                <Link
+                  to={"/"}
+                  className="text-gray-300 text-sm hover:text-white"
+                >
+                  Home
+                </Link>
+                <div className="bg-white h-[3px] w-[3px] rounded-full"></div>
+                <Link
+                  to={"/about-us"}
+                  className="text-gray-300 text-sm hover:text-white"
+                >
+                  About Us
+                </Link>
+                <div className="bg-white h-[3px] w-[3px] rounded-full"></div>
+                <Link
+                  to={"/contact-us"}
+                  className="text-gray-300 text-sm hover:text-white"
+                >
+                  Contact
+                </Link>
+                <div className="bg-white h-[3px] w-[3px] rounded-full"></div>
+                <Link
+                  to="/privacy-policy"
+                  className="text-gray-300 text-sm hover:text-white"
+                >
+                  Privacy & Policy
+                </Link>
               </div>
-            ))}
+            </div>
+            <div className=" py-1 px-5 flex justify-center pb-10">
+                <div className="text-gray-300 text-sm flex flex-col items-center ">
+                  <span>&copy; 2024 HighImpactTalentenquiry</span>
+                  <a
+                    href=""
+                    className="text-[#1176DB] ml-1 font-semibold"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    highimpacttalentenquiry@gmail.com
+                  </a>
+                </div>
+              </div>
           </div>
         </div>
 
@@ -52,22 +82,6 @@ const Footer = () => {
             </a>
           </span>
         </div> */}
-
-        <div className="bg-[#424242]">
-          <div className=" py-4 px-5 flex  ">
-            <div className="text-gray-300 text-sm flex flex-col ">
-              <span>&copy; 2024 HighImpactTalentenquiry</span>
-              <a
-                href=""
-                className="text-[#1176DB] ml-1 font-semibold"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                highimpacttalentenquiry@gmail.com
-              </a>
-            </div>
-          </div>
-        </div>
       </div>
     </footer>
   );

@@ -281,7 +281,7 @@ export const footerLinks = [
     {
         id: "01",
         title: "Company",
-        links: ["Home", "About Us", "Contact"],
+        links: ["Home", "About Us", "Contact","Privacy & Policy"],
     },
 ];
 

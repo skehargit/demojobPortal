@@ -116,8 +116,8 @@ function Loginform() {
               id="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="w-full p-3 border border-gray-300 focus:outline-none focus:ring focus:border-blue-300 capitalize"
+              placeholder="Enter Your Email"
+              className="w-full p-3 border border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
               required
             />
           </div>
