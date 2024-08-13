@@ -80,6 +80,9 @@ export const signIn = async (req, res, next) => {
     //     message:"password not match"
     //   })
     // }
+    
+    // const match = await bcrypt.compare("Qwert123$", company.password)
+    // console.log('inside controller -',password,"Qwert123$", company.password,match)
     // compare password
     const isMatch = await company.comparePassword(password);
     // console.log(isMatch)

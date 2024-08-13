@@ -41,27 +41,5 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 })
 
-// // Set up multer for file storage
-// const storage = multer.diskStorage({
-//     destination: (req, file, cb) => {
-//       cb(null, 'uploads/');
-//     },
-//     filename: (req, file, cb) => {
-//       cb(null, Date.now() + '-' + file.originalname);
-//     }
-//   });
-  
-//   const upload = multer({ storage: storage });
-// // Endpoint to upload resume
-// app.post('/upload/:id', upload.single('resume'),async (req, res) => {
-//     const id = req.params.id
-//     console.log(req.file.filename)
-//     const user = await Users.findOneAndUpdate({_id:id},{cvUrl:req.file.filename})
-//       .then(() => res.json('Resume uploaded successfully'))
-//       .catch(err => res.status(400).json('Error: ' + err));
-//   });
-//   const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// // Serve uploaded files
-// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 

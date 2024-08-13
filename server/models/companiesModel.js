@@ -17,7 +17,6 @@ const companySchema = new Schema({
   password: {
     type: String,
     required: [true, "Password is required"],
-    select: true,
   },
   copmanyType:{
     type:String,
@@ -40,8 +39,9 @@ companySchema.pre("save", async function () {
 });
 
 //compare password
-companySchema.methods.comparePassword = async function (userPassword) {
-  const isMatch = await bcrypt.compare(userPassword, this.password);
+companySchema.methods.comparePassword = async function (password) {
+  const isMatch = await bcrypt.compare(password, this.password);
+  console.log(password, this.password,isMatch)
   return isMatch;
 };
 
