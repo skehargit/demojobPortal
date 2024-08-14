@@ -257,9 +257,9 @@ const CompanyProfile = () => {
         </div>
 
         <div className="w-full flex flex-col md:flex-row justify-start md:justify-between mt-4 md:mt-8 text-sm">
-          <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
+          {/* <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
             <HiLocationMarker /> {info?.location ?? "No Location"}
-          </p>
+          </p> */}
           {/* <p className="flex gap-1 items-center px-3 py-1 text-slate-600 rounded-full">
             <AiOutlineMail /> {info?.email ?? "No Email"}
           </p>
@@ -282,9 +282,9 @@ const CompanyProfile = () => {
               <p className="text-gray-500">No Jobs Posted</p>
             </div>
           )}
-          {info?.jobPosts?.map((jobId, index) => (
-            <Card jobId={jobId} name={info.name} key={index} info={info} job={info} />
-            
+          
+          {info?.jobPosts&&info?.jobPosts.map((jobId, index) => (
+            <Card jobId={jobId} name={info.name} key={index} info={info}  />
           ))}
           {/* {console.log(info)} */}
         </div>

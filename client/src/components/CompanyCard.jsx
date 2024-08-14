@@ -5,15 +5,9 @@ const CompanyCard = ({ cmp }) => {
   const { _id, profileUrl, name, email, location, jobPosts } = cmp;
 
   return (
-    <div className="w-full h-16 flex gap-4 items-center justify-between bg-white shadow-md rounded">
-      <div className="w-3/4 md:w-2/4 flex gap-4 items-center">
-        <Link to={`/company-profile/${_id}`}>
-          {/* <img
-            src={profileUrl}
-            alt={name}
-            className="w-8 md:w-12 h-8 md:h-12 rounded"
-          /> */}
-        </Link>
+    <Link to={`/company-profile/${_id}`} className="w-full h-16 flex gap-4 items-center justify-between bg-white shadow-md rounded max-w-[800px]">
+      <div className="w-3/4  md:w-2/4 pl-5 flex gap-4 items-center">
+        
         <div className="h-full flex flex-col">
           <Link
             to={`/company-profile/${_id}`}
@@ -25,9 +19,9 @@ const CompanyCard = ({ cmp }) => {
         </div>
       </div>
 
-      <div className="hidden w-1/4 h-full md:flex items-center">
+      {/* <div className="hidden w-1/4 h-full md:flex items-center">
         <p className="text-base text-start">{location || "No Location"}</p>
-      </div>
+      </div> */}
 
       <div className="w-1/4 h-full flex flex-col items-center">
         <p className="text-blue-600 font-semibold">{jobPosts?.length || 0}</p>
@@ -35,7 +29,7 @@ const CompanyCard = ({ cmp }) => {
           Jobs Posted
         </span>
       </div>
-    </div>
+    </Link>
   );
 };
 

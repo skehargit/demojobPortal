@@ -6,9 +6,9 @@ import { useSelector } from "react-redux";
 import { apiRequest } from "../utils";
 import axios from "axios";
 
-function Card({ jobId, name, location, job }) {
+function Card({ jobId, name, location}) {
   const params = useParams();
-    console.log(jobId, name, location,job);
+    console.log(jobId, name, location);
   const [info, setInfo] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const { user } = useSelector((state) => state.user);
@@ -20,7 +20,7 @@ function Card({ jobId, name, location, job }) {
       const res = await axios.get(`https://demojobportal.onrender.com/api-v1/jobs/get-job-detail/${jobId}`)
       console.log('card -',res)
         console.log(res.data.data.jobTitle);
-      setInfo(res?.data?.data);
+      setInfo(res.data.data);
       
       setIsLoading(false);
     } catch (error) {
