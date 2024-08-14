@@ -26,14 +26,6 @@ const Landing = () => {
               <Link to={'/authform'} className='text-white w-fit p-2 rounded text-sm bg-blue-500'>Find Candidate's For Your Team</Link>
             </div>
           </div>
-          {/* {user?.token==''&&<div className='flex gap-4 pt-8 absolute bottom-8'>
-            <Link  to={'/user-auth'} className='bg-blue-500 p-4 text-white rounded-full flex items-center gap-2 animate-bounce'>
-              <FaSearch /> Find Your Next Job
-            </Link>
-            <Link to={'/user-auth'} className='bg-blue-500 p-4 text-white rounded-full flex items-center gap-2 animate-bounce delay-200'>
-              <FaBriefcase /> Post a Job
-            </Link>
-          </div>} */}
           <div className=' flex items-center justify-center py-10'>
             <div className='w-[400px]'><img src={man} alt="" /></div>
           </div>

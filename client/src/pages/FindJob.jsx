@@ -40,7 +40,6 @@ const FindJobs = () => {
 
   const fetchJobs = async () => {
     setIsFetching(true);
-    console.log(filterExp);
     const newURL = updateURL({
       query: searchQuery,
       cmpLoc: jobLocation,
@@ -63,21 +62,24 @@ const FindJobs = () => {
       setIsFetching(false);
     }
   };
+  const [showFilters, setShowFilters] = useState(false);
+  // const [selectedCheckbox, setSelectedCheckbox] = useState(null);
+
+  // const handleCheckboxChange = (index) => {
+  //   setSelectedCheckbox(index);
+  //   setShowFilters(false); // Hide filters after selecting
+  // };
+  const handleCheckboxChange = (index) => {
+    setSelectedCheckbox(index === selectedCheckbox ? 0 : index);
+    setShowFilters(false);
+  };
+
   useEffect(() => {
     fetchJobs();
   }, [sort, filterJobTypes, selectedCheckbox, filterExp, page]);
 
-  const handleCheckboxChange = (index) => {
-    if (selectedCheckbox === index) {
-      // If the currently selected checkbox is clicked again, deselect it
-      setSelectedCheckbox(0);
-    } else {
-      // Select the clicked checkbox
-      setSelectedCheckbox(index);
-    }
-  };
   return (
-    <div>
+    <div className="bg-gray-100">
       <Header
         type="home"
         handleClick={() => {}}
@@ -86,74 +88,128 @@ const FindJobs = () => {
         location={jobLocation}
         setLocation={setJobLocation}
       />
-      <div className="container mx-auto flex gap-2 2xl:gap-10 py-0 pb-4 ">
-        <div className="hidden md:flex flex-col py-2 w-1/6 shadow-sm rounded-lg xed">
-          <p className="text-lg font-semibold text-[#1176DB]">Filter Search</p>
-          <div className="py-2 mt-4">
-            <div className="flex justify-between mb-3">
-              <p className="flex items-center gap-2 font-semibold">
+      <div className="container mx-auto min-h-screen flex gap-4 py-4">
+        {/* Sidebar Filters */}
+        {/* <div className="hidden  md:flex flex-col py-4 w-1/5 bg-white shadow-lg rounded-lg">
+          <p className="text-xl font-semibold text-[#1176DB] mb-4 pl-5">
+            Filter Search
+          </p>
+          <div className="py-4 border-t border-gray-200">
+            <div className="flex pl-5 justify-between items-center mb-4">
+              <p className="flex items-center gap-2 font-semibold text-gray-700">
                 <BsStars />
                 Experience
               </p>
             </div>
-
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3 pl-5">
               <div className="flex flex-col capitalize">
-                {[0, 1, 2, 3].map((checkbox, index) => (
-                  <label key={index} className="flex gap-2 p-1">
-                    <input
-                      type="checkbox"
-                      checked={selectedCheckbox === index}
-                      onChange={() => handleCheckboxChange(index)}
-                    />
-                    {index==0&&"All"}
-                    {index==1&&"1-2 year"}
-                    {index==2&&"2-6 year"}
-                    {index==3&&"Over 6 Years"}
-                  </label>
-                ))}
+                {["All", "1-2 years", "2-6 years", "Over 6 years"].map(
+                  (label, index) => (
+                    <div
+                      key={index}
+                      onClick={() => handleCheckboxChange(index)}
+                      className={`flex items-center gap-2 p-2 rounded cursor-pointer transition ${
+                        selectedCheckbox === index
+                          ? "bg-blue-100 border-l-4 border-blue-500"
+                          : "hover:bg-gray-100"
+                      }`}
+                    >
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={selectedCheckbox === index}
+                          onChange={() => {}}
+                          className="hidden"
+                        />
+                        {label}
+                      </label>
+                    </div>
+                  )
+                )}
               </div>
-              {/* {experience.map((exp, idx) => (
-                <div key={exp.title} className="flex items-center gap-3">
-                  <label>
-              <input
-                type="checkbox"
-                name={`checkbox${idx+1}`}
-                checked={`checkboxes.checkbox${idx}`}
-                onChange={handleCheckboxChange}
-              />
-              Checkbox 4
-            </label>
-                </div> */}
-              {/* ))} */}
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="w-full md:w-5/6 px-5 md:px-0">
-          <div className="flex items-center justify-between mb-4">
-            <p className="text-sm md:text-base text-[#1176DB] border-b-1">
-              Showing: <span className="font-semibold">{data.length}</span> Jobs
-              Available
-            </p>
+        {/* Job Listings */}
+        <div className="w-full  px-5 md:px-8">
+          <div className="flex items-center  gap-5 mb-6">
+            <div className="flex items-center gap-4">
+              <p className="text-base text-gray-600">Sort By:</p>
+              <ListBox sort={sort} setSort={setSort} />
+              <div className="relative ">
+                {/* Small box to toggle filters */}
+                <button
+                  onClick={() => setShowFilters(!showFilters)}
+                  className="p-2 bg-blue-500 text-white rounded shadow-md focus:outline-none w-[8rem] md:w-[10rem] "
+                >
+                  Experience
+                </button>
 
-            <div className="flex flex-col md:flex-row gap-0 md:gap-2 md:items-center md:justify-center">
-              <p className="text-sm md:text-base">Sort By:</p>
-              <ListBox sort={sort} setSort={setSort} className="mb-4" />
+                {/* Filters container */}
+                {showFilters && (
+                  <div className="absolute top-12 left-0 w-64 bg-white shadow-lg rounded-lg z-10">
+                    {/* <p className="text-xl font-semibold text-[#1176DB] mb-4 pl-5 pt-4">
+                      Filter Search
+                    </p> */}
+                    <div className="py-4 border-t border-gray-200">
+                      <div className="flex pl-5 justify-between items-center mb-4">
+                        <p className="flex items-center gap-2 font-semibold text-gray-700">
+                          <BsStars />
+                          Experience
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-3 pl-5">
+                        <div className="flex flex-col capitalize">
+                          {[
+                            "All",
+                            "1-2 years",
+                            "2-6 years",
+                            "Over 6 years",
+                          ].map((label, index) => (
+                            <div
+                              key={index}
+                              onClick={() => handleCheckboxChange(index)}
+                              className={`flex items-center gap-2 p-2 rounded cursor-pointer transition ${
+                                selectedCheckbox === index
+                                  ? "bg-blue-100 border-l-4 border-blue-500"
+                                  : "hover:bg-gray-100"
+                              }`}
+                            >
+                              <label>
+                                <input
+                                  type="checkbox"
+                                  checked={selectedCheckbox === index}
+                                  onChange={() => {}}
+                                  className="hidden"
+                                />
+                                {label}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
-
-          <div className="w-full flex flex-wrap gap-4 justify-between ">
+          <p className="text-lg text-gray-700 mb-3">
+            Showing: <span className="font-semibold">{data.length}</span> Jobs
+            Available
+          </p>
+          <div className="flex  flex-wrap gap-6">
             {data.map((job, index) => (
               <JobCard job={job} key={index} />
             ))}
           </div>
 
           {numPage > page && !isFetching && (
-            <div className="w-full flex items-center justify-center pt-16">
+            <div className="w-full flex items-center justify-center pt-10">
               <CustomButton
                 title="Load More"
-                containerStyles={`text-blue-600 py-1.5 px-5 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600`}
+                containerStyles="text-blue-600 py-2 px-6 focus:outline-none hover:bg-blue-700 hover:text-white rounded-full text-base border border-blue-600 transition"
                 onClick={() => setPage((prevPage) => prevPage + 1)}
               />
             </div>

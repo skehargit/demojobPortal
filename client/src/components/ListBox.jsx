@@ -8,13 +8,13 @@ const ListBox = ({ sort, setSort }) => {
   return (
     <div className='w-[8rem] md:w-[10rem]'>
       <Listbox value={sort} onChange={setSort}>
-        <div className='relative mt-1'>
+        <div className='relative'>
           <Listbox.Button
             className={
               "relative w-full cursor-default rounded-lg bg-white py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-[#14e800] focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
             }
           >
-            <span className='block truncate'>{sort}</span>
+            <span className='block truncate p-1'>{sort}</span>
 
             <span className='pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2'>
               <BsChevronExpand
@@ -36,7 +36,7 @@ const ListBox = ({ sort, setSort }) => {
                   key={index}
                   className={({ active }) =>
                     `relative cursor-default select-none py-2 hover:text-white pl-10 pr-4 ${
-                      active ? "bg-[#14a800] text-[#4f4g4g]" : "text-gray-900"
+                      active ? "bg-blue-500 text-white" : "text-gray-900"
                     }`
                   }
                   value={op}

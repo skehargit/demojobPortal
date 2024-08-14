@@ -17,10 +17,10 @@ const JobDetail = () => {
   const [similarJobs, setSimilarJobs] = useState([]);
   const [selected, setSelected] = useState("0");
   const [isFetching, setIsFetching] = useState(false);
-  const [applied,setApplied]=useState(false)
-  const [status,setStatus]=useState('applied')
-  const navigate = useNavigate()
-  
+  const [applied, setApplied] = useState(false);
+  const [status, setStatus] = useState("applied");
+  const navigate = useNavigate();
+
   const getJobDetails = async () => {
     setIsFetching(true);
     try {
@@ -31,7 +31,7 @@ const JobDetail = () => {
       console.log("API Response:", res); // Log the entire response
       if (res && res.data) {
         setJob(res.data);
-        console.log(job)
+        console.log(job);
         setSimilarJobs(res.similarJobs);
       } else {
         console.error("Invalid response data:", res);
@@ -64,7 +64,7 @@ const JobDetail = () => {
   };
 
   useEffect(() => {
-    console.log(job)
+    console.log(job);
     id && getJobDetails();
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   }, [id]);
@@ -76,7 +76,7 @@ const JobDetail = () => {
   //   console.log(job)
   // })
   return (
-    <div className="container mx-auto pb-4 " >
+    <div className="container mx-auto pb-4 ">
       <div className="w-full flex flex-col md:flex-row gap-10">
         {/* LEFT SIDE */}
         <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
@@ -110,111 +110,71 @@ const JobDetail = () => {
             </div>
           </div>
 
-          <div className="w-full flex flex-wrap md:flex-row gap-2 items-center justify-between my-10">
-            {/* <div className="bg-[#bdf4c8] w-40 h-16 rounded-lg flex gap-2 items-center justify-center ">
-              <span className="text-sm">Anual Salary : </span>
-              <p className="text-lg font-semibold text-gray-700">
-                {job?.salary}
-              </p>
-            </div> */}
-
-            {/* <div className="bg-[#bae5f4] w-40 h-16 rounded-lg flex flex-col items-center justify-center">
-              <span className="text-sm">Job Type</span>
-              <p className="text-lg font-semibold text-gray-700">
-                {job?.jobType}
-              </p>
-            </div> */}
-
-
-            {/* <div className="bg-[#cecdff] w-40 h-16 px-6 rounded-lg flex flex-col items-center justify-center">
-              <span className="text-sm">No. of Vacancies</span>
-              <p className="text-lg font-semibold text-gray-700">
-                {job?.vacancies}
-              </p>
-            </div> */}
-          </div>
-
-          {/* <div className="w-full flex gap-4 py-5"> */}
-            {/* <CustomButton
-              onClick={() => setSelected("0")}
-              title="Job Description"
-              containerStyles={`w-full flex items-center justify-center py-3 px-5 outline-none rounded-full text-sm ${
-                selected === "0"
-                  ? "bg-black text-white"
-                  : "bg-white text-black border border-gray-300"
-              }`}
-            /> */}
-            {/* <div className="w-full flex items-center justify-center py-3 px-5 font-semibold">Job Description</div> */}
-
-            {/* <CustomButton
-              onClick={() => setSelected("1")}
-              title="Company"
-              containerStyles={`w-full flex items-center justify-center  py-3 px-5 outline-none rounded-full text-sm ${
-                selected === "1"
-                  ? "bg-black text-white"
-                  : "bg-white text-black border border-gray-300"
-              }`}
-            /> */}
-          {/* </div> */}
-
           <div className="my-6">
-          <div>
-                <p className="text-xl font-semibold ">Job Description</p>
+            <div>
+              <p className="text-xl font-semibold ">Job Description</p>
 
-                <span className="text-base">{job?.jobDescription}</span>
+              <span className="text-base text-sm">{job?.jobDescription}</span>
 
-                {/* {job?.detail?.[0]?.requirements && (
-                  <>
-                    <p className="text-xl font-semibold mt-8">Requirements</p>
-                    <span className="text-base">
-                      {job?.detail?.[0]?.requirements || "No Requirements"}
-                    </span>
-                  </>
-                )} */}
-                {/* {job?.requiredSkills.length>0&&<div><p className="text-xl font-semibold ">Skill Required :</p>
-                <ul className="flex flex-wrap gap-2">
-                  {job?.requiredSkills.length>0&&job?.requiredSkills.map((item,index)=>{
-                    return <li key={index} className="bg-zinc-500 text-white w-fit py-1 px-3 rounded-lg">{item}</li>
-                  })}
-                </ul></div>} */}
-                
-
-                <div className="flex gap-1 "><p className="font-semibold">Experience :</p><span>{job?.experience}</span> <span>Year</span></div>
+              <div className="flex gap-1 ">
+                <p className="font-semibold">Experience :</p>
+                <span>{job?.experience}</span> <span>Year</span>
               </div>
-            {/* {selected === "0" ? (
-              
-            ) : (
-              <>
-                <div className="mb-6 flex flex-col">
-                  <p className="text-xl text-blue-600 font-semibold">
-                    {job?.company?.name}
-                  </p>
-                  <span className="text-base">{job?.company?.location}</span>
-                  <span className="text-sm">{job?.company?.email}</span>
-                </div>
-
-                <p className="text-xl font-semibold">About Company</p>
-                <span>{job?.about}</span>
-              </>
-            )} */}
+            </div>
           </div>
-          {user?.token==null?<div onClick={()=>{
-            navigate('/user-auth')
-          }} className="p-2 bg-blue-500 my-2 text-white rounded-lg text-center">Login/Register To Apply</div>:user?.accountType=='seeker'?<div onClick={()=>{
-            navigate(
-              'screening-questions',
-              {
-                state: {
-                    questions:job?.screeningQuestions,
-                    jobid:job._id,
-                    companyid:job?.company?._id,
-                    userid:user._id
-                }
-              }
-            )
-            // navigate("/screening-questions")
-          }} className="p-2 bg-blue-500 my-2 text-white rounded-lg text-center"> Apply now</div>:<></>}
-              
+          {job?.requirements.length>0&&<div className="my-6">
+            <div>
+            {job.requirements[0]!=""&&<p className="text-xl font-semibold ">Requirements</p>}
+                <div>
+                  {job.requirements.map((para,index)=>{
+                    return para!=''&&<li key={index} className="pl-2 text-sm">{para}</li>
+                  })}
+                </div>
+            </div>
+          </div>}
+          {job?.qualifications.length>0&&<div className="my-6">
+            <div>
+            {job.qualifications[0]!=""&&<p className="text-xl font-semibold ">Qualifications</p>}
+                <div>
+                  {job.qualifications.map((para,index)=>{
+                    return para!=''&&<li key={index} className="pl-2 text-sm">{para}</li>
+                  })}
+                </div>
+            </div>
+          </div>}
+          
+
+          {user?.token == null ? (
+            <div
+              onClick={() => {
+                navigate("/user-auth");
+              }}
+              className="p-2 bg-blue-500 my-2 text-white rounded-lg text-center"
+            >
+              Login/Register To Apply
+            </div>
+          ) : user?.accountType == "seeker" ? (
+            <div
+              onClick={() => {
+                navigate("screening-questions", {
+                  state: {
+                    questions: job?.screeningQuestions,
+                    jobid: job._id,
+                    companyid: job?.company?._id,
+                    userid: user._id,
+                  },
+                });
+                // navigate("/screening-questions")
+              }}
+              className="p-2 bg-blue-500 my-2 text-white rounded-lg text-center"
+            >
+              {" "}
+              Apply now
+            </div>
+          ) : (
+            <></>
+          )}
+
           <div className="w-full">
             {user?.id === job?.company?._id ? (
               <CustomButton
