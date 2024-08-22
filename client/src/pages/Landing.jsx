@@ -47,18 +47,18 @@ const Landing = () => {
           <div className='border border-[#1176DB] w-full max-w-[800px] p-6 flex max-[400px]:flex-col items-center gap-2 bg-white rounded-lg shadow-md '>
             {/* <FaUsers className='text-[#1176DB] w-[80px]' /> */}
             <div className='max-w-[400px] w-full'><img src={toptt} alt="" /></div>
-            <div className='text-xl max-[600px]:text-sm flex flex-col'><span className='font-semibold'>Top-Tier Talent:</span> <p className='pl-5'>Access a curated pool of professionals with expertise in digital transformation, sustainability, data-driven decision-making, and more.</p></div>
+            <div className='text-xl max-[600px]:text-sm flex flex-col'><strong>Top-Tier Talent:</strong> <p className='pl-5'>Access a curated pool of professionals with expertise in digital transformation, sustainability, data-driven decision-making, and more.</p></div>
           </div>
           <div className='border border-[#1176DB] w-full max-w-[800px] p-6 flex max-[400px]:flex-col items-center gap-4 bg-white rounded-lg shadow-md'>
             {/* <FaUsers className='text-[#1176DB] w-[80px]' /> */}
             
-            <div className='text-xl max-[600px]:text-sm flex flex-col'><span className='font-semibold'>Industry Insights: </span><p className='pl-5 '>Stay ahead with the latest hiring trends and strategies for 2024 and beyond.</p></div>
+            <div className='text-xl max-[600px]:text-sm flex flex-col'><strong>Industry Insights: </strong><p className='pl-5 '>Stay ahead with the latest hiring trends and strategies for 2024 and beyond.</p></div>
             <div className='max-w-[400px] w-full'><img src={industry} alt="" /></div>
           </div>
           <div className='border border-[#1176DB] w-full p-6 max-w-[800px] flex max-[400px]:flex-col items-center gap-4 bg-white rounded-lg shadow-md '>
             {/* <FaUsers className='text-[#1176DB] w-[80px]' /> */}
             <div className='max-w-[400px] w-full'><img src={personlized} alt="" /></div>
-            <div className='text-xl max-[600px]:text-sm flex flex-col'><span className='font-semibold'>Personalized Matching:</span> <p className='pl-5'>Our advanced algorithms and expert team ensure the best fit for both candidates and employers.</p></div>
+            <div className='text-xl max-[600px]:text-sm flex flex-col'><strong>Personalized Matching:</strong> <p className='pl-5'>Our advanced algorithms and expert team ensure the best fit for both candidates and employers.</p></div>
           </div>
         </div>
       </div>

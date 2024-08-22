@@ -54,7 +54,7 @@ const Footer = () => {
                 <div className="text-gray-300 text-sm flex flex-col items-center ">
                   <span>&copy; 2024 HighImpactTalentenquiry</span>
                   <a
-                    href=""
+                    href="mailto:highimpacttalentenquiry@gmail.com"
                     className="text-[#1176DB] ml-1 font-semibold"
                     target="_blank"
                     rel="noopener noreferrer"
