@@ -6,8 +6,7 @@ import { apiRequest } from "../utils";
 import { useSelector } from "react-redux";
 
 const UploadJob = () => {
-  
-  const {user} = useSelector((state) => state.user);
+  const { user } = useSelector((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -37,10 +36,12 @@ const UploadJob = () => {
         data: newData,
         method: "POST",
       });
+
       if (res.status == "failed") {
         setErrMsg({ ...res });
       } else {
         setErrMsg("success");
+        alert("Success");
         setTimeout(() => {
           window.location.reload();
         }, 2000);
@@ -51,7 +52,6 @@ const UploadJob = () => {
       setIsLoading(false);
     }
   };
-
 
   // const getRecentPost = async ()=>{
   //   try {
@@ -67,7 +67,7 @@ const UploadJob = () => {
   // }
   useEffect(() => {
     // getRecentPost()
-  }, [])  
+  }, []);
   return (
     <div className="container mx-auto flex flex-col gap-8 w-full items-center justify-center transition-all ease-in-out mb-4 ">
       <div className="w-full h-fit max-w-[1500px] bg-white px-5 py-10 md:px-10">
@@ -87,7 +87,6 @@ const UploadJob = () => {
               register={register("jobTitle", {
                 required: "Job Title is required",
               })}
-              
               error={errors.jobTitle ? errors.jobTitle?.message : ""}
             />
 
@@ -180,50 +179,50 @@ const UploadJob = () => {
                 {...register("requirements")}
               ></textarea> */}
               <TextInput
-              name="location"
-              label="Question 1"
-              placeholder="eg. New York"
-              type="text"
-              register={register("location", {
-                required: "Job Location is required",
-              })}
-              error={errors.location ? errors.location?.message : ""}
-            />
-            <TextInput
-              name="location"
-              label="Question 2"
-              placeholder="eg. New York"
-              type="text"
-              register={register("location", {
-                required: "Job Location is required",
-              })}
-              error={errors.location ? errors.location?.message : ""}
-            />
-            <TextInput
-              name="location"
-              label="Question 3"
-              placeholder="eg. New York"
-              type="text"
-              register={register("location", {
-                required: "Job Location is required",
-              })}
-              error={errors.location ? errors.location?.message : ""}
-            />
-            <TextInput
-              name="location"
-              label="Question 4"
-              placeholder="eg. New York"
-              type="text"
-              register={register("location", {
-                required: "Job Location is required",
-              })}
-              error={errors.location ? errors.location?.message : ""}
-            />
+                name="location"
+                label="Question 1"
+                placeholder="eg. New York"
+                type="text"
+                register={register("location", {
+                  required: "Job Location is required",
+                })}
+                error={errors.location ? errors.location?.message : ""}
+              />
+              <TextInput
+                name="location"
+                label="Question 2"
+                placeholder="eg. New York"
+                type="text"
+                register={register("location", {
+                  required: "Job Location is required",
+                })}
+                error={errors.location ? errors.location?.message : ""}
+              />
+              <TextInput
+                name="location"
+                label="Question 3"
+                placeholder="eg. New York"
+                type="text"
+                register={register("location", {
+                  required: "Job Location is required",
+                })}
+                error={errors.location ? errors.location?.message : ""}
+              />
+              <TextInput
+                name="location"
+                label="Question 4"
+                placeholder="eg. New York"
+                type="text"
+                register={register("location", {
+                  required: "Job Location is required",
+                })}
+                error={errors.location ? errors.location?.message : ""}
+              />
             </div>
 
             {errMsg && (
               <span role="alert" className="text-sm text-red-500 mt-0.5">
-                {errMsg} 
+                {errMsg}
               </span>
             )}
             <div className="mt-2">
@@ -257,4 +256,4 @@ const UploadJob = () => {
   );
 };
 
-export default UploadJob;
+export default UploadJob;

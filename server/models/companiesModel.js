@@ -33,10 +33,20 @@ const companySchema = new Schema({
 });
 
 // middelwares
-companySchema.pre("save", async function () {
-  if (!this.isModified) return;
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+companySchema.pre("save", async function (next) {
+  if (!this.isModified("password")) {
+    console.log("Password not modified, skipping hashing.");
+    return next();
+  }
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    console.log("Password hashed:", this.password);
+    next();
+  } catch (err) {
+    next(err);
+  }
 });
 
 //compare password

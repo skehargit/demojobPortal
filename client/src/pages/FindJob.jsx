@@ -135,7 +135,7 @@ const FindJobs = () => {
         <div className="w-full  px-5 md:px-8">
           <div className="flex items-center  gap-5 mb-6">
             <div className="flex items-center gap-4">
-              <p className="text-base text-gray-600">Sort By:</p>
+              {/* <p className="text-base text-gray-600">Sort By:</p> */}
               <ListBox sort={sort} setSort={setSort} />
               <div className="relative ">
                 {/* Small box to toggle filters */}
@@ -195,10 +195,10 @@ const FindJobs = () => {
               </div>
             </div>
           </div>
-          <p className="text-lg text-gray-700 mb-3">
+          {/* <p className="text-lg text-gray-700 mb-3">
             Showing: <span className="font-semibold">{data.length}</span> Jobs
             Available
-          </p>
+          </p> */}
           <div className="flex  flex-wrap gap-6">
             {data.map((job, index) => (
               <JobCard job={job} key={index} />
