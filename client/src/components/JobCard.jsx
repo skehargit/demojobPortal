@@ -26,8 +26,8 @@ const JobCard = ({ job }) => {
 
         <div className="mb-1">
           {/* <p className="text-sm font-semibold text-gray-800">Description:</p> */}
-          <p className="text-xs text-gray-600">
-            {job?.jobDescription?.slice(0, 70) + "..."}
+          <p className="text-xs text-gray-600 line-clamp-2">
+            {job?.jobDescription}
           </p>
         </div>
         <div className="flex flex-col gap-1 mt-2">

@@ -199,7 +199,7 @@ const FindJobs = () => {
             Showing: <span className="font-semibold">{data.length}</span> Jobs
             Available
           </p> */}
-          <div className="flex  flex-wrap gap-6">
+          <div className="flex  flex-wrap gap-3">
             {data.map((job, index) => (
               <JobCard job={job} key={index} />
             ))}
