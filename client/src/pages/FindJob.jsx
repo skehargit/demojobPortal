@@ -132,7 +132,7 @@ const FindJobs = () => {
         </div> */}
 
         {/* Job Listings */}
-        <div className="w-full  px-5 md:px-8">
+        <div className="w-full  px-3  md:px-8">
           <div className="flex items-center  gap-5 mb-6">
             <div className="flex items-center gap-4">
               {/* <p className="text-base text-gray-600">Sort By:</p> */}

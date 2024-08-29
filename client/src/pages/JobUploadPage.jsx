@@ -3,12 +3,13 @@ import { apiRequest } from "../utils";
 import { useSelector } from "react-redux";
 
 const JobUploadPage = () => {
-    const {user} = useSelector((state) => state.user);
-    const [isLoading,setIsLoading] = useState(false);
+  const { user } = useSelector((state) => state.user);
+  const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     jobTitle: "",
     experience: "",
     salary: "",
+    salaryCategory:"",
     salaryConfidential: false,
     jobLocation: "",
     jobDescription: "",
@@ -66,8 +67,8 @@ const JobUploadPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    formData.experience=Number(formData.experience)
-    formData.salary=Number(formData.salary)
+    formData.experience = Number(formData.experience);
+    formData.salary = Number(formData.salary);
     console.log(formData);
     // Handle form submission logic here
     setIsLoading(true);
@@ -84,15 +85,15 @@ const JobUploadPage = () => {
         // setErrMsg({ ...res });
       } else {
         // setErrMsg("success");
-        console.log("success",res);
+        console.log("success", res);
         // setTimeout(() => {
         //   window.location.reload();
         // }, 2000);
       }
-        setIsLoading(false);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
-        setIsLoading(false);
+      setIsLoading(false);
     }
   };
 
@@ -126,7 +127,7 @@ const JobUploadPage = () => {
         >
           <option value="">Select experience</option>
           {Array.from({ length: 15 }, (_, i) => (
-            <option key={i + 1} value={i+1}>{`${i + 1}+`}</option>
+            <option key={i + 1} value={i + 1}>{`${i + 1}+`}</option>
           ))}
         </select>
       </div>
@@ -143,7 +144,7 @@ const JobUploadPage = () => {
           className=" border rounded text-xs w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           required
         />
-        <div className="flex items-center mt-2">
+        {/* <div className="flex items-center mt-2">
           <input
             type="checkbox"
             name="salaryConfidential"
@@ -154,9 +155,45 @@ const JobUploadPage = () => {
           <label className="text-gray-700 text-sm ">
             Keep Salary Confidential
           </label>
-        </div>
+        </div> */}
       </div>
-
+      <div className="mb-4">
+        <label className="block text-gray-700 text-sm mb-2">
+          Select Salary Category
+        </label>
+        <select
+          name="salaryCategory"
+          value={formData.salaryCategory}
+          onChange={handleChange}
+          className="border rounded text-xs w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          required
+        >
+          <option value="">Select salary</option> {/* Placeholder option */}
+          <option value="On Experience">On Experience</option>
+          <option value="Competitive">Competitive</option>
+          <option value="Fixed">Fixed</option>
+          <option value="Negotiable">Negotiable</option>
+          <option value="Confidential">Confidential</option>
+          {/* <option value="5">5 Lakh</option>
+          <option value="10">10 Lakh</option>
+          <option value="15">15 Lakh</option>
+          <option value="20">20 Lakh</option>
+          <option value="25">25 Lakh</option> */}
+          {/* Add more options as needed */}
+        </select>
+        {/* <div className="flex items-center mt-2">
+          <input
+            type="checkbox"
+            name="salaryConfidential"
+            checked={formData.salaryConfidential}
+            onChange={handleChange}
+            className="mr-2 leading-tight"
+          />
+          <label className="text-gray-700 text-sm">
+            Keep Salary Confidential
+          </label>
+        </div> */}
+      </div>
       <div className="mb-4">
         <label className="block text-gray-700 text-sm  mb-2">
           Job Location
@@ -272,7 +309,7 @@ const JobUploadPage = () => {
         type="submit"
         className="bg-blue-500 hover:bg-blue-700 text-white  py-2 px-4 rounded focus:outline-none focus:shadow-outline"
       >
-        {isLoading?'Submiting....':'Submit'}
+        {isLoading ? "Submiting...." : "Submit"}
       </button>
     </form>
   );

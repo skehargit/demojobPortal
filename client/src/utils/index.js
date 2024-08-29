@@ -1,8 +1,7 @@
 import axios from 'axios';
 
-// const API_URL =  'https://demojobportal.onrender.com/api-v1';
-const API_URL =  'http://localhost:8800/api-v1';
-// process.env.REACT_APP_API_URL ||
+const API_URL =  'https://demojobportal.onrender.com/api-v1';
+// const API_URL =  'http://localhost:8800/api-v1';
 export const API = axios.create({
     baseURL: API_URL,
     responseType: 'json',

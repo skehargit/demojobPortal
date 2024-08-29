@@ -119,8 +119,9 @@ const UploadJob = () => {
                   error={errors.salary ? errors.salary?.message : ""}
                 />
               </div>
+              
             </div>
-
+            
             {/* <div className="w-full flex gap-4">
               <div className="w-1/2">
                 <TextInput
