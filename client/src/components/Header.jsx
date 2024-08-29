@@ -49,14 +49,14 @@ const Header = ({
 }) => {
   return (
     <div className="relative bg-cover bg-center h-fit  flex items-center justify-center" >
-      <div className=" rounded-xl w-full max-w-4xl mx-auto px-5 py-10 ">
-        <div className="text-center mb-8">
+      <div className=" rounded-xl w-full max-w-4xl mx-auto px-5 py-5">
+        <div className="text-center mb-2 max-[550px]:hidden py-2">
           <p className="text-[#1176DB] font-bold italic text-4xl md:text-6xl">
             Find your Next Opportunity
           </p>
         </div>
 
-        <div className="w-full flex flex-col md:flex-row gap-4 items-center justify-between  px-2 py-3  rounded-full">
+        <div className="w-full flex flex-col md:flex-row gap-2 items-center justify-between   rounded-full">
           <SearchInput
             placeholder="Job Title or Keywords"
             icon={<AiOutlineSearch className="text-gray-600 text-xl ml-3" />}
@@ -64,14 +64,14 @@ const Header = ({
             value={searchQuery}
             setValue={setSearchQuery}
           />
-          <SearchInput
+          {/* <SearchInput
             placeholder="Add Country or City"
             icon={<CiLocationOn className="text-gray-600 text-xl ml-3" />}
             name="joblocation"
             value={location}
             setValue={setLocation}
             styles="hidden md:flex md:w-1/2"
-          />
+          /> */}
 
           <div className="w-full md:w-auto">
             <CustomButton

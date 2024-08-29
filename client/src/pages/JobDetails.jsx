@@ -76,10 +76,10 @@ const JobDetail = () => {
   //   console.log(job)
   // })
   return (
-    <div className="container mx-auto pb-4 ">
-      <div className="w-full flex flex-col md:flex-row gap-10">
+    <div className="container mx-auto pb-4 bg-[#f3f4f6]">
+      <div className="w-full flex flex-col md:flex-row gap-2">
         {/* LEFT SIDE */}
-        <div className="w-full h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-10 md:px-10 shadow-md">
+        <div className="w-full m-2 rounded h-fit md:w-2/3 2xl:2/4 bg-white px-5 py-5 md:px-10 shadow-md flex flex-col gap-1">
           <div className="w-full flex items-center justify-between">
             <div className="w-3/4 flex gap-2">
               {/* <img
@@ -110,34 +110,34 @@ const JobDetail = () => {
             </div>
           </div>
 
-          <div className="my-6">
+          <div className="my-2">
             <div>
-              <p className="text-xl font-semibold ">Job Description</p>
+              <p className="text-xl font-semibold text-zinc-700">Job Description</p>
 
-              <span className="text-base text-sm">{job?.jobDescription}</span>
+              <span className="text-zinc-600 text-sm">{job?.jobDescription}</span>
 
-              <div className="flex gap-1 ">
-                <p className="font-semibold">Experience :</p>
-                <span>{job?.experience}</span> <span>Year</span>
+              <div className="flex gap-1 items-center mt-3">
+                <p className="font-semibold text-md text-zinc-700">Experience :</p>
+                <span className="text-zinc-600 text-sm flex items-center">{job?.experience}<span>Year+</span></span> 
               </div>
             </div>
           </div>
-          {job?.requirements.length>0&&<div className="my-6">
+          {job?.requirements.length>0&&<div className="my-2">
             <div>
-            {job.requirements[0]!=""&&<p className="text-xl font-semibold ">Requirements</p>}
-                <div>
+            {job.requirements[0]!=""&&<p className="text-md text-zinc-700 font-semibold ">Requirements</p>}
+                <div className="flex flex-col gap-1">
                   {job.requirements.map((para,index)=>{
-                    return para!=''&&<li key={index} className="pl-2 text-sm">{para}</li>
+                    return para!=''&&<li key={index} className="pl-2  text-sm text-zinc-600">{para}</li>
                   })}
                 </div>
             </div>
           </div>}
-          {job?.qualifications.length>0&&<div className="my-6">
+          {job?.qualifications.length>0&&<div className="my-2">
             <div>
-            {job.qualifications[0]!=""&&<p className="text-xl font-semibold ">Qualifications</p>}
-                <div>
+            {job.qualifications[0]!=""&&<p className="text-ms text-zinc-700 font-semibold ">Qualifications</p>}
+                <div className="flex flex-col gap-1">
                   {job.qualifications.map((para,index)=>{
-                    return para!=''&&<li key={index} className="pl-2 text-sm">{para}</li>
+                    return para!=''&&<li key={index} className="pl-2 text-zinc-600 text-sm">{para}</li>
                   })}
                 </div>
             </div>
@@ -189,8 +189,8 @@ const JobDetail = () => {
         </div>
 
         {/* RIGHT SIDE */}
-        <div className="w-full md:w-1/3 2xl:w-2/4 p-5 md:mt-0">
-          <p className="text-gray-500 font-semibold">Similar Job Post</p>
+        <div className="w-full md:w-1/3 2xl:w-2/4 p-2 md:mt-0 ">
+          <p className="text-gray-500 font-semibold mb-3">Similar Job Post</p>
 
           <div className="w-full flex flex-wrap gap-4">
             {similarJobs.slice(0, 6).map((job, index) => {

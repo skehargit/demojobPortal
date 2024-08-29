@@ -101,7 +101,7 @@ const Navbar = () => {
   };
 
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white shadow-md sticky top-0 z-50 py-1">
       <nav className="container mx-auto flex items-center justify-between p-1 lg:px-10">
         <Link to="/" className="flex items-center gap-2">
           <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" />

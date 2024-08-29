@@ -30,7 +30,7 @@ function Layout() {
 function App() {
   const { user } = useSelector((state) => state.user);
   return (
-    <main className='bg-[#ffffff] font-[Poppins] tracking-tighter '>
+    <main className='bg-[#f3f4f6] font-[Poppins] tracking-tighter '>
       <div className="fixe w-full z-[1000]  bg-white">
       <Navbar />
       <hr />

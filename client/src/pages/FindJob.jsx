@@ -88,60 +88,19 @@ const FindJobs = () => {
         location={jobLocation}
         setLocation={setJobLocation}
       />
-      <div className="container mx-auto min-h-screen flex gap-4 py-4">
-        {/* Sidebar Filters */}
-        {/* <div className="hidden  md:flex flex-col py-4 w-1/5 bg-white shadow-lg rounded-lg">
-          <p className="text-xl font-semibold text-[#1176DB] mb-4 pl-5">
-            Filter Search
-          </p>
-          <div className="py-4 border-t border-gray-200">
-            <div className="flex pl-5 justify-between items-center mb-4">
-              <p className="flex items-center gap-2 font-semibold text-gray-700">
-                <BsStars />
-                Experience
-              </p>
-            </div>
-            <div className="flex flex-col gap-3 pl-5">
-              <div className="flex flex-col capitalize">
-                {["All", "1-2 years", "2-6 years", "Over 6 years"].map(
-                  (label, index) => (
-                    <div
-                      key={index}
-                      onClick={() => handleCheckboxChange(index)}
-                      className={`flex items-center gap-2 p-2 rounded cursor-pointer transition ${
-                        selectedCheckbox === index
-                          ? "bg-blue-100 border-l-4 border-blue-500"
-                          : "hover:bg-gray-100"
-                      }`}
-                    >
-                      <label>
-                        <input
-                          type="checkbox"
-                          checked={selectedCheckbox === index}
-                          onChange={() => {}}
-                          className="hidden"
-                        />
-                        {label}
-                      </label>
-                    </div>
-                  )
-                )}
-              </div>
-            </div>
-          </div>
-        </div> */}
+      <div className="container mx-auto min-h-screen flex gap-4">
 
         {/* Job Listings */}
         <div className="w-full  px-3  md:px-8">
-          <div className="flex items-center  gap-5 mb-6">
-            <div className="flex items-center gap-4">
+          <div className="flex items-center  gap-5 mb-2">
+            <div className="flex items-center gap-2">
               {/* <p className="text-base text-gray-600">Sort By:</p> */}
               <ListBox sort={sort} setSort={setSort} />
               <div className="relative ">
                 {/* Small box to toggle filters */}
                 <button
                   onClick={() => setShowFilters(!showFilters)}
-                  className="p-2 bg-blue-500 text-white rounded shadow-md focus:outline-none w-[8rem] md:w-[10rem] "
+                  className="p-2 bg-blue-500 text-white rounded shadow-sm focus:outline-none w-[8rem] md:w-[10rem] "
                 >
                   Experience
                 </button>
@@ -199,7 +158,7 @@ const FindJobs = () => {
             Showing: <span className="font-semibold">{data.length}</span> Jobs
             Available
           </p> */}
-          <div className="flex  flex-wrap gap-3">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
             {data.map((job, index) => (
               <JobCard job={job} key={index} />
             ))}
