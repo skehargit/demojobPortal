@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { BiBriefcaseAlt2 } from "react-icons/bi";
 import { BsStars } from "react-icons/bs";
 import { MdOutlineKeyboardArrowDown } from "react-icons/md";
-
+import { AiOutlineSearch, AiOutlineCloseCircle } from "react-icons/ai";
 import Header from "../components/Header.jsx";
 import { experience } from "../utils/data";
 import { CustomButton, JobCard, ListBox } from "../components";
@@ -37,7 +37,25 @@ const FindJobs = () => {
 
     return `${location.pathname}?${params.toString()}`;
   };
+  const [searchKeyword, setSearchKeyword] = useState("");
+  const [filteredJobs, setFilteredJobs] = useState();
 
+  // Handle change in search input
+  const handleInputChange = (e) => {
+    const keyword = e.target.value;
+    setSearchKeyword(keyword);
+    if (keyword === "") {
+      setFilteredJobs(data);
+    } else {
+      const lowerCaseKeyword = keyword.toLowerCase();
+      const filtered = data.filter(
+        (job) =>
+          job.jobTitle.toLowerCase().includes(lowerCaseKeyword) ||
+          job.jobDescription.toLowerCase().includes(lowerCaseKeyword)
+      );
+      setFilteredJobs(filtered);
+    }
+  };
   const fetchJobs = async () => {
     setIsFetching(true);
     const newURL = updateURL({
@@ -54,6 +72,8 @@ const FindJobs = () => {
         method: "GET",
       });
       setData(res?.data);
+      console.log(res?.data);
+      setFilteredJobs(res?.data);
       setNumPage(res?.numOfPage);
       setRecordCount(res?.total);
     } catch (error) {
@@ -80,19 +100,34 @@ const FindJobs = () => {
 
   return (
     <div className="bg-gray-100">
-      <Header
-        type="home"
-        handleClick={() => {}}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-        location={jobLocation}
-        setLocation={setJobLocation}
-      />
-      <div className="container mx-auto min-h-screen flex gap-4">
+      <div className="relative bg-cover bg-center h-fit  flex items-center justify-center">
+        <div className=" rounded-xl w-full max-w-4xl mx-auto px-5 py-5">
+          <div className="text-center mb-2 max-[550px]:hidden py-2">
+            <p className="text-[#1176DB] font-bold italic text-4xl md:text-6xl">
+              Find your Next Opportunity
+            </p>
+          </div>
 
+          <div className="w-full flex flex-col md:flex-row gap-2 items-center justify-between   rounded-full">
+            <div
+              className={`flex w-full items-center bg-white rounded-full shadow-md`}
+            >
+              <AiOutlineSearch className="text-gray-600 text-xl ml-3" />
+              <input
+                type="text"
+                value={searchKeyword}
+                onChange={handleInputChange}
+                placeholder="Enter job title..."
+                className="capitalize w-full p-3 outline-none bg-transparent text-sm md:text-base"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className=" min-h-screen flex gap-4">
         {/* Job Listings */}
-        <div className="w-full  px-3  md:px-8">
-          <div className="flex items-center  gap-5 mb-2">
+        <div className="w-full  px-3">
+          <div className="flex items-center justify-end  gap-5 mb-2">
             <div className="flex items-center gap-2">
               {/* <p className="text-base text-gray-600">Sort By:</p> */}
               <ListBox sort={sort} setSort={setSort} />
@@ -154,14 +189,12 @@ const FindJobs = () => {
               </div>
             </div>
           </div>
-          {/* <p className="text-lg text-gray-700 mb-3">
-            Showing: <span className="font-semibold">{data.length}</span> Jobs
-            Available
-          </p> */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            {data.map((job, index) => (
-              <JobCard job={job} key={index} />
-            ))}
+            {filteredJobs &&
+              filteredJobs.length > 0 &&
+              filteredJobs.map((job, index) => (
+                <JobCard job={job} key={index} />
+              ))}
           </div>
 
           {numPage > page && !isFetching && (

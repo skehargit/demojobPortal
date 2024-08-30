@@ -22,14 +22,15 @@ function MenuList({ user, onClick }) {
     <Menu as="div" className="inline-block text-left">
       <div>
         <Menu.Button className="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 px-4 py-2 rounded-full">
+          <div className="p-1 border border-black/20 rounded-full">
           <img
             src={user?.profileUrl || "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"}
             alt="user profile"
-            className="w-8 h-8 rounded-full object-cover"
+            className="w-4 h-4 rounded-full object-cover"
           />
+          </div>
           <div className="text-left">
             <p className="text-sm font-semibold">{user?.firstName ?? user?.name}</p>
-            <span className="text-xs text-[#1176DB]">{user?.jobTitle ?? user?.email}</span>
           </div>
           <BiChevronDown className="h-6 w-6 text-gray-600" aria-hidden="true" />
         </Menu.Button>

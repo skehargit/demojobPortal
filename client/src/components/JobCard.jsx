@@ -6,7 +6,7 @@ import { BsPersonFillCheck } from "react-icons/bs";
 const JobCard = ({ job }) => {
   return (
     <Link to={`/job-detail/${job?._id}`}>
-      <div className="w-full shadow-sm  h-auto bg-white flex flex-col justify-between rounded-md p-3 transition-transform transform hover:scale-105 hover:shadow-xl overflow-hidden">
+      <div className="w-full h-full shadow-sm  h-auto bg-white flex flex-col justify-between rounded-md p-3 transition-transform transform hover:scale-105 hover:shadow-xl overflow-hidden">
         <div className="flex gap-2 items-center mb-1">
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzs8x_9_bjHF_paKJr8R5lgMWuoN8_aqs0upHo8xmlXgjhKmOX39-Jj4gxXTy_KminlFc&usqp=CAU"
