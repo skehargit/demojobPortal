@@ -59,19 +59,25 @@ const userSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Application",
     },
+    likedJobs: [{ type: mongoose.Schema.Types.ObjectId, ref: "Jobs" }]
   },
   { timestamps: true }
 );
 
 // middelwares
-userSchema.pre("save", async function () {
+userSchema.pre("save", async function (next) {
   // Only hash the password if it has been modified (or is new)
   if (!this.isModified("password")) {
-    return next();
+    return next(); // Call next to pass control to the next middleware
   }
-  // if (!this.isModified) return;
-  const salt = await bcrypt.genSalt(10);
-  this.password = await bcrypt.hash(this.password, salt);
+
+  try {
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+    next(); // Call next to signal that the middleware is done
+  } catch (err) {
+    next(err); // Pass any errors to the next middleware
+  }
 });
 
 //compare password

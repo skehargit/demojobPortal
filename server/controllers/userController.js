@@ -278,3 +278,45 @@ export const deleteUser = async (req, res, next) => {
     });
   }
 };
+
+export const toggleJobLike = async (req, res) => {
+  try {
+    const userId = req.body.user.userId; // Assuming you're using authentication middleware
+    const { jobId } = req.body;
+
+    // Find the user by ID
+    const user = await Users.findById(userId);
+
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    // Check if the job is already liked
+    const jobIndex = user.likedJobs.indexOf(jobId);
+
+    if (jobIndex > -1) {
+      // Job is already liked, so remove it
+      user.likedJobs.splice(jobIndex, 1);
+      await user.save();
+      return res.status(200).json({
+        success: true,
+        message: "Job removed from liked jobs",
+        user,
+      });
+    } else {
+      // Job is not liked, so add it
+      user.likedJobs.push(jobId);
+      await user.save();
+      return res.status(200).json({
+        success: true,
+        message: "Job added to liked jobs",
+        user,
+      });
+    }
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ success: false, message: "Server error" });
+  }
+};

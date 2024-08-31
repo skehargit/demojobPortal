@@ -8,8 +8,11 @@ import Header from "../components/Header.jsx";
 import { experience } from "../utils/data";
 import { CustomButton, JobCard, ListBox } from "../components";
 import { apiRequest } from "../utils";
+import { useSelector } from "react-redux";
 
 const FindJobs = () => {
+  const { user } = useSelector((state) => state.user);
+
   const [sort, setSort] = useState("Newest");
   const [page, setPage] = useState(1);
   const [numPage, setNumPage] = useState(1);
@@ -25,7 +28,8 @@ const FindJobs = () => {
   const explist = ["0-100", "1-2", "2-6", "6-100"];
   const location = useLocation();
   const navigate = useNavigate();
-
+  const [showLikedJobs, setShowLikedJobs] = useState(false);
+  const [likedJobs, setLikedJobs] = useState([]);
   const updateURL = ({ query, cmpLoc, exp, sort, pageNum, location }) => {
     const params = new URLSearchParams();
 
@@ -92,6 +96,19 @@ const FindJobs = () => {
   const handleCheckboxChange = (index) => {
     setSelectedCheckbox(index === selectedCheckbox ? 0 : index);
     setShowFilters(false);
+  };
+  const filterLikedJobs = () => {
+    if (showLikedJobs) {
+      setFilteredJobs(data);
+    } else {
+      // Show all jobs
+      const likedJobIds = new Set(user.likedJobs);
+      console.log(likedJobIds);
+      // Filter jobs to include only those that are in the liked jobs
+      const likedJobsData = data.filter((job) => likedJobIds.has(job._id));
+      setFilteredJobs(likedJobsData);
+      console.log(likedJobsData);
+    }
   };
 
   useEffect(() => {
@@ -187,6 +204,19 @@ const FindJobs = () => {
                   </div>
                 )}
               </div>
+              <button
+                onClick={() => {
+                  setShowLikedJobs((prevState) => !prevState);
+                  filterLikedJobs();
+                }}
+                className={`p-2 ${
+                  showLikedJobs
+                    ? "bg-blue-600 text-white"
+                    : "bg-gray-200 text-gray-700"
+                } rounded shadow-sm focus:outline-none`}
+              >
+                {showLikedJobs ? "All" : "Liked"}
+              </button>
             </div>
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
