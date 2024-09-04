@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import CustomButton from "./CustomButton";
 import { useSelector, useDispatch } from "react-redux";
 import { Logout } from "../redux/userSlice";
-import logo from '../assets/logo.jpg';
+import logo from '../assets/tlogo.png';
 
 function MenuList({ user, onClick }) {
   const dispatch = useDispatch();
@@ -105,8 +105,8 @@ const Navbar = () => {
     <header className="bg-white shadow-md sticky top-0 z-50 py-1">
       <nav className="container mx-auto flex items-center justify-between p-1 lg:px-10">
         <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="w-10 h-10 rounded-full" />
-          <span className="text-xl font-semibold text-blue-500">High Impact Talent</span>
+          <img src={logo} alt="Logo" className="w-8 h-8 rounded-full" />
+          <span className="text-md font-semibold text-blue-500">High Impact Talent</span>
         </Link>
 
         <ul className="hidden lg:flex gap-8 text-base text-gray-700">

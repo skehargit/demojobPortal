@@ -87,12 +87,7 @@ const FindJobs = () => {
     }
   };
   const [showFilters, setShowFilters] = useState(false);
-  // const [selectedCheckbox, setSelectedCheckbox] = useState(null);
-
-  // const handleCheckboxChange = (index) => {
-  //   setSelectedCheckbox(index);
-  //   setShowFilters(false); // Hide filters after selecting
-  // };
+  
   const handleCheckboxChange = (index) => {
     setSelectedCheckbox(index === selectedCheckbox ? 0 : index);
     setShowFilters(false);
@@ -212,8 +207,8 @@ const FindJobs = () => {
                 className={`p-2 ${
                   showLikedJobs
                     ? "bg-blue-600 text-white"
-                    : "bg-gray-200 text-gray-700"
-                } rounded shadow-sm focus:outline-none`}
+                    : "bg-white text-gray-700"
+                } rounded shadow-md focus:outline-none`}
               >
                 {showLikedJobs ? "All" : "Liked"}
               </button>

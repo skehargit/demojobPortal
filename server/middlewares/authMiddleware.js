@@ -7,7 +7,7 @@ const userAuth = async (req, res, next) => {
   // }
 
   const token = authHeader?.split(" ")[1];
-
+  // console.log(token)
   if(!token){
     return res.json({
       success:false,

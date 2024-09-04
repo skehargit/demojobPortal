@@ -7,23 +7,76 @@ import { AiOutlineMail } from "react-icons/ai";
 import { FiPhoneCall } from "react-icons/fi";
 import { CustomButton, TextInput } from "../components";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UpdateUser } from "../redux/userSlice";
 
 const UserProfile = () => {
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   // const [open, setOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const userInfo = user;
   console.log(user);
+  const [image, setImage] = useState(null);
+  const [imageUrl, setImageUrl] = useState("");
+
+  const handleImageUpload = async () => {
+    if (image) {
+      const formData = new FormData();
+      formData.append("file", image);
+      formData.append("upload_preset", "jtzzkmlf"); // Use the ml_default preset
+
+      try {
+        const response = await axios.post(
+          `https://api.cloudinary.com/v1_1/db7pikwo4/image/upload`, // Replace 'your_cloud_name' with your actual cloud_name
+          formData
+        );
+        // This is the URL of the uploaded image
+        console.log(response.data.secure_url);
+        const profile = await axios.post(
+          `https://demojobportal.onrender.com/api-v1/user/updateprofileurl`,
+          { profileUrl: response.data.secure_url },
+          {
+            headers: {
+              Authorization: `Bearer ${user?.token}`,
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        if (profile.data.success) {
+          alert("profile url updated");
+          dispatch(UpdateUser(updatedUser));
+          setImageUrl(response.data.secure_url);
+        }
+      } catch (error) {
+        console.error("Error uploading the image", error);
+      }
+    }
+  };
+  const handleFileChange = (e) => {
+    setImage(e.target.files[0]);
+  };
   return (
     <div className="container mx-auto flex items-center justify-center py-10 ">
       <div className="w-full md:w-2/3 2xl:w-2/4 bg-white flex flex-col gap-3 shadow-lg p-10 rounded-lg">
-        <div className="flex gap-3">
-          <div className="w-36 h-36 rounded-full border border-blue-500 flex items-center justify-center">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
-              alt=""
-            />
+        <div className="flex gap-3 flex-col">
+          <div className="w-20 h-20  2xl:w-36 2xl:h-36 md:w-24 md:h-24 rounded-full border border-blue-500 flex items-center justify-center overflow-hidden">
+            {imageUrl ? (
+              <img src={imageUrl} alt="Uploaded" />
+            ) : (
+              <div>
+                {user?.profileUrl ? (
+                  <img src={user?.profileUrl} alt="" />
+                ) : (
+                  <img
+                    src="https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
+                    alt=""
+                  />
+                )}
+              </div>
+            )}
           </div>
+
           <div className="">
             <h2 className="text-4xl capitalize">
               {" "}
@@ -41,6 +94,15 @@ const UserProfile = () => {
                 {userInfo?.currentLocation ?? "No Location"}
               </p>
             </div>
+          </div>
+        </div>
+        <div className="flex flex-col gap-2">
+          <input type="file" onChange={handleFileChange} />
+          <div
+            onClick={handleImageUpload}
+            className="bg-blue-500 p-2 text-white"
+          >
+            Upload Profile Pic
           </div>
         </div>
         <div className="capitalize border rounded p-2">
@@ -104,8 +166,8 @@ const UserProfile = () => {
         <div className="border rounded p-2 ">
           <button
             className="w-full md:w-64 bg-blue-500 text-white py-2 capitalize rounded"
-            onClick={() =>{
-              navigate('/user-additional-details')
+            onClick={() => {
+              navigate("/user-additional-details");
             }}
           >
             update details

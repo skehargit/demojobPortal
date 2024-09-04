@@ -320,3 +320,33 @@ export const toggleJobLike = async (req, res) => {
     return res.status(500).json({ success: false, message: "Server error" });
   }
 };
+
+export const updateProfileUrl = async (req, res, next) => {
+  try {
+    const id = req.body.user.userId;
+    const {profileUrl}=req.body;
+    console.log(profileUrl)
+    console.log(id);
+    const user = await Users.findById({ _id: id });
+
+    if (!user) {
+      return res.status(200).send({
+        message: "User Not Found",
+        success: false,
+      });
+    }
+    user.profileUrl=profileUrl
+    await user.save();
+    res.status(200).json({
+      success: true,
+      user
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Error while updateing url",
+      success: false,
+      error: error.message,
+    });
+  }
+};
