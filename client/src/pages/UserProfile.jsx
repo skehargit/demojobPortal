@@ -45,7 +45,7 @@ const UserProfile = () => {
         );
         if (profile.data.success) {
           alert("profile url updated");
-          dispatch(UpdateUser(updatedUser));
+          dispatch(UpdateUser(profile.data.user));
           setImageUrl(response.data.secure_url);
         }
       } catch (error) {

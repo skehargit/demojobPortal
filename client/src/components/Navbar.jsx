@@ -131,6 +131,9 @@ const Navbar = () => {
           <li className="hover:text-[#1176DB] transition">
             <Link to="/contact-us">Contact Us</Link>
           </li>
+          <li className="hover:text-[#1176DB] transition">
+            <Link to="/blog">blog</Link>
+          </li>
         </ul>
 
         <div className="hidden lg:flex items-center gap-4">
@@ -185,7 +188,9 @@ const Navbar = () => {
             <Link to="/contact-us" onClick={handleCloseNavbar}>
               Contact Us
             </Link>
-
+            <Link to="/blog" onClick={handleCloseNavbar}>
+              Blog
+            </Link>
             <div className="mt-5">
               {!user?.token ? (
                 <Link to="/authform" onClick={handleCloseNavbar}>
