@@ -3,6 +3,10 @@ import mongoose, { Schema } from "mongoose";
 // Define the schema for a blog post
 const blogSchema = new Schema(
   {
+    userId:{
+      type:mongoose.Schema.Types.ObjectId,
+      required:true,
+    },
     title: {
       type: String,
       required: true,
@@ -16,6 +20,7 @@ const blogSchema = new Schema(
       type: String,
       required: false, // Image is optional in case you want text-only blogs
     },
+    likes: [mongoose.Schema.Types.ObjectId],
     createdAt: {
       type: Date,
       default: Date.now,

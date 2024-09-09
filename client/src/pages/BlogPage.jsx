@@ -2,11 +2,12 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { UpdateUser } from "../redux/userSlice";
-
+import { IoMdHeartEmpty } from "react-icons/io";
+import { IoMdHeart } from "react-icons/io";
 const BlogPage = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(false);
   const [blogData, setBlogData] = useState({
     title: "",
@@ -42,7 +43,7 @@ const BlogPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true)
+    setLoading(true);
     try {
       let uploadedImageUrl = imageUrl;
 
@@ -62,12 +63,14 @@ const BlogPage = () => {
       }
 
       // Now send the blog data to the backend including the image URL
+      // http://localhost:8800
+      // https://demojobportal.onrender.com
       const blogResponse = await axios.post(
         `https://demojobportal.onrender.com/api-v1/blog/uploadblog`,
         {
           title: blogData.title,
           content: blogData.content,
-          image: uploadedImageUrl, // Use the uploaded image URL
+          image: uploadedImageUrl,
         },
         {
           headers: {
@@ -87,60 +90,122 @@ const BlogPage = () => {
       }
     } catch (error) {
       console.error("Failed to upload blog:", error);
-    }finally{
-        setLoading(false)
+    } finally {
+      setLoading(false);
     }
   };
+
   const fetchBlogs = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
       const response = await axios.get(
         `https://demojobportal.onrender.com/api-v1/blog/blogs`
       );
       if (response.data.success) {
         setBlogs(response.data.blogs);
+        console.log(response.data.blogs);
       }
     } catch (error) {
-      console.log("error while geting blogs", error);
-    }finally{
-        setLoading(false)
+      console.log("error while getting blogs", error);
+    } finally {
+      setLoading(false);
     }
   };
+
+  const handleLike = async (blogId) => {
+    try {
+      const response = await axios.post(
+        `https://demojobportal.onrender.com/api-v1/blog/togglelike`,
+        {blogId},
+        {
+          headers: {
+            Authorization: `Bearer ${user?.token}`,
+          },
+        }
+      );
+
+      if (response.data.success) {
+        fetchBlogs(); // Refresh blogs after liking
+      }
+    } catch (error) {
+      console.log("Error while liking blog:", error);
+    }
+  };
+
   useEffect(() => {
     fetchBlogs();
   }, []);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 p-6 flex justify-center overflow-x-hidden">
       <div className="max-w-7xl">
         {/* Blog Cards Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {blogs && blogs.length > 0 ? (
-          <>
-            {blogs.map((blog, index) => {
-              return (
-                <div
-                  key={index}
-                  className=""
-                >
-                  {/* Example Blog Card */}
-                  <div className="bg-white shadow-md rounded-lg p-6">
-                    <img
-                      src={blog.image}
-                      alt="blog cover"
-                      className="w-full h-48 object-cover rounded-t-md"
-                    />
-                    <h2 className="text-xl font-semibold mt-4">{blog.title}</h2>
-                    <p className="text-gray-600 mt-2">{blog.content}</p>
-                    <button className="mt-4 text-blue-500">Read More</button>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {blogs && blogs.length > 0 ? (
+            <>
+              {blogs.map((blog, index) => {
+                return (
+                  <div key={index} className="">
+                    {/* Example Blog Card */}
+                    <div className="bg-white shadow-md rounded-lg p-4">
+                      <div className="flex items-center mb-2">
+                        {/* Profile section with author name */}
+                        <img
+                          src={
+                            blog.profilePic
+                              ? blog.profilePic
+                              : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
+                          }
+                          alt="author"
+                          className="w-6 h-6 rounded-full mr-2 border border"
+                        />
+                        <span className="text-sm font-medium">
+                          {blog.name ? blog.name : "Unknown"}
+                        </span>
+
+                      </div>
+                      <img
+                        src={blog.image}
+                        alt="blog cover"
+                        className="w-full h-48 object-cover rounded-t-md"
+                      />
+                      <div className="flex justify-between items-center">
+                        {/* <button className="text-blue-500">Read More</button> */}
+                        <div className="flex items-center">
+                          {/* Like button */}
+                          <button
+                            onClick={() => handleLike(blog._id)}
+                            className="text-red-500 flex items-center gap-1"
+                          >
+                            {blog.likes.includes(user._id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                            {blog.likes.length || 0}
+                          </button>
+                        </div>
+                      </div>
+                      <h2 className="text-md capitalize font-semibold mt-2">
+                        {blog.title}
+                      </h2>
+                      <p className="text-sm text-gray-600 mt-2">{blog.content}</p>
+                      <div className="flex justify-between items-center">
+                        {/* <button className="text-blue-500">Read More</button> */}
+                        <div className="flex items-center">
+                          {/* Like button */}
+                          <button
+                            onClick={() => handleLike(blog._id)}
+                            className="text-red-500"
+                          >
+                            {/* ❤️ {blog.likes} */}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              );
-            })}
-          </>
-        ) : (
-          <div>no blogs found</div>
-        )}
+                );
+              })}
+            </>
+          ) : (
+            <div>No blogs found</div>
+          )}
         </div>
       </div>
 
@@ -209,7 +274,7 @@ const BlogPage = () => {
                   type="submit"
                   className="bg-blue-600 text-white px-4 py-2 rounded-md"
                 >
-                  {loading?'Submiting.....':'Submit'}
+                  {loading ? "Submitting..." : "Submit"}
                 </button>
               </div>
             </form>
