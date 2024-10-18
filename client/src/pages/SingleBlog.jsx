@@ -52,7 +52,7 @@ const SingleBlog = () => {
   }
 
   return (
-    <div className="bg-white shadow-md flex flex-col justify-center items-center rounded-lg p-4">
+    <div className="bg-white shadow-md flex flex-col justify-center items-center rounded-lg p-4 min-h-screen">
       <img
         src={blog?.image || "https://via.placeholder.com/150"} // Fallback image if blog.image is null
         alt="blog cover"
@@ -71,14 +71,14 @@ const SingleBlog = () => {
           {blog?.likes.length || 0}
         </button>
       </div>
-      <h2 className="text-md capitalize font-semibold mt-2">
+      <h2 className="text-md capitalize max-w-[500px] font-semibold mt-2">
         {blog?.title || "Untitled Blog"}
       </h2>
       <div
         dangerouslySetInnerHTML={{
           __html: (blog?.content || "").replace(/\n/g, "<br>"),
         }}
-        className="text-sm text-gray-600 mt-2"
+        className="text-sm text-gray-600 max-w-[500px] mt-2"
       />
     </div>
   );
