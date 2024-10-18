@@ -6,6 +6,6 @@ const router = express.Router();
 router.post('/uploadblog',userAuth,createBlog)
 
 router.get('/blogs',getAllBlogs)
-router.get('/:id',getBlogById)
+router.get('/blog',getBlogById)
 router.post('/togglelike',userAuth,likeBlog)
 export default router;

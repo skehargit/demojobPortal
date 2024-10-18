@@ -46,7 +46,8 @@ export const createBlog = async (req, res) => {
 
 export const getBlogById = async (req, res) => {
   try {
-    const blog = await Blog.findById(req.params.id);
+    const {id}=req.body
+    const blog = await Blog.findById(id);
 
     if (!blog) {
       return res.status(404).json({
