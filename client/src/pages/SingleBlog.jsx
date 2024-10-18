@@ -12,8 +12,9 @@ const SingleBlog = () => {
   const getBlog = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        `https://demojobportal.onrender.com/api-v1/blog/${blogId}`
+      const response = await axios.post(
+        `https://demojobportal.onrender.com/api-v1/blog/blog`,
+        { id: blogId }
       );
       console.log(response);
       setBlog(response.blog);
