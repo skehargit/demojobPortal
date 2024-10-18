@@ -5,6 +5,7 @@ import { UpdateUser } from "../redux/userSlice";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import logo from "../../src/assets/tlogo.png";
+import { useNavigate } from "react-router-dom";
 // import logo from '../assets/tlogo.png';
 const BlogPage = () => {
   const { user } = useSelector((state) => state.user);
@@ -133,7 +134,7 @@ const BlogPage = () => {
       console.log("Error while liking blog:", error);
     }
   };
-
+  const navigate = useNavigate()
   useEffect(() => {
     fetchBlogs();
   }, []);
@@ -196,20 +197,9 @@ const BlogPage = () => {
                         dangerouslySetInnerHTML={{
                           __html: blog.content.replace(/\n/g, "<br>"),
                         }}
-                        className="text-sm text-gray-600 mt-2"
+                        className="text-sm text-gray-600 mt-2 line-clamp-6"
                       />
-                      <div className="flex justify-between items-center">
-                        {/* <button className="text-blue-500">Read More</button> */}
-                        <div className="flex items-center">
-                          {/* Like button */}
-                          <button
-                            onClick={() => handleLike(blog._id)}
-                            className="text-red-500"
-                          >
-                            {/* ❤️ {blog.likes} */}
-                          </button>
-                        </div>
-                      </div>
+                      <div onClick={()=>navigate(`${blog._id}`)} className="bg-blue-500 w-full py-2 text-center cursor-pointer capitalize text-white rounded-lg mt-2">view more</div>
                     </div>
                   </div>
                 );

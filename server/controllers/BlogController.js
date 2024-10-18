@@ -58,7 +58,7 @@ export const getBlogById = async (req, res) => {
     res.status(200).json({
       success: true,
       message: "Blog fetched successfully",
-      data: blog,
+      blog,
     });
   } catch (error) {
     console.error("Error fetching blog by ID:", error);
@@ -120,7 +120,6 @@ export const getAllBlogs = async (req, res) => {
     });
   }
 };
-
 export const likeBlog = async (req, res) => {
   try {
     const { blogId } = req.body;

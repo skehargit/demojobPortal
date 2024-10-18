@@ -17,6 +17,7 @@ import JobUploadPage from "./pages/JobUploadPage";
 import AuthForm from "./pages/AuthForm/AuthForm";
 import Loginform from "./pages/AuthForm/Loginform";
 import BlogPage from "./pages/BlogPage";
+import SingleBlog from "./pages/SingleBlog";
 
 function Layout() {
   const { user } = useSelector((state) => state.user);
@@ -73,6 +74,7 @@ function App() {
         <Route path="/admin-dashboard" element={<Dashboard />} />
         <Route path="/upload-resume" element={<UploadResume />} />
         <Route path="/blog" element={<BlogPage/>}></Route>
+        <Route path="/blog/:blogId" element={<SingleBlog/>}></Route>
         <Route path="/application-tracking" element={<ApplicationTracking />} />
         <Route path="/privacy-policy" element={<PrivacyPolicy />} />
 
