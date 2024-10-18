@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { UpdateUser } from "../redux/userSlice";
 import { IoMdHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
+import logo from "../../src/assets/tlogo.png";
+// import logo from '../assets/tlogo.png';
 const BlogPage = () => {
   const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
@@ -116,7 +118,7 @@ const BlogPage = () => {
     try {
       const response = await axios.post(
         `https://demojobportal.onrender.com/api-v1/blog/togglelike`,
-        {blogId},
+        { blogId },
         {
           headers: {
             Authorization: `Bearer ${user?.token}`,
@@ -151,18 +153,19 @@ const BlogPage = () => {
                       <div className="flex items-center mb-2">
                         {/* Profile section with author name */}
                         <img
-                          src={
-                            blog.profilePic
-                              ? blog.profilePic
-                              : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
-                          }
+                          src={logo}
+                          // src={
+                          //   blog.profilePic
+                          //     ? blog.profilePic
+                          //     : "https://upload.wikimedia.org/wikipedia/commons/9/99/Sample_User_Icon.png?20200919003010"
+                          // }
                           alt="author"
                           className="w-6 h-6 rounded-full mr-2 border border"
                         />
-                        <span className="text-sm font-medium">
-                          {blog.name ? blog.name : "Unknown"}
+                        <span className="text-sm font-semibold">
+                          {/* {blog.name ? blog.name : "Unknown"} */}
+                          High Impact Talent
                         </span>
-
                       </div>
                       <img
                         src={blog.image}
@@ -177,7 +180,11 @@ const BlogPage = () => {
                             onClick={() => handleLike(blog._id)}
                             className="text-red-500 flex items-center gap-1"
                           >
-                            {blog.likes.includes(user._id) ? <IoMdHeart /> : <IoMdHeartEmpty />}
+                            {blog.likes.includes(user._id) ? (
+                              <IoMdHeart />
+                            ) : (
+                              <IoMdHeartEmpty />
+                            )}
                             {blog.likes.length || 0}
                           </button>
                         </div>
@@ -185,7 +192,12 @@ const BlogPage = () => {
                       <h2 className="text-md capitalize font-semibold mt-2">
                         {blog.title}
                       </h2>
-                      <p className="text-sm text-gray-600 mt-2">{blog.content}</p>
+                      <div
+                        dangerouslySetInnerHTML={{
+                          __html: blog.content.replace(/\n/g, "<br>"),
+                        }}
+                        className="text-sm text-gray-600 mt-2"
+                      />
                       <div className="flex justify-between items-center">
                         {/* <button className="text-blue-500">Read More</button> */}
                         <div className="flex items-center">
@@ -246,8 +258,8 @@ const BlogPage = () => {
                   value={blogData.content}
                   onChange={handleInputChange}
                   className="mt-1 p-2 border border-gray-300 rounded-md w-full"
-                  placeholder="Write your content..."
-                  rows="4"
+                  placeholder="Write your content with paragraphs, line breaks..."
+                  rows="6"
                   required
                 />
               </div>
