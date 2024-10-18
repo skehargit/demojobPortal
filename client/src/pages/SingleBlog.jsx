@@ -17,7 +17,7 @@ const SingleBlog = () => {
         { id: blogId }
       );
       console.log(response);
-      setBlog(response.blog);
+      setBlog(response.data.blog);
     } catch (err) {
       setError("Failed to load the blog.");
     } finally {
@@ -52,20 +52,11 @@ const SingleBlog = () => {
   }
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-4">
+    <div className="bg-white shadow-md flex flex-col justify-center items-center rounded-lg p-4">
       <img
         src={blog?.image || "https://via.placeholder.com/150"} // Fallback image if blog.image is null
         alt="blog cover"
-        className="w-full h-48 object-cover rounded-t-md"
-      />
-      <h2 className="text-md capitalize font-semibold mt-2">
-        {blog?.title || "Untitled Blog"}
-      </h2>
-      <div
-        dangerouslySetInnerHTML={{
-          __html: (blog?.content || "").replace(/\n/g, "<br>"),
-        }}
-        className="text-sm text-gray-600 mt-2"
+        className="w-full h-48 max-w-[500px] object-cover rounded-t-md"
       />
       <div className="flex justify-between items-center mt-4">
         <button
@@ -80,6 +71,15 @@ const SingleBlog = () => {
           {blog?.likes.length || 0}
         </button>
       </div>
+      <h2 className="text-md capitalize font-semibold mt-2">
+        {blog?.title || "Untitled Blog"}
+      </h2>
+      <div
+        dangerouslySetInnerHTML={{
+          __html: (blog?.content || "").replace(/\n/g, "<br>"),
+        }}
+        className="text-sm text-gray-600 mt-2"
+      />
     </div>
   );
 };
